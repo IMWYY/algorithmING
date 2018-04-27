@@ -1,4 +1,6 @@
 import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -7,6 +9,9 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+        Random random = new Random();
+        random.nextInt();
+
         Scanner sc = new Scanner(System.in);
         String s = sc.next();
         if (s.length() <= 1) {
@@ -40,6 +45,7 @@ public class Main {
         }
 
         System.out.println(strings[strings.length - 1]);
+
     }
 }
 
@@ -253,7 +259,7 @@ public class Main {
 //
 //    public static void main(String[] args) {
 //        Scanner sc = new Scanner(System.in);
-//        String s = sc.next();
+//        String s = sc.after();
 //        boolean[] removed = new boolean[s.length()];
 //        Arrays.fill(removed, false);
 //        backTrack(s, removed, 0, 0);
@@ -297,7 +303,7 @@ public class Main {
 //        String s;
 //        boolean error;
 //        for (int i = 0; i < n; ++i) {
-//            s = sc.next();
+//            s = sc.after();
 //            if ((s.length() & 1) == 1) {
 //                System.out.println("No");
 //                continue;
@@ -461,7 +467,7 @@ public class Main {
 
 //    public static void main(String[] args) {
 //        Scanner sc = new Scanner(System.in);
-//        String s = sc.next();
+//        String s = sc.after();
 //
 //        if (s.length() != 39) {
 //            System.out.println("Error");
@@ -568,7 +574,7 @@ public class Main {
 
 //    public static void main(String[] args) {
 //        Scanner scanner = new Scanner(System.in);
-//        String s = scanner.next();
+//        String s = scanner.after();
 //        if (s.length() <= 1) {
 //            System.out.println(s.length());
 //            return;

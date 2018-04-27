@@ -1,16 +1,12 @@
 package leetCode;
 
+import classic.TreeNode;
+
 /**
  * 最近公共父节点问题
  * create by stephen on 2018/4/21
  */
 public class ProblemLCA {
-
-    public class TreeNode {
-        public int value;
-        public TreeNode left;
-        public TreeNode right;
-    }
 
     /**
      * 计算任意两个节点之间的距离
@@ -24,33 +20,12 @@ public class ProblemLCA {
      */
     public int ditanceBetweenTwoNode(TreeNode root, TreeNode a, TreeNode b) {
         int result = 0;
-        Problem236
-
+        return result;
     }
 
     public int getDistanceFromRoot(TreeNode root, TreeNode node) {
-
+        return 0;
     }
 
-
-    public class UFset {
-        public TreeNode cur;
-        public TreeNode parent;
-        public int h;
-
-        public UFset(TreeNode cur, TreeNode parent, int h) {
-            this.cur = cur;
-            this.parent = parent;
-            this.h = h;
-        }
-    }
-
-
-    /**
-     * 计算两个节点的最近父节点
-     */
-    public TreeNode getLCA(TreeNode root, TreeNode a, TreeNode b) {
-
-    }
 
 }

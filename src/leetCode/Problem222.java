@@ -1,5 +1,7 @@
 package leetCode;
 
+import classic.TreeNode;
+
 /**
  * Given a complete binary tree, count the number of nodes.
  * <p>
@@ -12,16 +14,6 @@ package leetCode;
  * create by stephen on 2018/4/18
  */
 public class Problem222 {
-
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
 
     public int countNodes(TreeNode root) {
         int h = height(root);
