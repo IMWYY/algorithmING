@@ -1,11 +1,7 @@
 package leetCode;
 
 
-import classic.Tree;
 import classic.TreeNode;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 最近公共父节点问题
