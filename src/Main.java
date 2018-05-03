@@ -1,53 +1,55 @@
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.Random;
-import java.util.Scanner;
-
 /**
  * create by stephen on 2018/4/2
  */
 public class Main {
-
     public static void main(String[] args) {
-        Random random = new Random();
-        random.nextInt();
-
-        Scanner sc = new Scanner(System.in);
-        String s = sc.next();
-        if (s.length() <= 1) {
-            System.out.println(s);
-            return;
-        }
-
-        int[] d = new int[s.length()];
-        Arrays.fill(d, 1);
-
-        String[] strings = new String[s.length()];
-        Arrays.fill(strings, "");
-        strings[0] = String.valueOf(s.charAt(0));
-
-        int temp, index;
-
-        for (int i = 1; i < d.length; ++i) {
-            temp = index = -1;
-            for (int j = 0; j < i; ++j) {
-                if (s.charAt(i) > s.charAt(j) && d[j] > temp) {
-                    temp = d[j];
-                    index = j;
-                }
-            }
-
-            if (index == -1) {
-                strings[i] = String.valueOf(s.charAt(i));
-            } else {
-                strings[i] = strings[index] + s.charAt(i);
-            }
-        }
-
-        System.out.println(strings[strings.length - 1]);
-
+        int[] test = {1,2,3,4};
+        int index = 0;
+        System.out.println(test[++index]);
+        System.out.println(index);
     }
 }
+
+//    public static void main(String[] args) {
+//        Random random = new Random();
+//        random.nextInt();
+//
+//        Scanner sc = new Scanner(System.in);
+//        String s = sc.next();
+//        if (s.length() <= 1) {
+//            System.out.println(s);
+//            return;
+//        }
+//
+//        int[] d = new int[s.length()];
+//        Arrays.fill(d, 1);
+//
+//        String[] strings = new String[s.length()];
+//        Arrays.fill(strings, "");
+//        strings[0] = String.valueOf(s.charAt(0));
+//
+//        int temp, index;
+//
+//        for (int i = 1; i < d.length; ++i) {
+//            temp = index = -1;
+//            for (int j = 0; j < i; ++j) {
+//                if (s.charAt(i) > s.charAt(j) && d[j] > temp) {
+//                    temp = d[j];
+//                    index = j;
+//                }
+//            }
+//
+//            if (index == -1) {
+//                strings[i] = String.valueOf(s.charAt(i));
+//            } else {
+//                strings[i] = strings[index] + s.charAt(i);
+//            }
+//        }
+//
+//        System.out.println(strings[strings.length - 1]);
+//
+//    }
+//}
 
 
 //    private static int result = 0;
