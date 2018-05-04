@@ -1,3 +1,5 @@
+import java.util.concurrent.ArrayBlockingQueue;
+
 /**
  * create by stephen on 2018/4/2
  */
