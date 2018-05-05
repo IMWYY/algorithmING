@@ -1,14 +1,15 @@
-import java.util.concurrent.ArrayBlockingQueue;
+import java.util.Collections;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.AbstractQueuedSynchronizer;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * create by stephen on 2018/4/2
  */
 public class Main {
     public static void main(String[] args) {
-        int[] test = {1,2,3,4};
-        int index = 0;
-        System.out.println(test[++index]);
-        System.out.println(index);
     }
 }
 
