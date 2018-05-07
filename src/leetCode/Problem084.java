@@ -25,6 +25,7 @@ public class Problem084 {
      * （右下标是i，出栈找到左下标，高度为栈顶元素对应的高度）
      * O(n) time + O(n) space
      */
+    @SuppressWarnings("all")
     public int largestRectangleArea(int[] heights) {
         if (heights.length == 0) return 0;
         if (heights.length == 1) return heights[0];
@@ -41,7 +42,7 @@ public class Problem084 {
                 while (!stack.isEmpty() && h == heights[stack.peek()]) {
                     stack.pop();
                 }
-                int left = stack.isEmpty() ? 0 : stack.peek() + 1;
+                int left = stack.isEmpty() ? 0 : stack.peek() + 1; //计算的是peek后面一位作为左下标
                 res = Math.max(res, h * (i - left));
             }
         }
