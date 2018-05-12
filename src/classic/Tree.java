@@ -60,7 +60,7 @@ public class Tree {
      */
     public void postOrder(TreeNode node) {
         Stack<TreeNode> stack = new Stack<>();
-        TreeNode cur = node, temp = null, pre = null;
+        TreeNode cur = node, temp, pre = null;
         while (cur != null || !stack.isEmpty()) {
             while (cur != null) {
                 stack.push(cur);
