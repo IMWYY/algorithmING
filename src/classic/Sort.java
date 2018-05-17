@@ -106,7 +106,7 @@ public class Sort {
         if (left > right) return;
         int flag = a[left], i = left, j = right, temp;
         while (i < j) {
-            while (j > i && a[j] >= flag) j--;
+            while (j > i && a[j] >= flag) j--;      // 这里要先j-- 因为最后一次循环要找的是比当前flag小的数字进行交换
             while (j > i && a[i] <= flag) i++;
             if (i < j) {
                 temp = a[i];
