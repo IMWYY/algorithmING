@@ -38,8 +38,8 @@ public class Problem494 {
      */
     public int findTargetSumWays(int[] nums, int S) {
         int[][] memo = new int[nums.length][2001];
-        for (int i = 0; i < memo.length; ++i) {
-            Arrays.fill(memo[i], Integer.MAX_VALUE);
+        for (int[] aMemo : memo) {
+            Arrays.fill(aMemo, Integer.MAX_VALUE);
         }
         return dfs(nums, 0, 0, S, memo);
     }
