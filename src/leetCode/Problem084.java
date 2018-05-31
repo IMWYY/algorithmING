@@ -15,9 +15,13 @@ import java.util.Stack;
  * create by stephen on 2018/5/6
  */
 public class Problem084 {
+
+    public static void main(String[] args) {
+        System.out.println(new Problem084().largestRectangleArea(new int[]{3, 1, 3, 2, 2}));
+    }
     /**
      * 利用stack：
-     * 如果栈为空或者当前bar大于栈顶元素，入栈
+     * 如果栈为空或者当前bar大于栈顶元素，下标入栈
      * 否则出栈作为高度 找到左下标计算面积
      * 最后返回最大的面积
      *
