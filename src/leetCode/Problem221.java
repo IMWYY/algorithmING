@@ -20,7 +20,6 @@ import java.util.Stack;
  */
 public class Problem221 {
 
-
     /**
      * 动态规划算法 dp[i][j] 表示正方形右下角坐标为(i,j)
      * 这里构造动态规划的转换表发现仍可以继续优化，只用一维数组
