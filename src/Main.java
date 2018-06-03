@@ -1,4 +1,3 @@
-import java.util.Random;
 
 /**
  * create by stephen on 2018/4/2
