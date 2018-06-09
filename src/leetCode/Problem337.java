@@ -40,7 +40,7 @@ public class Problem337 {
     }
 
 
-    /**
+    /*******************优化解法*********************
      * 相比自己写的方法 更清晰的表达
      */
     public int rob(TreeNode root) {
@@ -62,7 +62,7 @@ public class Problem337 {
 
     private Map<TreeNode, int[]> map = new HashMap<>();
 
-    /**
+    /*******************未优化解法*********************
      * 递归 同时利用了memorization减少运算
      * key-TreeNode, value-int[] 0:选中 1:不选
      */

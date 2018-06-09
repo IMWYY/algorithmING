@@ -34,6 +34,7 @@ public class Problem543 {
         }
     }
 
+    /*******************优化解法*********************/
     int ans = 0;
     /**
      * DFS算法 只要求出每个节点的深度即可
@@ -52,7 +53,8 @@ public class Problem543 {
         return Math.max(l, r) + 1;
     }
 
-    /**
+
+    /*******************未优化解法*********************
      * 递归算法 非递归求树高
      */
     public int diameterOfBinaryTree1(TreeNode root) {
