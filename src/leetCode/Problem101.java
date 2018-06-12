@@ -25,16 +25,6 @@ import java.util.Queue;
  * create by stephen on 2018/6/9
  */
 public class Problem101 {
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
     /**************************************************************
      * 递归
      *************************************************************/
@@ -66,5 +56,15 @@ public class Problem101 {
             queue.add(t2.left);
         }
         return true;
+    }
+
+    private class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
     }
 }

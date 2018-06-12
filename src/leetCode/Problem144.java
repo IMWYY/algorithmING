@@ -6,30 +6,20 @@ import java.util.Stack;
 
 /**
  * Given a binary tree, return the preorder traversal of its nodes' values.
- *
+ * <p>
  * Example:
  * Input: [1,null,2,3]
- *  1
- *   \
- *    2
- *   /
- *  3
+ * 1
+ * \
+ * 2
+ * /
+ * 3
  * Output: [1,2,3]
- *
+ * <p>
  * Follow up: Recursive solution is trivial, could you do it iteratively?
  * create by stephen on 2018/5/12
  */
 public class Problem144 {
-
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
 
     /**
      * 非递归方法
@@ -55,7 +45,6 @@ public class Problem144 {
         return result;
     }
 
-
     /**
      * 递归方法
      */
@@ -70,6 +59,16 @@ public class Problem144 {
         sequence.add(node.val);
         preOrder(node.left, sequence);
         preOrder(node.right, sequence);
+    }
+
+    private class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
     }
 
 }

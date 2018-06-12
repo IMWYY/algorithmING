@@ -30,15 +30,12 @@ import java.util.HashMap;
  * create by stephen on 2018/6/11
  */
 public class Problem437 {
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
+    /************************
+     * 利用 map+前缀和
+     * key-之前的和 value-出现的次数 即到当前点为止 可以得到该value的路径数量
+     * 以 1,2,-1,-1,2为例，presum为 1, 3, 2, 1, 3 路径为{2}, {1,2,-1}, {2,-1,-1,2}, {2}
+     ***********************/
+    private int count;
 
     /******************
      * DFS
@@ -58,13 +55,6 @@ public class Problem437 {
                 + pathSumFrom(node.left, target - node.val)
                 + pathSumFrom(node.right, target - node.val);
     }
-
-    /************************
-     * 利用 map+前缀和
-     * key-之前的和 value-出现的次数 即到当前点为止 可以得到该value的路径数量
-     * 以 1,2,-1,-1,2为例，presum为 1, 3, 2, 1, 3 路径为{2}, {1,2,-1}, {2,-1,-1,2}, {2}
-     ***********************/
-    private int count;
 
     public int pathSum1(TreeNode root, int sum) {
         HashMap<Integer, Integer> preSum = new HashMap<>();
@@ -92,5 +82,15 @@ public class Problem437 {
         findPath(root.right, currSum, target, preSum);
 
         preSum.put(currSum, preSum.get(currSum) - 1);       // 容易遗漏
+    }
+
+    private class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
     }
 }

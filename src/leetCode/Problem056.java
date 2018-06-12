@@ -3,7 +3,6 @@ package leetCode;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -23,6 +22,26 @@ import java.util.List;
  */
 public class Problem056 {
 
+    /**
+     * 排序后逐个加入结果集合
+     */
+    public List<Interval> merge(List<Interval> intervals) {
+        if (intervals.size() <= 1) return intervals;
+        List<Interval> result = new ArrayList<>();
+        intervals.sort(Comparator.comparingInt(o -> o.start));
+        result.add(intervals.get(0));
+        for (Interval interval : intervals) {
+            Interval temp = result.get(result.size() - 1);
+            if (temp.end >= interval.start) {
+                temp.end = Math.max(temp.end, interval.end);
+            } else {
+                result.add(interval);
+            }
+        }
+
+        return result;
+    }
+
     private class Interval {
         int start;
         int end;
@@ -36,25 +55,5 @@ public class Problem056 {
             start = s;
             end = e;
         }
-    }
-
-    /**
-     * 排序后逐个加入结果集合
-     */
-    public List<Interval> merge(List<Interval> intervals) {
-        if (intervals.size() <= 1) return intervals;
-        List<Interval> result = new ArrayList<>();
-        intervals.sort(Comparator.comparingInt(o -> o.start));
-        result.add(intervals.get(0));
-        for (Interval interval : intervals) {
-            Interval temp = result.get(result.size()-1);
-            if (temp.end >= interval.start) {
-                temp.end = Math.max(temp.end, interval.end);
-            } else {
-                result.add(interval);
-            }
-        }
-
-        return result;
     }
 }

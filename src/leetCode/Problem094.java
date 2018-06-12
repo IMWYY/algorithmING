@@ -10,10 +10,10 @@ import java.util.Stack;
  * Example:
  * <p>
  * Input: [1,null,2,3]
- *  1
- *   \
- *   2
- *  /
+ * 1
+ * \
+ * 2
+ * /
  * 3
  * Output: [1,3,2]
  * <p>
@@ -22,16 +22,6 @@ import java.util.Stack;
  * create by stephen on 2018/5/12
  */
 public class Problem094 {
-
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
 
     /**
      * 非递归方法
@@ -57,7 +47,6 @@ public class Problem094 {
         return result;
     }
 
-
     /**
      * 递归方法
      */
@@ -72,6 +61,16 @@ public class Problem094 {
         inOrder(node.left, sequence);
         sequence.add(node.val);
         inOrder(node.right, sequence);
+    }
+
+    private class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
     }
 
 

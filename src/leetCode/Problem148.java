@@ -11,19 +11,10 @@ package leetCode;
  * Input: -1->5->3->4->0
  * Output: -1->0->3->4->5
  * <p>
- *
+ * <p>
  * create by stephen on 2018/5/17
  */
 public class Problem148 {
-
-    private class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
-    }
 
     /***********************************************************
      * 归并排序
@@ -74,7 +65,6 @@ public class Problem148 {
         return l1;
     }
 
-
     /*********************************************************
      * 链表快速排序
      * 两个指针p，q一起往后走，保持p之前小于flag，p与q之间大于flag
@@ -112,5 +102,14 @@ public class Problem148 {
         head.val = temp;
 
         return p;
+    }
+
+    private class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+        }
     }
 }

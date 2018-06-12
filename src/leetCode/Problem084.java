@@ -19,12 +19,13 @@ public class Problem084 {
     public static void main(String[] args) {
         System.out.println(new Problem084().largestRectangleArea(new int[]{3, 1, 3, 2, 2}));
     }
+
     /**
      * 利用stack：
      * 如果栈为空或者当前bar大于栈顶元素，下标入栈
      * 否则出栈作为高度 找到左下标计算面积
      * 最后返回最大的面积
-     *
+     * <p>
      * 每次遇到高度下降的情况就计算当前位置（i）之前的所有比当前高度大的高度面积
      * （右下标是i，出栈找到左下标，高度为栈顶元素对应的高度）
      * O(n) time + O(n) space

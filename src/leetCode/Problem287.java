@@ -68,7 +68,7 @@ public class Problem287 {
     public int findDuplicate3(int[] nums) {
         Arrays.sort(nums);
         for (int i = 1; i < nums.length; i++) {
-            if (nums[i] == nums[i-1]) {
+            if (nums[i] == nums[i - 1]) {
                 return nums[i];
             }
         }

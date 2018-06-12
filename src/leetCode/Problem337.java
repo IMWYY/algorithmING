@@ -29,16 +29,7 @@ import java.util.Map;
  */
 public class Problem337 {
 
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
+    private Map<TreeNode, int[]> map = new HashMap<>();
 
     /*******************优化解法*********************
      * 相比自己写的方法 更清晰的表达
@@ -57,10 +48,6 @@ public class Problem337 {
         res[1] = Math.max(l[0], l[1]) + Math.max(r[0], r[1]);
         return res;
     }
-
-
-
-    private Map<TreeNode, int[]> map = new HashMap<>();
 
     /*******************未优化解法*********************
      * 递归 同时利用了memorization减少运算
@@ -123,6 +110,16 @@ public class Problem337 {
             }
 
             return result;
+        }
+    }
+
+    private class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
         }
     }
 }

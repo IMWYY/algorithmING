@@ -1,7 +1,5 @@
 package leetCode;
 
-import classic.Tree;
-
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,17 +26,6 @@ import java.util.Queue;
  */
 public class Problem102 {
 
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
-
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
         if (root == null) return res;
@@ -48,7 +35,7 @@ public class Problem102 {
         while (!queue.isEmpty()) {
             int len = queue.size();
             list = new ArrayList<>();
-            while (len -- > 0) {
+            while (len-- > 0) {
                 TreeNode temp = queue.poll();
                 if (temp.left != null) queue.offer(temp.left);
                 if (temp.right != null) queue.offer(temp.right);
@@ -57,5 +44,15 @@ public class Problem102 {
             res.add(list);
         }
         return res;
+    }
+
+    private class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
     }
 }

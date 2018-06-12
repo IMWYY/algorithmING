@@ -1,15 +1,13 @@
 package leetCode;
 
-import java.util.List;
-
 /**
  * Write a program to find the node at which the intersection of two singly linked lists begins.
  * For example, the following two linked lists:
  * <p>
  * A:       a1 → a2
- *                  ↘
- *                    c1 → c2 → c3
- *                  ↗
+ * ↘
+ * c1 → c2 → c3
+ * ↗
  * B:  b1 → b2 → b3
  * begin to intersect at node c1.
  * <p>
@@ -22,16 +20,6 @@ import java.util.List;
  * create by stephen on 2018/5/16
  */
 public class Problem160 {
-    private class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
-    }
-
-
     /**
      * 不需要知道每个链表的长度 只需要两个指针同时遍历
      * 如果A达到末尾 就重新跳转到B的head。两者相遇的地方就是交点
@@ -55,17 +43,17 @@ public class Problem160 {
         ListNode temp = headA;
         int lenA = 0, lenB = 0;
         while (temp != null) {
-            lenA ++;
+            lenA++;
             temp = temp.next;
         }
 
         temp = headB;
         while (temp != null) {
-            lenB ++;
+            lenB++;
             temp = temp.next;
         }
 
-       if (lenA > lenB) { //交换 使a的长度是短的
+        if (lenA > lenB) { //交换 使a的长度是短的
             int t = lenA;
             lenA = lenB;
             lenB = t;
@@ -78,7 +66,7 @@ public class Problem160 {
         temp = headB;
         while (lenB > lenA) {
             temp = temp.next;
-            lenB --;
+            lenB--;
         }
 
         while (temp != null) {
@@ -88,5 +76,14 @@ public class Problem160 {
         }
 
         return null;
+    }
+
+    private class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+        }
     }
 }

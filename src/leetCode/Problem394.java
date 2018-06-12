@@ -32,10 +32,10 @@ public class Problem394 {
             if (c >= '0' && c <= '9') {
                 if (parentheses == 0) {
                     int cur = i;                // 这里是为了计算多位数的数字值
-                    while (s.charAt(i+1) >= '0' && s.charAt(i+1) <= '9') {
-                        i ++;                   // 注意i的下标 容易出错
+                    while (s.charAt(i + 1) >= '0' && s.charAt(i + 1) <= '9') {
+                        i++;                   // 注意i的下标 容易出错
                     }
-                    times = Integer.valueOf(s.substring(cur, i+1));
+                    times = Integer.valueOf(s.substring(cur, i + 1));
                 }
             } else if (c == '[') {
                 if (parentheses == 0) {
@@ -74,23 +74,23 @@ public class Problem394 {
                 int count = 0;
                 while (Character.isDigit(s.charAt(index))) {
                     count += count * 10 + s.charAt(index) - '0';
-                    index ++;
+                    index++;
                 }
                 countStack.push(count);
             } else if (s.charAt(index) == '[') {
                 stringStack.push(res);
                 res = "";
-                index ++;
+                index++;
             } else if (s.charAt(index) == ']') {
                 StringBuilder builder = new StringBuilder(stringStack.pop());
                 int count = countStack.pop();
-                for (int i=0; i<count; ++i) {
+                for (int i = 0; i < count; ++i) {
                     builder.append(res);
                 }
                 res = builder.toString();
-                index ++;
+                index++;
             } else {
-                res += s.charAt(index ++);
+                res += s.charAt(index++);
             }
         }
         return res;

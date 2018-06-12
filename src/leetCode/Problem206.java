@@ -1,7 +1,5 @@
 package leetCode;
 
-import javax.swing.*;
-
 /**
  * Reverse a singly linked list.
  * <p>
@@ -14,15 +12,6 @@ import javax.swing.*;
  * create by stephen on 2018/5/14
  */
 public class Problem206 {
-
-    private class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
-    }
 
     /**
      * 递归法
@@ -52,5 +41,14 @@ public class Problem206 {
 
         }
         return pre;
+    }
+
+    private class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+        }
     }
 }

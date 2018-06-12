@@ -28,10 +28,10 @@ public class Problem017 {
         result.add("");
         String[] letters = {"0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
         for (int i = 0; i < digits.length(); ++i) {
-            String letter = letters[digits.charAt(i)-'0'];
+            String letter = letters[digits.charAt(i) - '0'];
             while (result.peek().length() == i) {
                 String removed = result.remove();
-                for (char c: letter.toCharArray()) {
+                for (char c : letter.toCharArray()) {
                     result.add(removed + c);
                 }
             }

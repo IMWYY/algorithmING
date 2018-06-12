@@ -4,29 +4,20 @@ import java.util.Stack;
 
 /**
  * Given a singly linked list, determine if it is a palindrome.
- *
+ * <p>
  * Example 1:
  * Input: 1->2
  * Output: false
- *
+ * <p>
  * Example 2:
  * Input: 1->2->2->1
  * Output: true
  * Follow up:
  * Could you do it in O(n) time and O(1) space?
- *
+ * <p>
  * create by stephen on 2018/5/15
  */
 public class Problem234 {
-
-    private class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
-    }
 
     /**
      * 反转一半链表
@@ -40,7 +31,7 @@ public class Problem234 {
             fast = fast.next.next;
         }
         if (fast != null) {
-            slow= slow.next;
+            slow = slow.next;
         }
 
         //反转另一半列表
@@ -87,5 +78,14 @@ public class Problem234 {
             slow = slow.next;
         }
         return true;
+    }
+
+    private class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+        }
     }
 }

@@ -22,16 +22,6 @@ import java.util.Stack;
  * create by stephen on 2018/5/3
  */
 public class Problem105 {
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
     /**
      * 递归解法 注意递归的跳出条件
      */
@@ -56,7 +46,6 @@ public class Problem105 {
         root.right = rightLen == 0 ? null : construct(preorder, s1 + leftLen + 1, e1, inorder, rootIndex + 1, e2);
         return root;
     }
-
 
     /**
      * 非递归写法
@@ -95,6 +84,16 @@ public class Problem105 {
             stack.push(right);
         }
         return root;
+    }
+
+    private class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
     }
 
 }

@@ -79,7 +79,7 @@ public class Problem072 {
                 if (word1.charAt(i - 1) == word2.charAt(j - 1)) {
                     dp[i] = pre;
                 } else {
-                    dp[j] = Math.min(Math.min(dp[i-1], dp[i]), pre)  + 1;
+                    dp[j] = Math.min(Math.min(dp[i - 1], dp[i]), pre) + 1;
                 }
                 pre = temp;
             }

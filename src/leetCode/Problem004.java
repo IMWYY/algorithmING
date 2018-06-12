@@ -42,7 +42,7 @@ public class Problem004 {
 
         if (m == 0) {
             if ((n & 1) == 0) {
-                return (nums2[(n >> 1) -1] + nums2[n >> 1]) / 2.0;
+                return (nums2[(n >> 1) - 1] + nums2[n >> 1]) / 2.0;
             } else {
                 return nums2[n >> 1];
             }
@@ -54,15 +54,15 @@ public class Problem004 {
             j = (m + n + 1) / 2 - i;
 
             // 注意边界情况
-            if (i > 0 && j < n &&  nums1[i - 1] > nums2[j]) {
+            if (i > 0 && j < n && nums1[i - 1] > nums2[j]) {
                 right = i - 1;
-            } else if (j > 0 && i < m &&  nums2[j - 1] > nums1[i]) {
+            } else if (j > 0 && i < m && nums2[j - 1] > nums1[i]) {
                 left = i + 1;
-            } else if ((i <= 0 || j >= n  || nums1[i - 1] <= nums2[j]) &&
+            } else if ((i <= 0 || j >= n || nums1[i - 1] <= nums2[j]) &&
                     (j <= 0 || i >= m || nums2[j - 1] <= nums1[i])) {
                 int maxLeft;
-                if (i <= 0) maxLeft = nums2[j-1];
-                else if (j <= 0) maxLeft = nums1[i-1];
+                if (i <= 0) maxLeft = nums2[j - 1];
+                else if (j <= 0) maxLeft = nums1[i - 1];
                 else maxLeft = Math.max(nums1[i - 1], nums2[j - 1]);
 
                 if (((m + n) & 1) == 1) {

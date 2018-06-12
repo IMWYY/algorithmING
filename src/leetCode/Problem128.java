@@ -56,11 +56,11 @@ public class Problem128 {
         int longestStreak = 0;
 
         for (int num : num_set) {
-            if (!num_set.contains(num-1)) {
+            if (!num_set.contains(num - 1)) {
                 int currentNum = num;
                 int currentStreak = 1;
 
-                while (num_set.contains(currentNum+1)) {
+                while (num_set.contains(currentNum + 1)) {
                     currentNum += 1;
                     currentStreak += 1;
                 }

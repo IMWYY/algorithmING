@@ -24,11 +24,11 @@ public class Problem322 {
      * 动态规划 完全背包问题变种
      * dp[i][j] 表示前i种coin组合成j的最少coin数量
      * dp[i][j] = Math.min(dp[i][j - coins[i]] + 1, dp[i - 1][j])
-     *
+     * <p>
      * 这里需要注意的是：转换方程中，如果前一个状态有0，不能计算在内，0会影响最终的结果
      * 如dp[i - 1][j]=0，则变成dp[i][j] = dp[i][j - coins[i]] + 1
      * 如dp[i][j - coins[i]]=0，则变成 dp[i][j] = dp[i - 1][j]
-     *
+     * <p>
      * O(S*n) time + O(S*n) space
      */
     public int coinChange1(int[] coins, int amount) {
@@ -48,7 +48,7 @@ public class Problem322 {
         for (int i = 1; i < dp.length; ++i) {
             for (int j = 1; j < dp[0].length; ++j) {
                 if ((j - coins[i] > 0 && dp[i][j - coins[i]] > 0) || j - coins[i] == 0) {
-                    if (dp[i-1][j] > 0) {
+                    if (dp[i - 1][j] > 0) {
                         dp[i][j] = Math.min(dp[i][j - coins[i]] + 1, dp[i - 1][j]);
                     } else {
                         dp[i][j] = dp[i][j - coins[i]] + 1;
@@ -59,7 +59,7 @@ public class Problem322 {
             }
         }
 
-        return dp[coins.length-1][amount] == 0 ? -1 : dp[coins.length-1][amount];
+        return dp[coins.length - 1][amount] == 0 ? -1 : dp[coins.length - 1][amount];
     }
 
 
@@ -70,16 +70,16 @@ public class Problem322 {
         if (amount == 0) return 0;
         if (coins.length == 0) return -1;
 
-        int[] dp = new int[amount+1];
-        Arrays.fill(dp, amount+1);
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, amount + 1);
         dp[0] = 0;
-        for (int i=1; i<=amount; ++i) {
+        for (int i = 1; i <= amount; ++i) {
             for (int coin : coins) {
                 if (i - coin >= 0) {
                     dp[i] = Math.min(dp[i], dp[i - coin] + 1);
                 }
             }
         }
-        return dp[amount] > amount ? -1 :dp[amount];
+        return dp[amount] > amount ? -1 : dp[amount];
     }
 }

@@ -21,7 +21,7 @@ public class Problem560 {
      */
     public int subarraySum(int[] nums, int k) {
         int count = 0, sum = 0;
-        HashMap< Integer, Integer > map = new HashMap < > ();
+        HashMap<Integer, Integer> map = new HashMap<>();
         map.put(0, 1);
         for (int i = 0; i < nums.length; i++) {
             sum += nums[i];
@@ -44,14 +44,14 @@ public class Problem560 {
         int temp;
         for (int i = 1; i < nums.length; ++i) {
             temp = 0;
-            dp[i] += dp[i-1];
-            for (int j=i; j>=0; j--) {
+            dp[i] += dp[i - 1];
+            for (int j = i; j >= 0; j--) {
                 temp += nums[j];
-                if (temp == k) dp[i] ++;
+                if (temp == k) dp[i]++;
             }
         }
 
-        return dp[nums.length-1];
+        return dp[nums.length - 1];
     }
 
 
@@ -81,9 +81,9 @@ public class Problem560 {
     public int subarraySum3(int[] nums, int k) {
         int count = 0;
         for (int start = 0; start < nums.length; start++) {
-            int sum=0;
+            int sum = 0;
             for (int end = start; end < nums.length; end++) {
-                sum+=nums[end];
+                sum += nums[end];
                 if (sum == k)
                     count++;
             }

@@ -3,7 +3,7 @@ package leetCode;
 
 /**
  * Merge k sorted linked lists and return it as one sorted list. Analyze and describe its complexity.
- *
+ * <p>
  * Example:
  * Input:
  * [
@@ -16,15 +16,6 @@ package leetCode;
  */
 public class Problem023 {
 
-    private class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
-    }
-
     /**
      * 归并法合并列表 可以用递归法 这里用了非递归
      */
@@ -33,14 +24,13 @@ public class Problem023 {
         if (lists.length == 1) return lists[0];
         int interval = 1;
         while (interval < lists.length) {
-            for (int i=0; i<lists.length - interval; i += interval * 2) {
+            for (int i = 0; i < lists.length - interval; i += interval * 2) {
                 lists[i] = mergeTwoList(lists[i], lists[i + interval]);
             }
             interval *= 2;
         }
         return lists[0];
     }
-
 
     /**
      * 一个个合并
@@ -49,7 +39,7 @@ public class Problem023 {
         if (lists == null || lists.length == 0) return null;
         if (lists.length == 1) return lists[0];
         ListNode result = lists[0];
-        for (int i=1; i<lists.length; ++i) {
+        for (int i = 1; i < lists.length; ++i) {
             result = mergeTwoList(result, lists[i]);
         }
         return result;
@@ -86,6 +76,15 @@ public class Problem023 {
         }
 
         return (l1.val <= l2.val) ? l1 : l2;
+    }
+
+    private class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+        }
     }
 
 

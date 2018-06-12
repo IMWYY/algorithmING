@@ -29,7 +29,7 @@ public class Problem049 {
         Map<String, List<String>> map = new HashMap<>();
         String key;
 
-        for (String s :strs) {
+        for (String s : strs) {
             char[] chars = s.toCharArray();
             Arrays.sort(chars);
             key = String.valueOf(chars);

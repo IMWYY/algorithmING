@@ -26,7 +26,7 @@ public class Problem309 {
     /**
      * 利用有限自动机 有点难理解 参考：
      * https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/discuss/75928/Share-my-DP-solution-(By-State-Machine-Thinking)
-     *
+     * <p>
      * 每一天只有三个状态：
      * 1）买 2）卖 3）不做操作
      * s0该天不做操作 s1该天买入 s2 改天卖出

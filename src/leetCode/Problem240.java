@@ -40,10 +40,10 @@ public class Problem240 {
         if (matrix.length == 0 || matrix[0].length == 0) return false;
         int x = 0, y = matrix[0].length - 1;
 
-        while (x <= matrix.length && y >=0) {
+        while (x <= matrix.length && y >= 0) {
             if (matrix[x][y] == target) return true;
             if (matrix[x][y] > target) y--;
-            else if (matrix[x][y] < target) x ++;
+            else if (matrix[x][y] < target) x++;
         }
         return false;
     }

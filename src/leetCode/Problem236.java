@@ -36,7 +36,7 @@ public class Problem236 {
 
     /**
      * 转换为rmq问题解决
-     *
+     * <p>
      * 参考：https://www.cnblogs.com/scau20110726/archive/2013/05/26/3100812.html
      */
     public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
@@ -50,18 +50,18 @@ public class Problem236 {
     /**
      * Tarjan算法 利用并查集和DFS
      * marge和find为并查集合并函数和查找函数
-     *
+     * <p>
      * Tarjan(u) {
-     *      for each(u,v) {    //访问所有u子节点v
-     *          Tarjan(v);        //继续往下遍历
-     *          marge(u,v);    //合并v到u上
-     *          标记v被访问过;
-     *      }
-     *
-     *      for each(u,e) {    //访问所有和u有询问关系的e
-     *          如果e被访问过;
-     *          u,e的最近公共祖先为find(e);
-     *      }
+     * for each(u,v) {    //访问所有u子节点v
+     * Tarjan(v);        //继续往下遍历
+     * marge(u,v);    //合并v到u上
+     * 标记v被访问过;
+     * }
+     * <p>
+     * for each(u,e) {    //访问所有和u有询问关系的e
+     * 如果e被访问过;
+     * u,e的最近公共祖先为find(e);
+     * }
      * }
      */
     public TreeNode Tarjan(TreeNodeWrapper root, TreeNodeWrapper p, TreeNodeWrapper q, UFset uFset) {
@@ -90,6 +90,7 @@ public class Problem236 {
         c.right = r;
         return c;
     }
+
     public class TreeNodeWrapper {
         public TreeNode node;
         public TreeNodeWrapper parent;

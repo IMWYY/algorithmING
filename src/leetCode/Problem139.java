@@ -28,7 +28,7 @@ public class Problem139 {
 
     /**
      * 动态规划：dp[i] 表示到i位置是否能够被wordDict组成
-     *  dp[i] = map.getOrDefault(s.substring(j, i + 1), false) && dp[j - 1];
+     * dp[i] = map.getOrDefault(s.substring(j, i + 1), false) && dp[j - 1];
      */
     public boolean wordBreak(String s, List<String> wordDict) {
         if (s.isEmpty() || wordDict.isEmpty()) return false;

@@ -65,24 +65,24 @@ public class Problem312 {
 
         int[] numbers = new int[nums.length + 2];
         int n = 1;
-        for (int x: nums) {
+        for (int x : nums) {
             if (x > 0) numbers[n++] = x;            // key point: 去除所有0
         }
         numbers[0] = numbers[n++] = 1;
 
         int[][] dp = new int[n][n];
 
-        for (int gap=2; gap<n; ++gap) {              // key point: gap from 0 to n-1
-            for (int left=0; left<n-gap; ++left) {
+        for (int gap = 2; gap < n; ++gap) {              // key point: gap from 0 to n-1
+            for (int left = 0; left < n - gap; ++left) {
                 int right = left + gap;
-                for (int i=left + 1; i < right; ++i) {
+                for (int i = left + 1; i < right; ++i) {
                     dp[left][right] = Math.max(dp[left][right], numbers[left] * numbers[i] * numbers[right]
                             + dp[left][i] + dp[i][right]);
                 }
             }
         }
 
-        return dp[0][n-1];
+        return dp[0][n - 1];
 
     }
 }

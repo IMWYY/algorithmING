@@ -9,28 +9,17 @@ import java.util.Stack;
  * <p>
  * Example:
  * Input: [1,null,2,3]
- *  1
- *   \
- *    2
- *   /
- *  3
+ * 1
+ * \
+ * 2
+ * /
+ * 3
  * Output: [3,2,1]
  * Follow up: Recursive solution is trivial, could you do it iteratively?
  * <p>
  * create by stephen on 2018/5/12
  */
 public class Problem145 {
-
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
 
     /**
      * 非递归方法
@@ -62,7 +51,6 @@ public class Problem145 {
         return result;
     }
 
-
     /**
      * 递归方法
      */
@@ -77,5 +65,15 @@ public class Problem145 {
         postOrder(node.left, sequence);
         postOrder(node.right, sequence);
         sequence.add(node.val);
+    }
+
+    private class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
     }
 }

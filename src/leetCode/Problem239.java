@@ -3,7 +3,6 @@ package leetCode;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.PriorityQueue;
-import java.util.Queue;
 
 /**
  * Given an array nums, there is a sliding window of size k which is moving from the very
@@ -41,7 +40,7 @@ public class Problem239 {
         if (k == 0 || nums.length == 0) return new int[0];
         Deque<Integer> queue = new ArrayDeque<>();
         int[] result = new int[(nums.length - k) <= 0 ? 1 : nums.length - k + 1];
-        for (int i=0; i<nums.length; ++i) {
+        for (int i = 0; i < nums.length; ++i) {
             while (!queue.isEmpty() && queue.peek() < i - k + 1) {      // 将在窗口之外的元素移除
                 queue.poll();
             }
@@ -49,8 +48,8 @@ public class Problem239 {
                 queue.pollLast();
             }
             queue.offer(i);
-            if (i >= k-1) {
-                result[i-k+1] = nums[queue.peek()];
+            if (i >= k - 1) {
+                result[i - k + 1] = nums[queue.peek()];
             }
         }
         return result;
@@ -73,7 +72,7 @@ public class Problem239 {
         while (start < nums.length - k + 1) {
             heap.remove(nums[start - 1]);
             heap.add(nums[start + k - 1]);
-            result[start ++] = heap.peek();
+            result[start++] = heap.peek();
         }
         return result;
     }

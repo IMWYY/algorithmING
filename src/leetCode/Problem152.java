@@ -19,7 +19,7 @@ package leetCode;
 public class Problem152 {
 
     public static void main(String[] args) {
-        System.out.println(maxProduct(new int[]{-2,0,-1}));
+        System.out.println(maxProduct(new int[]{-2, 0, -1}));
     }
 
     public static int maxProduct(int[] nums) {

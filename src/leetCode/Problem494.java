@@ -79,7 +79,7 @@ public class Problem494 {
 
     private int subTarget(int[] nums, int target) {
         int[][] dp = new int[nums.length + 1][target + 1];
-        for (int i=0; i<dp.length; ++i) {
+        for (int i = 0; i < dp.length; ++i) {
             Arrays.fill(dp[i], 0);
         }
         dp[0][0] = 1;

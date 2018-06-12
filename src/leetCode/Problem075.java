@@ -63,12 +63,12 @@ public class Problem075 {
                 temp = nums[high];
                 nums[high] = nums[i];
                 nums[i] = temp;
-                high --;
+                high--;
             } else if (nums[i] == 0) {
                 temp = nums[low];
                 nums[low] = nums[i];
                 nums[i] = temp;
-                low ++;
+                low++;
                 i++;
             } else if (nums[i] == 1) {
                 i++;
