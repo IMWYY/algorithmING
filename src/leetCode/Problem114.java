@@ -1,6 +1,5 @@
 package leetCode;
 
-import classic.Tree;
 
 /**
  * Given a binary tree, flatten it to a linked list in-place.
@@ -30,7 +29,7 @@ import classic.Tree;
 public class Problem114 {
 
 
-    public static class TreeNode {
+    private class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
