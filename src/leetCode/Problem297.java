@@ -14,24 +14,15 @@ import java.util.*;
  */
 public class Problem297 {
 
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
     /*************************************
      * 改进 只用先序遍历就够了 需要记录null节点
      ************************************/
     public String serialize(TreeNode root) {
         StringBuilder builder = new StringBuilder();
-        buildString(root,builder);
+        buildString(root, builder);
         return builder.toString();
     }
+
     private void buildString(TreeNode root, StringBuilder builder) {
         if (root == null) {
             builder.append("X").append(",");
@@ -56,7 +47,6 @@ public class Problem297 {
         root.right = buildTree(queue);
         return root;
     }
-
 
     /*************************************
      * 利用中序遍历和先序遍历 同时利用一个map记录每个节点的索引 用来区分val相同的节点
@@ -96,7 +86,6 @@ public class Problem297 {
         return root;
     }
 
-
     private String preOrder(TreeNode root, Map<TreeNode, Integer> map) {
         if (root == null) return null;
         Stack<TreeNode> stack = new Stack<>();
@@ -106,7 +95,7 @@ public class Problem297 {
         while (ptr != null || !stack.isEmpty()) {
             while (ptr != null) {
                 stack.push(ptr);
-                map.put(ptr, index ++);
+                map.put(ptr, index++);
                 builder.append(ptr.val).append((char) (map.getOrDefault(ptr, 0) + 'a')).append("#");
 
                 ptr = ptr.left;
@@ -136,5 +125,15 @@ public class Problem297 {
             }
         }
         return builder.toString();
+    }
+
+    private class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
     }
 }

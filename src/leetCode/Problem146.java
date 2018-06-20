@@ -21,6 +21,7 @@ public class Problem146 {
     private Map<Integer, Node> map = new HashMap<>();
     private Node head, tail;
     private int capacity;
+
     public Problem146(int capacity) {
         this.capacity = capacity;
     }

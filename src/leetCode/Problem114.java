@@ -29,16 +29,6 @@ package leetCode;
 public class Problem114 {
 
 
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
     /**********************************
      * 找到左子树最右边节点 接到右子树
      **********************************/
@@ -67,5 +57,15 @@ public class Problem114 {
         }
         root.left = null;
         return res;
+    }
+
+    private class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
     }
 }

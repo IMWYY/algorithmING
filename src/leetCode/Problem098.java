@@ -1,7 +1,5 @@
 package leetCode;
 
-import classic.TreeNode;
-
 import java.util.Stack;
 
 /**
@@ -15,16 +13,6 @@ import java.util.Stack;
  * create by stephen on 2018/6/15
  */
 public class Problem098 {
-
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
 
     /**
      * 递归法
@@ -75,6 +63,16 @@ public class Problem098 {
             }
         }
         return true;
+    }
+
+    private class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
     }
 
 }

@@ -20,16 +20,6 @@ package leetCode;
  */
 public class Problem124 {
 
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
     private int ans = Integer.MIN_VALUE;
 
     /**
@@ -50,5 +40,15 @@ public class Problem124 {
         ans = Math.max(ans, res);
         // 返回的时候只能返回带一个子树的
         return Math.max(Math.max(root.val, root.val + l), root.val + r);
+    }
+
+    private class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
     }
 }
