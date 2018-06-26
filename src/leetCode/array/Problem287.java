@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.array;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -42,18 +42,6 @@ public class Problem287 {
      * 最普通的想法 O(n2)
      */
     public int findDuplicate(int[] nums) {
-        for (int i = 0; i < nums.length; ++i) {
-            for (int j = i + 1; j < nums.length; ++j) {
-                if (nums[j] == nums[i]) return nums[i];
-            }
-        }
-        return -1;
-    }
-
-    /**
-     * 利用二分查找
-     */
-    public int findDuplicate2(int[] nums) {
         for (int i = 0; i < nums.length; ++i) {
             for (int j = i + 1; j < nums.length; ++j) {
                 if (nums[j] == nums[i]) return nums[i];
