@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.dynamicProgramming;
 
 /**
  * Given a m x n grid filled with non-negative numbers,

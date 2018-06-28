@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.array;
 
 /**
  * Given a sorted array and a target value, return the index if the target is found.
@@ -35,7 +35,7 @@ public class Problem035 {
                 return mid;
             } else if (nums[mid] < target) {
                 left = mid + 1;
-            } else {    // nums[mid] > target
+            } else {
                 right = mid;
             }
         }

@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.array;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -16,7 +16,11 @@ import java.util.HashMap;
 public class Problem560 {
 
     /**
-     * 利用HashMap记录sum的对应出现的次数 每次操作map查看sum-k是否在map中
+     * 遍历一遍 利用HashMap记录sum的对应出现的次数
+     * 每次操作map查看sum-k是否在map中 count加上出现的次数
+     * 举例说明：
+     * 加入当前下标为i，sum(i)-k在map中说明，之前的某个位置j sum(j) = sum(i)-k
+     * 也即 sum(i)-sum(j) = k 就是 i-j的和等于k
      * O(n) time + O(n) space
      */
     public int subarraySum(int[] nums, int k) {
