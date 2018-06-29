@@ -1,4 +1,6 @@
-package leetCode;
+package leetCode.array;
+
+import java.util.Stack;
 
 /**
  * Given n non-negative integers representing an elevation map where the width of each bar is 1,
@@ -35,20 +37,24 @@ public class Problem042 {
 
 
     /**
-     * 改进 使用动态规划记录最大值 选小的作为水高度
+     * 改进
+     * 使用动态规划记录左边界和右边界 选小的作为水高度
+     * left_max记录到i位置的左边最大值
+     * right_max记录到i位置的右边最大值
      * O(n）time + O(n) space
      */
     public int trap2(int[] height) {
         if (height == null || height.length <= 2) return 0;
         int ans = 0;
         int size = height.length;
+
         int[] left_max = new int[height.length];
-        int[] right_max = new int[height.length];
         left_max[0] = height[0];
         for (int i = 1; i < size; i++) {
             left_max[i] = Math.max(height[i], left_max[i - 1]);
         }
 
+        int[] right_max = new int[height.length];
         right_max[size - 1] = height[size - 1];
         for (int i = size - 2; i >= 0; i--) {
             right_max[i] = Math.max(height[i], right_max[i + 1]);
@@ -62,10 +68,34 @@ public class Problem042 {
     }
 
     /**
-     * 使用前后两个指针
-     * O(n）time + O(1) space
+     * 利用栈
+     * 思想：遍历 每次遇到
+     * 1.height[i]比栈顶元素小，就入栈（说明栈顶元素可以作为左边界）
+     * 2.height[i]比栈顶元素大 i就是右边界 计算trap的水量
      */
     public int trap3(int[] height) {
+        int ans = 0, current = 0;
+        Stack<Integer> st = new Stack<>();
+        while (current < height.length) {
+            while (!st.isEmpty() && height[current] > height[st.peek()]) {
+                int top = st.peek();
+                st.pop();
+                if (st.empty())
+                    break;
+                int distance = current - st.peek() - 1;
+                int bounded_height = Math.min(height[current], height[st.peek()]) - height[top];
+                ans += distance * bounded_height;
+            }
+            st.push(current++);
+        }
+        return ans;
+    }
+
+    /**
+     * 使用前后两个指针 比较难理解
+     * O(n）time + O(1) space
+     */
+    public int trap4(int[] height) {
         int left = 0, right = height.length - 1;
         int ans = 0;
         int left_max = 0, right_max = 0;
@@ -88,6 +118,4 @@ public class Problem042 {
         }
         return ans;
     }
-
-
 }

@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.array;
 
 /**
  * Given an array with n objects colored red, white or blue, sort them in-place so
@@ -54,10 +54,11 @@ public class Problem075 {
 
     /**
      * 遍历一遍 前后两个指针一起往中间移动
+     * 另一个指针从头遍历到尾 遇到2和high交换 遇到1和low交换
      */
     public void sortColors2(int[] nums) {
         int low = 0, high = nums.length - 1;
-        int i = 0, temp = 0;
+        int i = 0, temp;
         while (low <= high && i <= high) {
             if (nums[i] == 2) {
                 temp = nums[high];

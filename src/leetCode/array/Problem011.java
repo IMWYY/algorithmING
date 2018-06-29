@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.array;
 
 /**
  * Given n non-negative integers a1, a2, ..., an, where each represents a point at coordinate (i, ai).
@@ -12,21 +12,28 @@ package leetCode;
 public class Problem011 {
 
     /**
-     * 前后两个指针法 每次小height的指针往中间移动
+     * 两指针法
+     * start和end记录两个边界
+     * 因为容量大小由短的边决定 每次小height的指针往中间移动 同时记录每一步都更新maxArea
+     * O(n) time + O(1) space
      */
     public int maxArea(int[] height) {
         int res = 0, start = 0, end = height.length - 1;
         while (start < end) {
             res = Math.max(res, (end - start) * Math.min(height[end], height[start]));
-            if (height[end] > height[start]) start++;
-            else end--;
+            if (height[end] > height[start]){
+                start++;
+            } else {
+                end--;
+            }
         }
         return res;
     }
 
 
     /**
-     * 暴力解法  Time Limit Exceeded
+     * 暴力解法
+     * O(n2) time + O(1) space
      */
     public int maxArea1(int[] height) {
         int res = 0;
