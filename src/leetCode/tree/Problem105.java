@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.tree;
 
 import java.util.Stack;
 
@@ -22,6 +22,16 @@ import java.util.Stack;
  * create by stephen on 2018/5/3
  */
 public class Problem105 {
+    private class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
+    }
+
     /**
      * 递归解法 注意递归的跳出条件
      */
@@ -85,15 +95,4 @@ public class Problem105 {
         }
         return root;
     }
-
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
 }

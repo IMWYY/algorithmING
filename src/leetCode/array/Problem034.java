@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.array;
 
 /**
  * Given an array of integers nums sorted in ascending order,

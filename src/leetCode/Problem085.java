@@ -69,17 +69,4 @@ public class Problem085 {
         return res;
     }
 
-
-    /**
-     *
-     */
-    public int maximalRectangle1(char[][] matrix) {
-        if (matrix.length == 0 || matrix[0].length == 0) return 0;
-
-        int res = 0;
-
-        return res;
-    }
-
-
 }
