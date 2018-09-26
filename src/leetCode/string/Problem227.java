@@ -1,5 +1,7 @@
 package leetCode.string;
 
+import java.util.Stack;
+
 /**
  * Implement a basic calculator to evaluate a simple expression string.
  * The expression string contains only non-negative integers, +, -, *, / operators and empty spaces .
@@ -20,110 +22,112 @@ package leetCode.string;
  */
 public class Problem227 {
 
-    public static void main(String[] args) {
-        System.out.println(calculate("1-2+3-1"));
-    }
+	public static void main(String[] args) {
+		System.out.println(new Problem227().calculate("1-1-1*4"));
+	}
 
-    public static int calculate(String s) {
-        s = s.trim();
-        if (s.equals("")) return 0;
+	/**
+	 * 利用栈 将所有的符号都去除后放入stack 然后进行累加即可
+	 */
+public int calculate(String s) {
+	Stack<Integer> stack = new Stack<>();
+	char sign = '+';
+	for (int i = 0; i < s.length(); i++) {
+		char c = s.charAt(i);
+		if (Character.isDigit(c)) {
+			int start = i;
+			while (c >= '0' && c <= '9') {
+				i++;
+				if (i >= s.length())
+					break;
+				c = s.charAt(i);
+			}
+			int operand = Integer.valueOf(s.substring(start, i));
+			i--;
+			if (sign == '+') {
+				stack.push(operand);
+			} else if (sign == '-') {
+				stack.push(-operand);
+			} else if (sign == '*') {
+				stack.push(stack.pop() * operand);
+			} else if (sign == '/') {
+				stack.push(stack.pop() / operand);
+			}
+		} else if (c != ' ') {
+			sign = c;
+		}
+	}
+	int res = 0;
+	for (int i : stack) {
+		res += i;
+	}
+	return res;
+}
 
-        int operandA = -1, operandB = -1;
-        boolean isMulti = false, isDivison = false;
-        for (int i = 0; i < s.length(); ) {
-            char c = s.charAt(i);
-            if (c == ' ') {
-                i++;
-            } else if (c == '+') {
-                return operandA + calculate(s.substring(i + 1));
-            } else if (c == '-') {
-                String temp = s.substring(i + 1);
-                return operandA - calculate();
-            } else if (c == '*') {
-                isMulti = true;
-                i++;
-            } else if (c == '/') {
-                isDivison = true;
-                i++;
-            } else {
-                int start = i;
-                while (c >= '0' && c <= '9') {
-                    i++;
-                    if (i >= s.length()) break;
-                    c = s.charAt(i);
-                }
-                int num = Integer.valueOf(s.substring(start, i));
-                if (operandA == -1) {
-                    operandA = num;
-                } else if (operandB == -1) {
-                    operandB = num;
-                    if (isMulti) {
-                        operandA *= operandB;
-                        operandB = -1;
-                        isMulti = false;
-                    } else if (isDivison) {
-                        operandA /= operandB;
-                        operandB = -1;
-                        isDivison = false;
-                    }
-                }
-            }
-        }
-        return operandA;
-    }
+	/**
+	 * 递归方式分解+- 和 /*
+	 * 需要对减法特殊考虑
+	 * 不那么优雅的方法 而且time limit exceed
+	 */
+	public int calculate1(String s) {
+		return calculate(s, false);
+	}
 
-//    public static int calculate(String s, boolean negative) {
-//        s = s.trim();
-//        if (s.equals("")) return 0;
-//
-//        int operandA = -1, operandB = -1;
-//        boolean isMulti = false, isDivison = false;
-//        for (int i = 0; i < s.length(); ) {
-//            char c = s.charAt(i);
-//            if (c == ' ') {
-//                i++;
-//            } else if (c == '+') {
-//                System.out.println(negative + " " + operandA +  " + ");
-//                if (negative) {
-//                    return operandA - calculate(s.substring(i + 1), true);
-//                }
-//                return operandA + calculate(s.substring(i + 1), false);
-//            } else if (c == '-') {
-//                System.out.println(negative + " " + operandA + " - " );
-//                if (negative) {
-//                    return operandA - calculate(s.substring(i + 1), true);
-//                }
-//                return operandA - calculate(s.substring(i + 1), true);
-//            } else if (c == '*') {
-//                isMulti = true;
-//                i++;
-//            } else if (c == '/') {
-//                isDivison = true;
-//                i++;
-//            } else {
-//                int start = i;
-//                while (c >= '0' && c <= '9') {
-//                    i++;
-//                    if (i >= s.length()) break;
-//                    c = s.charAt(i);
-//                }
-//                int num = Integer.valueOf(s.substring(start, i));
-//                if (operandA == -1) {
-//                    operandA = num;
-//                } else if (operandB == -1) {
-//                    operandB = num;
-//                    if (isMulti) {
-//                        operandA *= operandB;
-//                        operandB = -1;
-//                        isMulti = false;
-//                    } else if (isDivison) {
-//                        operandA /= operandB;
-//                        operandB = -1;
-//                        isDivison = false;
-//                    }
-//                }
-//            }
-//        }
-//        return operandA;
-//    }
+	public int calculate(String s, boolean negative) {
+		s = s.trim();
+		if (s.equals(""))
+			return 0;
+
+		int operandA = -1, operandB = -1;
+		boolean isMulti = false, isDivison = false;
+		for (int i = 0; i < s.length(); ) {
+			char c = s.charAt(i);
+
+			if (negative) {
+				if (c == '+') {
+					c = '-';
+				} else if (c == '-') {
+					c = '+';
+				}
+			}
+
+			if (c == ' ') {
+				i++;
+			} else if (c == '+') {
+				return operandA + calculate(s.substring(i + 1), negative);
+			} else if (c == '-') {
+				return operandA - calculate(s.substring(i + 1), !negative);
+			} else if (c == '*') {
+				isMulti = true;
+				i++;
+			} else if (c == '/') {
+				isDivison = true;
+				i++;
+			} else {
+				int start = i;
+				while (c >= '0' && c <= '9') {
+					i++;
+					if (i >= s.length())
+						break;
+					c = s.charAt(i);
+				}
+				int num = Integer.valueOf(s.substring(start, i));
+				if (operandA == -1) {
+					operandA = num;
+				} else if (operandB == -1) {
+					operandB = num;
+					if (isMulti) {
+						operandA *= operandB;
+						operandB = -1;
+						isMulti = false;
+					} else if (isDivison) {
+						operandA /= operandB;
+						operandB = -1;
+						isDivison = false;
+					}
+				}
+			}
+		}
+		return operandA;
+	}
 }
