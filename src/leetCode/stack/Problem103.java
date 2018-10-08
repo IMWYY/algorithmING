@@ -22,13 +22,6 @@ import java.util.*;
  * create by stephen on 2018/10/7
  */
 public class Problem103 {
-    public static void main(String[] args) {
-        int flag = 0;
-        flag ^= 1;
-        System.out.println(flag);
-        flag ^= 1;
-        System.out.println(flag);
-    }
 
     private class TreeNode {
         int val;
