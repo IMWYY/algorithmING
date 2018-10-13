@@ -11,10 +11,6 @@ package leetCode.bit;
  * create by stephen on 2018/10/12
  */
 public class Problem191 {
-    public static void main(String[] args) {
-        int a = 2, b= 2;
-        System.out.println(a ^ b);
-    }
 
     /**
      * 位操作的trick 每次 n &= (n - 1)都会将最右边的一个1变成0
