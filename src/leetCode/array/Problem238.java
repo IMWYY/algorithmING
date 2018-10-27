@@ -20,6 +20,7 @@ public class Problem238 {
     /**
      * 将乘积分成两部分 该数字之前和该数字之后
      * 用一个数组记录从后往前的乘积
+     * O(n) time + O(n) space
      */
     public int[] productExceptSelf(int[] nums) {
         int[] result = new int[nums.length];

@@ -40,6 +40,7 @@ public class Problem279 {
      * 利用数学算法
      * Based on Lagrange's Four Square theorem, there are only 4 possible results: 1, 2, 3, 4.
      * https://en.wikipedia.org/wiki/Lagrange%27s_four-square_theorem
+     * https://www.alpertron.com.ar/4SQUARES.HTM
      */
     public int numSquares1(int n) {
         // If n is a perfect square, return 1.

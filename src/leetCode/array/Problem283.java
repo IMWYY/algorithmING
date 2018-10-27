@@ -16,7 +16,24 @@ package leetCode.array;
  */
 public class Problem283 {
 
+    /**
+     * O(n) space + o(1) space
+     */
     public void moveZeroes(int[] nums) {
+        for (int lastNonZeroFoundAt = 0, cur = 0; cur < nums.length; cur++) {
+            if (nums[cur] != 0) {
+                int temp = nums[cur];
+                nums[cur] = nums[lastNonZeroFoundAt];
+                nums[lastNonZeroFoundAt] = temp;
+                lastNonZeroFoundAt ++;
+            }
+        }
+    }
+
+    /**
+     * O(n) space + o(1) space
+     */
+    public void moveZeroes1(int[] nums) {
         int noneZeroIndex = 0;
         for (int i = 0; i < nums.length; ++i) {
             if (nums[i] != 0) {
