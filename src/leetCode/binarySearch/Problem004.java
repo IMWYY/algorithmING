@@ -17,10 +17,6 @@ package leetCode.binarySearch;
  */
 public class Problem004 {
 
-    public static void main(String[] args) {
-        System.out.println(findMedianSortedArrays(new int[]{1, 2, 3, 4, 5, 6}, new int[]{}));
-    }
-
     /**
      * 改进的二分查找。
      * 找到两个数组的下标i，j，使得被分割的两部分的数量相等（或者相差一），且左半部分最大值小于右半部分最小值
@@ -51,7 +47,7 @@ public class Problem004 {
         int left = 0, right = m, i, j;
         while (left <= right) {
             i = (left + right) / 2;
-            j = (m + n + 1) / 2 - i;
+            j = (m + n + 1) / 2 - i;    // 根据i算出j
 
             // 注意边界情况
             if (i > 0 && j < n && nums1[i - 1] > nums2[j]) {
