@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.string;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -18,9 +18,10 @@ import java.util.List;
  */
 public class Problem017 {
 
-
     /**
      * 每一轮将原来list所有的string都加上新字母
+     * 每一轮 结果的string长度都会加1 可以依据string的长度来判断是否需要新加字母
+     * 也可以利用递归来解决
      */
     public List<String> letterCombinations(String digits) {
         LinkedList<String> result = new LinkedList<>();

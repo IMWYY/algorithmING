@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.twoPoint;
 
 /**
  * Given a linked list, remove the n-th node from the end of list and return its head.
@@ -28,7 +28,7 @@ public class Problem019 {
             num--;
         }
 
-        if (fast == null) return head.next;
+        if (fast == null) return head.next; // 删除的恰好是头节点
 
         while (fast.next != null) {
             fast = fast.next;
@@ -45,7 +45,6 @@ public class Problem019 {
     private class ListNode {
         int val;
         ListNode next;
-
         ListNode(int x) {
             val = x;
         }
