@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.dynamicProgramming;
 
 import java.util.Arrays;
 import java.util.Stack;
@@ -20,10 +20,6 @@ import java.util.Stack;
  * create by stephen on 2018/5/22
  */
 public class Problem032 {
-
-    public static void main(String[] args) {
-        System.out.println(new Problem032().longestValidParentheses("()(()"));
-    }
 
     /**
      * 利用栈 栈中记录每个(的下标。循环遍历，每次遇到
@@ -64,24 +60,23 @@ public class Problem032 {
     /**
      * 动态规划
      * dp[i] 表示以i结尾的最长匹配长度
-     * dp[i] 只考虑以)结尾的位置 即考虑 ()和)) 结尾两种情况
+     * dp[i] 只考虑以)结尾的位置 即考虑 ()和)) 结尾两种情况 对于( dp[i]=0
+     * O(n) time + O(n) time
      */
     public int longestValidParentheses1(String s) {
-        if (s.isEmpty()) return 0;
-        int[] dp = new int[s.length()];
-        int result = 0;
-        Arrays.fill(dp, 0);
-        for (int i = 1; i < s.length(); ++i) {
+        int maxans = 0;
+        int dp[] = new int[s.length()];
+        for (int i = 1; i < s.length(); i++) {
             if (s.charAt(i) == ')') {
-                if (s.charAt(i - 1) == '(') {           //()结尾
-                    dp[i] = i - 2 >= 0 ? dp[i - 2] : 0;
-                } else if (i - dp[i - 1] - 1 >= 0 && s.charAt(i - dp[i - 1] - 1) == '(') {      //)) 结尾
-                    dp[i] = dp[i - 1] + 2 + (i - dp[i - 1] - 2 >= 0 ? dp[i - dp[i - 1] - 2] : 0);
+                if (s.charAt(i - 1) == '(') {
+                    dp[i] = (i >= 2 ? dp[i - 2] : 0) + 2;
+                } else if (i - dp[i - 1] > 0 && s.charAt(i - dp[i - 1] - 1) == '(') {
+                    dp[i] = dp[i - 1] + ((i - dp[i - 1]) >= 2 ? dp[i - dp[i - 1] - 2] : 0) + 2;
                 }
+                maxans = Math.max(maxans, dp[i]);
             }
-            result = Math.max(result, dp[i]);
         }
-        return result;
+        return maxans;
     }
 
 }
