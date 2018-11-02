@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.tree;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +22,15 @@ import java.util.Stack;
  * create by stephen on 2018/5/12
  */
 public class Problem094 {
+    private class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
+    }
 
     /**
      * 非递归方法
@@ -56,22 +65,36 @@ public class Problem094 {
         return result;
     }
 
-    public void inOrder(TreeNode node, List<Integer> sequence) {
+    private void inOrder(TreeNode node, List<Integer> sequence) {
         if (node == null) return;
         inOrder(node.left, sequence);
         sequence.add(node.val);
         inOrder(node.right, sequence);
     }
 
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
+    /**
+     * mirror traversal
+     * https://leetcode.com/articles/binary-tree-inorder-traversal/
+     */
+    public List<Integer> inorderTraversal3(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        TreeNode curr = root;
+        TreeNode pre;
+        while (curr != null) {
+            if (curr.left == null) {
+                res.add(curr.val);
+                curr = curr.right; // move to next right node
+            } else { // has a left subtree
+                pre = curr.left;
+                while (pre.right != null) { // find rightmost
+                    pre = pre.right;
+                }
+                pre.right = curr; // put cur after the pre node
+                TreeNode temp = curr; // store cur node
+                curr = curr.left; // move cur to the top of the new tree
+                temp.left = null; // original cur left be null, avoid infinite loops
+            }
         }
+        return res;
     }
-
-
 }
