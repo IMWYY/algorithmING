@@ -16,12 +16,8 @@ import java.util.Stack;
  */
 public class Problem084 {
 
-    public static void main(String[] args) {
-        System.out.println(new Problem084().largestRectangleArea(new int[]{3, 1, 3, 2, 2}));
-    }
-
     /**
-     * 利用stack：
+     * 利用stack：https://www.geeksforgeeks.org/largest-rectangle-under-histogram/
      * 如果栈为空或者当前bar大于栈顶元素，下标入栈
      * 否则出栈作为高度 找到左下标计算面积
      * 最后返回最大的面积
@@ -30,7 +26,6 @@ public class Problem084 {
      * （右下标是i，出栈找到左下标，高度为栈顶元素对应的高度）
      * O(n) time + O(n) space
      */
-    @SuppressWarnings("all")
     public int largestRectangleArea(int[] heights) {
         if (heights.length == 0) return 0;
         if (heights.length == 1) return heights[0];
@@ -38,7 +33,7 @@ public class Problem084 {
         Stack<Integer> stack = new Stack<>();
 
         for (int i = 0; i <= heights.length; ) {
-            int bar = i == heights.length ? 0 : heights[i];
+            int bar = i == heights.length ? 0 : heights[i];  // 当 i == heights.length 取0是为了将当前栈中的值全部计算完
             if (stack.isEmpty() || bar >= heights[stack.peek()]) {
                 stack.push(i);
                 i++;
@@ -54,11 +49,29 @@ public class Problem084 {
         return res;
     }
 
+    @SuppressWarnings("all")
+    public int largestRectangleArea1(int[] height) {
+        int len = height.length;
+        Stack<Integer> s = new Stack<>();
+        int maxArea = 0;
+        for (int i = 0; i <= len; i++) {
+            int h = (i == len ? 0 : height[i]);
+            if (s.isEmpty() || h >= height[s.peek()]) {
+                s.push(i);
+            } else {
+                int tp = s.pop();
+                maxArea = Math.max(maxArea, height[tp] * (s.isEmpty() ? i : i - 1 - s.peek()));
+                i--;
+            }
+        }
+        return maxArea;
+    }
+
     /**
      * 暴力解法：计算以每个下标结尾的最大面积 然后取所有面积的最大值
-     * O(n2) time + O(1) space
+     * O(n^2) time + O(1) space
      */
-    public int largestRectangleArea1(int[] heights) {
+    public int largestRectangleArea2(int[] heights) {
         if (heights.length == 0) return 0;
         if (heights.length == 1) return heights[0];
         int res = 0;

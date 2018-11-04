@@ -23,6 +23,7 @@ public class Problem085 {
 
     /**
      * 利用Problem084的解法 对于每一行如果每个位置j，计算竖直方向1的个数作为高度
+     *  O(n^2) time + O(n) space
      */
     public int maximalRectangle(char[][] matrix) {
         if (matrix.length == 0 || matrix[0].length == 0) return 0;
@@ -46,27 +47,21 @@ public class Problem085 {
     }
 
     @SuppressWarnings("all")
-    private int largestRectangleArea(int[] heights) {
-        if (heights.length == 0) return 0;
-        if (heights.length == 1) return heights[0];
-        int res = 0;
-        Stack<Integer> stack = new Stack<>();
-
-        for (int i = 0; i <= heights.length; ) {
-            int bar = i == heights.length ? 0 : heights[i];
-            if (stack.isEmpty() || bar >= heights[stack.peek()]) {
-                stack.push(i);
-                i++;
+    private int largestRectangleArea(int[] height) {
+        int len = height.length;
+        Stack<Integer> s = new Stack<>();
+        int maxArea = 0;
+        for (int i = 0; i <= len; i++) {
+            int h = (i == len ? 0 : height[i]);
+            if (s.isEmpty() || h >= height[s.peek()]) {
+                s.push(i);
             } else {
-                int h = heights[stack.pop()];
-                while (!stack.isEmpty() && h == heights[stack.peek()]) {
-                    stack.pop();
-                }
-                int left = stack.isEmpty() ? 0 : stack.peek() + 1;
-                res = Math.max(res, h * (i - left));
+                int tp = s.pop();
+                maxArea = Math.max(maxArea, height[tp] * (s.isEmpty() ? i : i - 1 - s.peek()));
+                i--;
             }
         }
-        return res;
+        return maxArea;
     }
 
 }
