@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.tree;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -25,6 +25,15 @@ import java.util.Queue;
  * create by stephen on 2018/6/9
  */
 public class Problem102 {
+    private class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
+    }
 
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
@@ -33,7 +42,7 @@ public class Problem102 {
         queue.offer(root);
         List<Integer> list;
         while (!queue.isEmpty()) {
-            int len = queue.size();
+            int len = queue.size();   // 每一层的个数
             list = new ArrayList<>();
             while (len-- > 0) {
                 TreeNode temp = queue.poll();
@@ -46,13 +55,4 @@ public class Problem102 {
         return res;
     }
 
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
 }
