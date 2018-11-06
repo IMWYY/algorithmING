@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.tree;
 
 
 import java.util.ArrayDeque;
@@ -25,9 +25,20 @@ import java.util.Queue;
  * create by stephen on 2018/6/9
  */
 public class Problem101 {
-    /**************************************************************
+    private class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
+    }
+
+    /**
      * 递归
-     *************************************************************/
+     * O(n) time + O(n) space
+     **/
     public boolean isSymmetric(TreeNode root) {
         return root == null || isSymmetric(root.left, root.right);
     }
@@ -38,9 +49,11 @@ public class Problem101 {
         return left.val == right.val && isSymmetric(left.right, right.left) && isSymmetric(left.left, right.right);
     }
 
-    /**************************************************************
+    /**
      * 非递归
-     *************************************************************/
+     * 利用queue在root的左右子树同时进行BFS 注意插入顺序
+     * O(n) time + O(n) space
+     **/
     public boolean isSymmetric1(TreeNode root) {
         Queue<TreeNode> queue = new ArrayDeque<>();
         queue.add(root);
@@ -56,15 +69,5 @@ public class Problem101 {
             queue.add(t2.left);
         }
         return true;
-    }
-
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
     }
 }

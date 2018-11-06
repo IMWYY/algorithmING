@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.tree;
 
 /**
  * Given a non-empty binary tree, find the maximum path sum.
@@ -20,10 +20,25 @@ package leetCode;
  */
 public class Problem124 {
 
+    private class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
+    }
+
     private int ans = Integer.MIN_VALUE;
 
     /**
-     * 递归即可 最大路径就出现在某节点左右子树路径和
+     * 递归
+     * 对于每个节点 最大路径可能是
+     * 1.左子树+当前节点
+     * 2.当前节点
+     * 3.右子树+当前节点
+     * 必须带当前节点 否则递归会不成立
      */
     public int maxPathSum(TreeNode root) {
         findPath(root);
@@ -42,13 +57,4 @@ public class Problem124 {
         return Math.max(Math.max(root.val, root.val + l), root.val + r);
     }
 
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
 }
