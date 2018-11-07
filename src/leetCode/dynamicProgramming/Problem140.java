@@ -58,7 +58,9 @@ public class Problem140 {
      * 对于这种testcase会Memory Limit Exceeded
      * "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
      * ["a","aa","aaa","aaaa","aaaaa","aaaaaa","aaaaaaa","aaaaaaaa","aaaaaaaaa","aaaaaaaaaa"]
-     * 解决方法： 可以利用wordbreak (problem139) 先判断是否是breakable
+     * 解决方法：
+     * 1.可以利用wordbreak (problem139) 先判断是否是breakable
+     * 2.先将string加入 先加入index 利用index判断是否breakable
      */
     public List<String> wordBreak1(String s, List<String> wordDict) {
         List<String> res = new ArrayList<>();
@@ -73,7 +75,7 @@ public class Problem140 {
                     dp.get(i).add(word + " ");
                 } else if (i + 1 > word.length() && s.substring(i + 1 - word.length(), i + 1).equals(word)
                         && dp.get(i - word.length()).size() > 0) {
-                    for (String sb : dp.get(i - word.length())) {
+                    for (String sb : dp.get(i - word.length())) {  // 将之前的加入
                         dp.get(i).add(sb + word + " ");
                     }
                 }
@@ -88,29 +90,17 @@ public class Problem140 {
 
     @SuppressWarnings("all")
     public boolean isBreakable(String s, List<String> wordDict) {
-        if (s.isEmpty() || wordDict.isEmpty()) return false;
-
-        boolean[] dp = new boolean[s.length()];
-        Arrays.fill(dp, false);
-
-        Map<String, Boolean> map = new HashMap<>();
-        for (String s1 : wordDict) {
-            map.put(s1, true);
-        }
-        dp[0] = map.getOrDefault(s.substring(0, 1), false);
-        String temp;
-        for (int i = 1; i < dp.length; ++i) {
-            int j = 0;
-            while (!dp[i] && j <= i) {
-                temp = s.substring(j, i + 1);
-                if (j == 0) {
-                    dp[i] = map.getOrDefault(temp, false);
-                } else {
-                    dp[i] = map.getOrDefault(temp, false) && dp[j - 1];
+        boolean[] f = new boolean[s.length() + 1];
+        f[0] = true;
+        Set<String> set = new HashSet<>(wordDict);
+        for (int i = 1; i <= s.length(); i++) {
+            for (int j = 0; j < i; j++) {
+                if (f[j] && set.contains(s.substring(j, i))) {
+                    f[i] = true;
+                    break;
                 }
-                j++;
             }
         }
-        return dp[s.length() - 1];
+        return f[s.length()];
     }
 }
