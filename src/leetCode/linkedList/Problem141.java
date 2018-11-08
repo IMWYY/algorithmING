@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.linkedList;
 
 /**
  * Given a linked list, determine if it has a cycle in it.
@@ -9,7 +9,19 @@ package leetCode;
  * create by stephen on 2018/5/15
  */
 public class Problem141 {
+    private class ListNode {
+        int val;
+        ListNode next;
 
+        ListNode(int x) {
+            val = x;
+        }
+    }
+
+    /**
+     * 快慢指针
+     * O(n) time + O(1) space
+     */
     public boolean hasCycle(ListNode head) {
         if (head == null || head.next == null) return false;
         ListNode slow = head, fast = head;
@@ -23,12 +35,5 @@ public class Problem141 {
         return false;
     }
 
-    private class ListNode {
-        int val;
-        ListNode next;
 
-        ListNode(int x) {
-            val = x;
-        }
-    }
 }

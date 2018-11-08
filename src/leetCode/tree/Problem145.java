@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.tree;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +20,19 @@ import java.util.Stack;
  * create by stephen on 2018/5/12
  */
 public class Problem145 {
+    private class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
+    }
 
     /**
      * 非递归方法
+     * 利用一个pre记录上一次访问的节点 从而判断右子树是否被访问过
      */
     public List<Integer> postorderTraversal1(TreeNode root) {
         List<Integer> result = new ArrayList<>();
@@ -65,15 +75,5 @@ public class Problem145 {
         postOrder(node.left, sequence);
         postOrder(node.right, sequence);
         sequence.add(node.val);
-    }
-
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
     }
 }

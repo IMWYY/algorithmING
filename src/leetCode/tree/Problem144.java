@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.tree;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +20,18 @@ import java.util.Stack;
  * create by stephen on 2018/5/12
  */
 public class Problem144 {
+    private class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
 
+        TreeNode(int x) {
+            val = x;
+        }
+    }
     /**
      * 非递归方法
+     * 先访问 再入栈
      */
     public List<Integer> preorderTraversal1(TreeNode root) {
         List<Integer> result = new ArrayList<>();
@@ -60,15 +69,4 @@ public class Problem144 {
         preOrder(node.left, sequence);
         preOrder(node.right, sequence);
     }
-
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
 }

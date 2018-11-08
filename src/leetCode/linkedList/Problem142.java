@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.linkedList;
 
 /**
  * Given a linked list, return the node where the cycle begins. If there is no cycle, return null.
@@ -9,6 +9,15 @@ package leetCode;
  * create by stephen on 2018/4/27
  */
 public class Problem142 {
+
+    private class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+        }
+    }
 
     public ListNode detectCycle(ListNode head) {
         if (head == null || head.next == null) return null;
@@ -21,13 +30,14 @@ public class Problem142 {
             fast = fast.next;
             if (fast == null) return null;
             fast = fast.next;
-            if (fast == slow) {
+            if (fast == slow) {     // 两者相遇
                 isCycle = true;
                 break;
             }
         }
 
         if (!isCycle) return null;
+        // 从相遇点开始移动
         fast = head;
         while (slow != fast) {
             slow = slow.next;
@@ -36,15 +46,4 @@ public class Problem142 {
 
         return slow;
     }
-
-    class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
-    }
-
 }
