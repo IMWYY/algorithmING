@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.array;
 
 /**
  * Given an integer array nums, find the contiguous subarray within an array
