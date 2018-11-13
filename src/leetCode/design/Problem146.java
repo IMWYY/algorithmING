@@ -53,7 +53,6 @@ public class Problem146 {
             moveToHead(node);
             return node.val;
         }
-
         return -1;
     }
 

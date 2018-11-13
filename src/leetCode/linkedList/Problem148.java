@@ -15,10 +15,18 @@ package leetCode.linkedList;
  * create by stephen on 2018/5/17
  */
 public class Problem148 {
+    private class ListNode {
+        int val;
+        ListNode next;
 
-    /***********************************************************
-     * 归并排序
-     **********************************************************/
+        ListNode(int x) {
+            val = x;
+        }
+    }
+
+    /**
+     * 归并排序 将前后两个链表先断开 再merge
+     */
     public ListNode sortList(ListNode head) {
         if (head == null || head.next == null) return head;
         ListNode slow = head, fast = head, pre = head;
@@ -27,7 +35,7 @@ public class Problem148 {
             slow = slow.next;
             fast = fast.next.next;
         }
-        pre.next = null;            //关键代码在这里
+        pre.next = null;            //关键代码在这里 将前后两个链表先断开
 
         ListNode l1 = sortList(head);
         ListNode l2 = sortList(slow);
@@ -35,40 +43,26 @@ public class Problem148 {
     }
 
     private ListNode mergeList(ListNode l1, ListNode l2) {
-        if (l1 == null) return l2;
-        if (l2 == null) return l1;
-        if (l1.val > l2.val) {
-            ListNode temp = l1;
-            l1 = l2;
-            l2 = temp;
-        }
-
-        ListNode cur1 = l1, cur2 = l2, pre1 = null, temp;
-        while (cur2 != null) {
-            while (cur1 != null && cur1.val <= cur2.val) {
-                pre1 = cur1;
-                cur1 = cur1.next;
+        ListNode dummy = new ListNode(0), p = dummy;
+        while (l1 != null && l2 != null) {
+            if (l1.val < l2.val) {
+                p.next = l1;
+                l1 = l1.next;
+            } else {
+                p.next = l2;
+                l2 = l2.next;
             }
-            if (cur1 == null) break;
-
-            temp = cur2.next;
-            if (pre1 != null) pre1.next = cur2;
-            cur2.next = cur1;
-
-            cur2 = temp;
+            p = p.next;
         }
 
-        if (cur1 == null) {
-            pre1.next = cur2;
-        }
-
-        return l1;
+        if (l1 != null) p.next = l1;
+        if (l2 != null) p.next = l2;
+        return dummy.next;
     }
 
-    /*********************************************************
+    /**
      * 链表快速排序
-     * 两个指针p，q一起往后走，保持p之前小于flag，p与q之间大于flag
-     **********************************************************/
+     */
     public ListNode sortList1(ListNode head) {
         if (head == null || head.next == null) return head;
         return quickSort(head, null);
@@ -83,33 +77,27 @@ public class Problem148 {
         return head;
     }
 
+    /**
+     * flag = head
+     * 两个指针p，q一起往后走，保持p之前小于flag，p与q之间大于flag
+     */
     private ListNode getSeparator(ListNode head, ListNode end) {
         ListNode p = head, q = head;
         while (q != end) {
             if (q.val < head.val) {
                 p = p.next;
-                // 交换p和q
+                // 交换p和q 只是交换值
                 int temp = p.val;
                 p.val = q.val;
                 q.val = temp;
             }
             q = q.next;
         }
-
-        // 交换head和p
+        // 交换head和p 只是交换值
         int temp = p.val;
         p.val = head.val;
         head.val = temp;
 
-        return p;
-    }
-
-    private class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
+        return p;   // 返回flag
     }
 }

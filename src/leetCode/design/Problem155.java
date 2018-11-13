@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.design;
 
 import java.util.Stack;
 
@@ -29,7 +29,10 @@ public class Problem155 {
     private int min = Integer.MIN_VALUE;
 
     /**
-     * initialize your data structure here.
+     * 用两个栈
+     * 一个栈保存数据
+     * 另一个栈保存到当前为止为止的min
+     * 每次pop同时pop
      */
     public Problem155() {
         this.stack = new Stack<>();

@@ -18,11 +18,10 @@ package leetCode.array;
  */
 public class Problem152 {
 
-    public static void main(String[] args) {
-        System.out.println(maxProduct(new int[]{-2, 0, -1}));
-    }
-
-    public static int maxProduct(int[] nums) {
+    /**
+     * 记录到当前位置为止的最小乘积和最大乘积
+     */
+    public int maxProduct(int[] nums) {
         int max = 1, min = 1;
         int result = Integer.MIN_VALUE;
 

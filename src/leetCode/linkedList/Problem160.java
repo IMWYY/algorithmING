@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.linkedList;
 
 /**
  * Write a program to find the node at which the intersection of two singly linked lists begins.
@@ -20,6 +20,15 @@ package leetCode;
  * create by stephen on 2018/5/16
  */
 public class Problem160 {
+    private class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+        }
+    }
+
     /**
      * 不需要知道每个链表的长度 只需要两个指针同时遍历
      * 如果A达到末尾 就重新跳转到B的head。两者相遇的地方就是交点
@@ -39,51 +48,31 @@ public class Problem160 {
      * 找到链表的长度 然后从长度一样的地方一起往下遍历
      */
     public ListNode getIntersectionNode2(ListNode headA, ListNode headB) {
-        if (headA == null || headB == null) return null;
-        ListNode temp = headA;
-        int lenA = 0, lenB = 0;
-        while (temp != null) {
-            lenA++;
-            temp = temp.next;
+        int lenA = length(headA), lenB = length(headB);
+        // move headA and headB to the same start point
+        while (lenA > lenB) {
+            headA = headA.next;
+            lenA--;
         }
-
-        temp = headB;
-        while (temp != null) {
-            lenB++;
-            temp = temp.next;
-        }
-
-        if (lenA > lenB) { //交换 使a的长度是短的
-            int t = lenA;
-            lenA = lenB;
-            lenB = t;
-
-            temp = headA;
-            headA = headB;
-            headB = temp;
-        }
-
-        temp = headB;
-        while (lenB > lenA) {
-            temp = temp.next;
+        while (lenA < lenB) {
+            headB = headB.next;
             lenB--;
         }
-
-        while (temp != null) {
-            if (temp == headA) return temp;
-            temp = temp.next;
+        // find the intersection until end
+        while (headA != headB) {
             headA = headA.next;
+            headB = headB.next;
         }
-
-        return null;
+        return headA;
     }
 
-    private class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
+    private int length(ListNode node) {
+        int length = 0;
+        while (node != null) {
+            node = node.next;
+            length++;
         }
+        return length;
     }
+
 }
