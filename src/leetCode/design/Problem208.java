@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.design;
 
 /**
  * Implement a trie with insert, search, and startsWith methods.
@@ -64,7 +64,7 @@ public class Problem208 {
         private TrieNode[] nodes;
         private boolean isEnd;
 
-        public TrieNode() {
+        TrieNode() {
             this.nodes = new TrieNode[26];
         }
 

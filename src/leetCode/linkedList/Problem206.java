@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.linkedList;
 
 /**
  * Reverse a singly linked list.
@@ -12,6 +12,14 @@ package leetCode;
  * create by stephen on 2018/5/14
  */
 public class Problem206 {
+    private class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+        }
+    }
 
     /**
      * 递归法
@@ -19,10 +27,24 @@ public class Problem206 {
     public ListNode reverseList(ListNode head) {
         if (head == null || head.next == null) return head;
         ListNode tail = reverseList(head.next);
-        ListNode temp = head.next;
-        temp.next = head;
+        head.next.next = head;
         head.next = null;
         return tail;
+    }
+
+    /**
+     * 非递归 更简洁 直接改变指针指向
+     */
+    public ListNode reverseList1(ListNode head) {
+        ListNode prev = null;
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode nextTemp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextTemp;
+        }
+        return prev;
     }
 
     /**
@@ -43,12 +65,5 @@ public class Problem206 {
         return pre;
     }
 
-    private class ListNode {
-        int val;
-        ListNode next;
 
-        ListNode(int x) {
-            val = x;
-        }
-    }
 }
