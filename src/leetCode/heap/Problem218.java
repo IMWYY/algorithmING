@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.heap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,10 +46,10 @@ public class Problem218 {
             heights.add(new int[]{rect[0], -rect[2]});
             heights.add(new int[]{rect[1], rect[2]});
         }
-
         heights.sort((o1, o2) -> o1[0] == o2[0] ? o1[1] - o2[1] : o1[0] - o2[0]);
+
         Queue<Integer> queue = new PriorityQueue<>((o1, o2) -> o2 - o1);
-        queue.offer(0);             // key point here 如果出现同样高度的楼，下面的remove有可能会使queue为空
+        queue.offer(0);             // key point here 下面的remove有可能会使queue为空 为空时默认高度为0
         int pre = 0;
         for (int[] a : heights) {
             if (a[1] < 0) {
@@ -57,7 +57,7 @@ public class Problem218 {
             } else {
                 queue.remove(a[1]);
             }
-            int cur = queue.peek();
+            int cur = queue.peek();  // 拿出当前为止的最大的高度
             if (cur != pre) {
                 result.add(new int[]{a[0], cur});
                 pre = cur;
