@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.linkedList;
 
 import java.util.Stack;
 
@@ -83,7 +83,6 @@ public class Problem234 {
     private class ListNode {
         int val;
         ListNode next;
-
         ListNode(int x) {
             val = x;
         }
