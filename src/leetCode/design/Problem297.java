@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.design;
 
 import java.util.*;
 
@@ -13,6 +13,16 @@ import java.util.*;
  * create by stephen on 2018/6/13
  */
 public class Problem297 {
+
+    private class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
+    }
 
     /*************************************
      * 改进 只用先序遍历就够了 需要记录null节点
@@ -49,7 +59,7 @@ public class Problem297 {
     }
 
     /*************************************
-     * 利用中序遍历和先序遍历 同时利用一个map记录每个节点的索引 用来区分val相同的节点
+     * 利用中序遍历和先序遍历 同时利用一个map记录每个节点的唯一索引 用来区分val相同的节点
      * note:
      *  1.#1#2 和 1#2# spilt的结果不同 前者数组多一位 且第一位为""
      *  2.null + "," 之后，null变成了"null"
@@ -125,15 +135,5 @@ public class Problem297 {
             }
         }
         return builder.toString();
-    }
-
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
     }
 }
