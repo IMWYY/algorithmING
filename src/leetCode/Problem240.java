@@ -29,9 +29,6 @@ import java.util.Arrays;
  */
 public class Problem240 {
 
-    public static void main(String[] args) {
-    }
-
     /**
      * 从右上角开始查找
      * O(m+n) time + O(1) space
@@ -49,7 +46,7 @@ public class Problem240 {
     }
 
     /**
-     * 利用二分查找
+     * 利用二分查找 从最后一行往前
      * O(mlogn) time + O(1) space
      */
     public boolean searchMatrix2(int[][] matrix, int target) {

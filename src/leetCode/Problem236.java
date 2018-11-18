@@ -17,21 +17,16 @@ public class Problem236 {
 
     /**
      * 递归解决
+     * 函数的语义：
      * 如果子树中包含了p和q，那么直接返回公共节点；
      * 如果子树中仅包含一个节点，返回该节点；
      * 如果子树中不包含任何节点 返回null
      */
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null || p == root || q == root) return root;
-
         TreeNode left = lowestCommonAncestor(root.left, p, q);
         TreeNode right = lowestCommonAncestor(root.right, p, q);
-
-        if (left != null && right != null) return root;
-
-        if (left != null) return left;
-        if (right != null) return right;
-        return null;
+        return left == null ? right : right == null ? left : root;
     }
 
     /**
@@ -40,6 +35,7 @@ public class Problem236 {
      * 参考：https://www.cnblogs.com/scau20110726/archive/2013/05/26/3100812.html
      */
     public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
+        // TODO LCA和RMQ
         // DFS遍历树
         // 记录每个几点的树深度
         // 求遍历序列中第一次出现的节点之间的最小值 对应的节点即为LCA
