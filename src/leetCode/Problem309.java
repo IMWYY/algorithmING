@@ -19,15 +19,11 @@ import java.util.Arrays;
  */
 public class Problem309 {
 
-    public static void main(String[] args) {
-        System.out.println(new Problem309().maxProfit(new int[]{1, 4, 2}));
-    }
-
     /**
      * 利用有限自动机 有点难理解 参考：
      * https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/discuss/75928/Share-my-DP-solution-(By-State-Machine-Thinking)
      * <p>
-     * 每一天只有三个状态：
+     * 每一天只有三个操作，这三个操作导致状态的改变：
      * 1）买 2）卖 3）不做操作
      * s0该天不做操作 s1该天买入 s2 改天卖出
      */
@@ -49,9 +45,33 @@ public class Problem309 {
     }
 
     /**
-     * 暴力DP O(n3) time + O(n2) space
+     * 优化后的dp 参考
+     * https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/discuss/75927/Share-my-thinking-process
+     *
+     * buy[i]  = max(rest[i-1]-price, buy[i-1])
+     * sell[i] = max(buy[i-1]+price, sell[i-1])
+     * rest[i] = max(sell[i-1], buy[i-1], rest[i-1])
+     * ====>
+     * rest[i] = sell[i-1]
+     * ====>
+     * buy[i] = max(sell[i-2]-price, buy[i-1])
+     * sell[i] = max(buy[i-1]+price, sell[i-1])
      */
     public int maxProfit1(int[] prices) {
+        int sell = 0, prev_sell = 0, buy = Integer.MIN_VALUE, prev_buy;
+        for (int price : prices) {
+            prev_buy = buy;
+            buy = Math.max(prev_sell - price, prev_buy);
+            prev_sell = sell;
+            sell = Math.max(prev_buy + price, prev_sell);
+        }
+        return sell;
+    }
+
+    /**
+     * 暴力DP O(n3) time + O(n2) space
+     */
+    public int maxProfit2(int[] prices) {
         if (prices.length <= 1) return 0;
         if (prices.length == 2) return prices[1] > prices[0] ? prices[1] - prices[0] : 0;
 
