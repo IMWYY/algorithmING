@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.dynamicProgramming;
 
 /**
  * Given n balloons, indexed from 0 to n-1. Each balloon is painted with a number on it represented by array nums.
@@ -26,6 +26,7 @@ public class Problem312 {
      * 假设最后一个位置为i，那么coins就是 numbers[0] * numbers[i] * numbers[n]
      * 然后以i分割，分别计算两边（left-i, i-right）的值
      * 需要注意的是：所有的0需要先去除
+     * O(n^3) time + O(n^2) space
      */
     public int maxCoins(int[] nums) {
         if (nums.length == 0) return 0;
@@ -57,6 +58,7 @@ public class Problem312 {
     /**
      * 动态规划做法 思路和memorization一样 不过这里是将递归改为循环。
      * 需要注意的是，这里是将gap从2到n-1 就是burst的范围
+     * O(n^3) time + O(n^2) space
      */
     @SuppressWarnings("all")
     public int maxCoins1(int[] nums) {
@@ -72,7 +74,7 @@ public class Problem312 {
 
         int[][] dp = new int[n][n];
 
-        for (int gap = 2; gap < n; ++gap) {              // key point: gap from 0 to n-1
+        for (int gap = 2; gap < n; ++gap) {              // key point: gap from 2 to n-1
             for (int left = 0; left < n - gap; ++left) {
                 int right = left + gap;
                 for (int i = left + 1; i < right; ++i) {
@@ -83,6 +85,5 @@ public class Problem312 {
         }
 
         return dp[0][n - 1];
-
     }
 }
