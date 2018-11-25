@@ -20,8 +20,21 @@ import java.util.List;
  * create by stephen on 2018/5/25
  */
 public class Problem315 {
+    private class TreeNode {
+        TreeNode left;
+        TreeNode right;
+        int val;
+        int count = 1;   // count 默认为1
+
+        public TreeNode(int val) {
+            this.val = val;
+        }
+    }
+
     /**
      * 利用BST 增加一个count值记录小于等于当前节点的数量
+     * 从后往前每次insert后都可以拿到当前节点的结果
+     * 最后再reverse一下
      */
     public List<Integer> countSmaller(int[] nums) {
         List<Integer> result = new ArrayList<>();
@@ -40,7 +53,7 @@ public class Problem315 {
     private int insert(TreeNode root, int val) {
         int count = 0;
         while (true) {
-            if (val <= root.val) {
+            if (val <= root.val) {  // 当前值比root小 加入这个节点后 root的计数就要加一
                 root.count++;
                 if (root.left == null) {
                     root.left = new TreeNode(val);
@@ -49,7 +62,7 @@ public class Problem315 {
                     root = root.left;
                 }
             } else {
-                count += root.count;
+                count += root.count; // 当前值比root大 加入节点后 所有root的计数也是当前值的计数
                 if (root.right == null) {
                     root.right = new TreeNode(val);
                     break;
@@ -60,17 +73,5 @@ public class Problem315 {
         }
         return count;
     }
-
-    private class TreeNode {
-        TreeNode left;
-        TreeNode right;
-        int val;
-        int count = 1;
-
-        public TreeNode(int val) {
-            this.val = val;
-        }
-    }
-
 
 }
