@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.dynamicProgramming;
 
 
 import java.util.Arrays;
@@ -26,12 +26,12 @@ public class Problem322 {
      * dp[i][j] = Math.min(dp[i][j - coins[i]] + 1, dp[i - 1][j])
      * <p>
      * 这里需要注意的是：转换方程中，如果前一个状态有0，不能计算在内，0会影响最终的结果
-     * 如dp[i - 1][j]=0，则变成dp[i][j] = dp[i][j - coins[i]] + 1
-     * 如dp[i][j - coins[i]]=0，则变成 dp[i][j] = dp[i - 1][j]
+     * 若dp[i - 1][j]=0  则dp[i][j] = dp[i][j - coins[i]] + 1
+     * 若dp[i][j - coins[i]]=0 则 dp[i][j] = dp[i - 1][j]
      * <p>
      * O(S*n) time + O(S*n) space
      */
-    public int coinChange1(int[] coins, int amount) {
+    public int coinChange(int[] coins, int amount) {
         if (amount == 0) return 0;
         if (coins.length == 0) return -1;
 
@@ -62,11 +62,33 @@ public class Problem322 {
         return dp[coins.length - 1][amount] == 0 ? -1 : dp[coins.length - 1][amount];
     }
 
+    /**
+     * top down dynamic programming
+     * memorization
+     */
+    public int coinChange1(int[] coins, int amount) {
+        if (amount < 1) return 0;
+        return coinChange(coins, amount, new int[amount]);
+    }
+
+    private int coinChange(int[] coins, int rem, int[] count) {
+        if (rem < 0) return -1;
+        if (rem == 0) return 0;
+        if (count[rem - 1] != 0) return count[rem - 1];
+        int min = Integer.MAX_VALUE;
+        for (int coin : coins) {
+            int res = coinChange(coins, rem - coin, count);
+            if (res >= 0 && res < min) min = 1 + res;
+        }
+        count[rem - 1] = (min == Integer.MAX_VALUE) ? -1 : min;
+        return count[rem - 1];
+    }
 
     /**
+     * bottom up dynamic programming
      * 简化版动态规划 O(S*n) time + O(S) space
      */
-    public int coinChange(int[] coins, int amount) {
+    public int coinChange2(int[] coins, int amount) {
         if (amount == 0) return 0;
         if (coins.length == 0) return -1;
 
