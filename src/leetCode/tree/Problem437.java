@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.tree;
 
 import java.util.HashMap;
 
@@ -30,15 +30,11 @@ import java.util.HashMap;
  * create by stephen on 2018/6/11
  */
 public class Problem437 {
-    /************************
-     * 利用 map+前缀和
-     * key-之前的和 value-出现的次数 即到当前点为止 可以得到该value的路径数量
-     * 以 1,2,-1,-1,2为例，presum为 1, 3, 2, 1, 3 路径为{2}, {1,2,-1}, {2,-1,-1,2}, {2}
-     ***********************/
-    private int count;
 
     /******************
      * DFS
+     * Space: O(n) due to recursion.
+     * Time: O(n^2) in worst case (no branching); O(nlogn) in best case (balanced tree).
      *******************/
     public int pathSum(TreeNode root, int sum) {
         if (root == null) return 0;
@@ -51,37 +47,32 @@ public class Problem437 {
     // 以node为起点的路径数量
     private int pathSumFrom(TreeNode node, int target) {
         if (node == null) return 0;
-        return (node.val == target ? 1 : 0)
+        return (node.val == target ? 1 : 0)     // 如果val == target 不能终止递归 接下来的pathSum可能是0 不能漏考虑
                 + pathSumFrom(node.left, target - node.val)
                 + pathSumFrom(node.right, target - node.val);
     }
 
+    /************************
+     * 利用 map+前缀和 不太好理解
+     * key-前缀和 value-到当前点为止 可以得到该前缀和的路径数量
+     * 以 1,2,-1,-1,2为例，presum为 1, 3, 2, 1, 3 路径为{2}, {1,2,-1}, {2,-1,-1,2}, {2}
+     ***********************/
     public int pathSum1(TreeNode root, int sum) {
         HashMap<Integer, Integer> preSum = new HashMap<>();
-        preSum.put(0, 1);       // 保证节点值等于sum的情况
-        findPath(root, 0, sum, preSum);
-        return count;
+        preSum.put(0,1);
+        return helper(root, 0, sum, preSum);
     }
 
-    private void findPath(TreeNode root, int currSum, int target, HashMap<Integer, Integer> preSum) {
-        if (root == null) return;
+    private int helper(TreeNode root, int currSum, int target, HashMap<Integer, Integer> preSum) {
+        if (root == null) { return 0;}
 
         currSum += root.val;
+        int res = preSum.getOrDefault(currSum - target, 0);
+        preSum.put(currSum, preSum.getOrDefault(currSum, 0) + 1);
 
-        if (preSum.containsKey(currSum - target)) {
-            count += preSum.get(currSum - target);
-        }
-
-        if (!preSum.containsKey(currSum)) {
-            preSum.put(currSum, 1);
-        } else {
-            preSum.put(currSum, preSum.get(currSum) + 1);
-        }
-
-        findPath(root.left, currSum, target, preSum);
-        findPath(root.right, currSum, target, preSum);
-
-        preSum.put(currSum, preSum.get(currSum) - 1);       // 容易遗漏
+        res += helper(root.left, currSum, target, preSum) + helper(root.right, currSum, target, preSum);
+        preSum.put(currSum, preSum.get(currSum) - 1);
+        return res;
     }
 
     private class TreeNode {
