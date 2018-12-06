@@ -55,11 +55,12 @@ public class Problem437 {
     /************************
      * 利用 map+前缀和 不太好理解
      * key-前缀和 value-到当前点为止 可以得到该前缀和的路径数量
-     * 以 1,2,-1,-1,2为例，presum为 1, 3, 2, 1, 3 路径为{2}, {1,2,-1}, {2,-1,-1,2}, {2}
+     * 以 1,2,-1,-1,2为例，target=2
+     * presum为 1, 3, 2, 1, 3 路径为{2}, {1,2,-1}, {2,-1,-1,2}, {2}
      ***********************/
     public int pathSum1(TreeNode root, int sum) {
         HashMap<Integer, Integer> preSum = new HashMap<>();
-        preSum.put(0,1);
+        preSum.put(0,1); // 插入一个(0,1)是为了能够cover preSum=node.val的情况 如例子中presum=2 target=2的情况
         return helper(root, 0, sum, preSum);
     }
 
@@ -71,7 +72,7 @@ public class Problem437 {
         preSum.put(currSum, preSum.getOrDefault(currSum, 0) + 1);
 
         res += helper(root.left, currSum, target, preSum) + helper(root.right, currSum, target, preSum);
-        preSum.put(currSum, preSum.get(currSum) - 1);
+        preSum.put(currSum, preSum.get(currSum) - 1); // 递归后还原presum的值
         return res;
     }
 
