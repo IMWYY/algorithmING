@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.dynamicProgramming;
 
 
 import java.util.Arrays;
@@ -28,13 +28,11 @@ import java.util.Arrays;
  */
 public class Problem494 {
 
-    public static void main(String[] args) {
-        System.out.println(new Problem494().findTargetSumWays1(new int[]{1, 1, 1, 1, 1}, 3));
-    }
 
     /**
      * DFS 解法+ memorization
      * 这里加1000 使sum结果都映射到数组里
+     * 也可以用map
      */
     public int findTargetSumWays(int[] nums, int S) {
         int[][] memo = new int[nums.length][2001];
@@ -69,7 +67,8 @@ public class Problem494 {
      * 2 * sum(P) = target + sum(nums)
      * sum(P) = target + sum(nums)/2
      * <p>
-     * 转换为找数字集合和为 target + sum(nums)/2 典型背包问题
+     * 记数组的和sum(nums) = S, 则得到
+     * 正数集合的和 sum(P) =  target + S/2 典型背包问题
      */
     public int findTargetSumWays1(int[] nums, int S) {
         int sum = 0;
@@ -79,8 +78,8 @@ public class Problem494 {
 
     private int subTarget(int[] nums, int target) {
         int[][] dp = new int[nums.length + 1][target + 1];
-        for (int i = 0; i < dp.length; ++i) {
-            Arrays.fill(dp[i], 0);
+        for (int[] aDp : dp) {
+            Arrays.fill(aDp, 0);
         }
         dp[0][0] = 1;
 

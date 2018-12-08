@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.hash;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,6 +35,10 @@ public class Problem438 {
 
     /**
      * 滑动窗口的思想
+     * 当key是char的时候 可以利用char[]来代替hashMap
+     * O(n) time + O(n) space
+     * a template for reference:
+     * https://leetcode.com/problems/find-all-anagrams-in-a-string/discuss/92007/Sliding-Window-algorithm-template-to-solve-all-the-Leetcode-substring-search-problem.
      */
     public List<Integer> findAnagrams(String s, String p) {
         List<Integer> result = new ArrayList<>();
