@@ -230,4 +230,12 @@ public void printReverse(TreeNode start, TreeNode end) {
 }
 ```
 
-### 
+### 递归同时利用memorization
+
+TODO
+ 
+### 自底向上递归 减少重复计算 
+
+TODO 参考Problem337,Problem543
+ 
+ 

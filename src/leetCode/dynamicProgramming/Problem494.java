@@ -86,9 +86,9 @@ public class Problem494 {
         for (int i = 1; i < nums.length + 1; ++i) {
             for (int j = 0; j < target + 1; ++j) {
                 if (j - nums[i - 1] >= 0) {
-                    dp[i][j] += dp[i - 1][j - nums[i - 1]];
+                    dp[i][j] += dp[i - 1][j - nums[i - 1]]; // 选num[i-1]为正数
                 }
-                dp[i][j] += dp[i - 1][j];
+                dp[i][j] += dp[i - 1][j];  // 不选num[i-1]为正数
             }
         }
 

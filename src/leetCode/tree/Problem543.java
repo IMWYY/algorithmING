@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.tree;
 
 
 import java.util.ArrayDeque;
@@ -29,7 +29,7 @@ public class Problem543 {
 
     /**
      * DFS算法 只要求出每个节点的深度即可
-     * 递归求解 减少了很多重复计算
+     * 自底向上递归求解 减少了很多重复计算
      */
     public int diameterOfBinaryTree(TreeNode root) {
         maxDepth(root);
@@ -51,8 +51,8 @@ public class Problem543 {
         if (root == null) return 0;
         int leftHeight = height(root.left);
         int rightHeight = height(root.right);
-        return Math.max(Math.max(diameterOfBinaryTree(root.left),
-                diameterOfBinaryTree(root.right))
+        return Math.max(Math.max(diameterOfBinaryTree1(root.left),
+                diameterOfBinaryTree1(root.right))
                 , Math.abs(leftHeight + rightHeight));
 
     }
