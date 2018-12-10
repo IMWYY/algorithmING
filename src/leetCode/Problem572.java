@@ -22,8 +22,19 @@ package leetCode;
  * create by stephen on 2018/6/10
  */
 public class Problem572 {
+
+    private class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
+    }
+
     /**************************************************************
-     * 非递归 利用（改进的）先序遍历来比较
+     * 非递归 利用（改进的）先序遍历来比较遍历后的序列
      *************************************************************/
     public boolean isSubtree(TreeNode s, TreeNode t) {
         String s1 = preOrder(s, true);
@@ -64,15 +75,4 @@ public class Problem572 {
         if (a.val != b.val) return false;
         return equal(a.left, b.left) && equal(a.right, b.right);
     }
-
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
 }
