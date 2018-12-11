@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.tree;
 
 /**
  * Given two non-empty binary trees s and t, check whether tree t has exactly the same structure and
