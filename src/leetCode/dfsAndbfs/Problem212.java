@@ -1,4 +1,4 @@
-package leetCode.backTrack;
+package leetCode.dfsAndbfs;
 
 import java.util.ArrayList;
 import java.util.HashSet;

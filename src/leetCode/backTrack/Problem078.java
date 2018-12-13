@@ -36,7 +36,7 @@ public class Problem078 {
         result.add(new ArrayList<>(tempList));
         for (int i=start; i<nums.length; ++i) {
             tempList.add(nums[i]);
-            backTrack(result, tempList, nums, i +1);
+            backTrack(result, tempList, nums, i +1); //不可以重复 将start=i+1
             tempList.remove(tempList.size() -1);
         }
     }

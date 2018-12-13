@@ -23,6 +23,9 @@ public class Problem039 {
         return result;
     }
 
+    /**
+     * 回溯法 注意这里元素可以重复，递归时的index不用+1
+     */
     private void backTrack(List<List<Integer>> result, int[] candidates, int target, int start, ArrayList<Integer> tempList) {
         if (target < 0) return;
         if (target == 0) result.add(new ArrayList<>(tempList));
