@@ -1,5 +1,9 @@
 package leetCode.backTrack;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Given a collection of integers that might contain duplicates, nums, return all possible subsets (the power set).
  * Note: The solution set must not contain duplicate subsets.
@@ -18,4 +22,24 @@ package leetCode.backTrack;
  * ]
  */
 public class Problem090 {
+
+	public List<List<Integer>> subsetsWithDup(int[] nums) {
+		List<List<Integer>> list = new ArrayList<>();
+		Arrays.sort(nums); // 将数组排好序
+		backtrack(list, new ArrayList<>(), nums, 0);
+		return list;
+	}
+
+	/**
+	 * 需要去除重复 前提条件是数组是排好序的
+	 */
+	private void backtrack(List<List<Integer>> list, List<Integer> tempList, int[] nums, int start) {
+		list.add(new ArrayList<>(tempList));
+		for (int i = start; i < nums.length; i++) {
+			if (i > start && nums[i] == nums[i - 1]) continue; // skip duplicates
+			tempList.add(nums[i]);
+			backtrack(list, tempList, nums, i + 1);
+			tempList.remove(tempList.size() - 1);
+		}
+	}
 }
