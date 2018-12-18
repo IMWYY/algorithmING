@@ -1,4 +1,4 @@
-package leetCode.array;
+package leetCode.binarySearch;
 
 /**
  * Given an array of integers nums sorted in ascending order,
@@ -17,11 +17,6 @@ package leetCode.array;
  * create by stephen on 2018/5/5
  */
 public class Problem034 {
-
-    public static void main(String[] args) {
-        int[] res = searchRange(new int[]{5, 7, 7, 8, 8, 10}, 8);
-        System.out.println(res[0] + " " + res[1]);
-    }
 
     /**
      * 找到target第一次和最后一次出现的位置即可
