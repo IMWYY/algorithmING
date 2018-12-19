@@ -1,4 +1,4 @@
-package leetCode.array;
+package leetCode.twoPoint;
 
 /**
  * Given n non-negative integers a1, a2, ..., an, where each represents a point at coordinate (i, ai).
@@ -29,21 +29,5 @@ public class Problem011 {
         }
         return res;
     }
-
-
-    /**
-     * 暴力解法
-     * O(n2) time + O(1) space
-     */
-    public int maxArea1(int[] height) {
-        int res = 0;
-        for (int i = 0; i < height.length; ++i) {
-            for (int j = i + 1; j < height.length; ++j) {
-                res = Math.max(res, (j - i) * Math.min(height[i], height[j]));
-            }
-        }
-        return res;
-    }
-
 
 }

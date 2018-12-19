@@ -26,14 +26,6 @@ package leetCode.array;
  */
 public class Problem026 {
 
-    public static void main(String[] args) {
-        int[] arr = new int[]{1,1,2};
-        int len = new Problem026().removeDuplicates(arr);
-        for (int i = 0; i < len; i++) {
-            System.out.println(arr[i]);
-        }
-    }
-
     public int removeDuplicates(int[] nums) {
         if (nums.length <= 1) return nums.length;
         int cur = nums[0], res = 1, index = 1;
