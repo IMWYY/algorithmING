@@ -27,25 +27,25 @@ public class Problem033 {
 		int start = 0;
 		int end = nums.length - 1;
 		//找出最小值的数组下标
-   /* while (start < end) {
-        int mid = (start + end) / 2;
-        if (nums[mid] > nums[end]) {
-            start = mid + 1  ;
-        } else {
-            end = mid;
-        }
-    }
-    int bias = start;*/
-		//找出最大值的数组下标
 		while (start < end) {
-			int mid = Math.round(((float) start + end) / 2);
-			if (nums[mid] < nums[start]) {
-				end = mid - 1;
+			int mid = (start + end) / 2;
+			if (nums[mid] > nums[end]) {
+				start = mid + 1; // 每次只把start往后移动
 			} else {
-				start = mid;
+				end = mid;
 			}
-
 		}
+		int bias = start;
+		//找出最大值的数组下标
+		//		while (start < end) {
+		//			int mid = Math.round(((float) start + end) / 2);
+		//			if (nums[mid] < nums[start]) {
+		//				end = mid - 1; // 每次只移动
+		//			} else {
+		//				start = mid;
+		//			}
+		//
+		//		}
 		int n = nums.length;
 		int bias = (start + n) - (n - 1); //得到偏移
 		start = 0;
