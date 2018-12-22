@@ -15,107 +15,86 @@ import java.util.Stack;
  */
 public class Problem042 {
 
-    /**
-     * 暴力解法 计算每个位置的左边和右边的峰值 选小的作为水高度
-     * O(n2）time + O(1) space
-     */
-    public int trap1(int[] height) {
-        int ans = 0;
-        int size = height.length;
-        for (int i = 1; i < size - 1; i++) {
-            int max_left = 0, max_right = 0;
-            for (int j = i; j >= 0; j--) { //Search the left part for max bar size
-                max_left = Math.max(max_left, height[j]);
-            }
-            for (int j = i; j < size; j++) { //Search the right part for max bar size
-                max_right = Math.max(max_right, height[j]);
-            }
-            ans += Math.min(max_left, max_right) - height[i];
-        }
-        return ans;
-    }
+	/**
+	 * 使用两个数组记录左边界和右边界 选小的作为水高度
+	 * left_max记录到i位置的左边最大值
+	 * right_max记录到i位置的右边最大值
+	 * O(n）time + O(n) space
+	 */
+	public int trap(int[] height) {
+		if (height == null || height.length <= 2)
+			return 0;
+		int ans = 0;
+		int size = height.length;
 
+		int[] left_max = new int[height.length];
+		left_max[0] = height[0];
+		for (int i = 1; i < size; i++) {
+			left_max[i] = Math.max(height[i], left_max[i - 1]);
+		}
 
-    /**
-     * 改进
-     * 使用动态规划记录左边界和右边界 选小的作为水高度
-     * left_max记录到i位置的左边最大值
-     * right_max记录到i位置的右边最大值
-     * O(n）time + O(n) space
-     */
-    public int trap2(int[] height) {
-        if (height == null || height.length <= 2) return 0;
-        int ans = 0;
-        int size = height.length;
+		int[] right_max = new int[height.length];
+		right_max[size - 1] = height[size - 1];
+		for (int i = size - 2; i >= 0; i--) {
+			right_max[i] = Math.max(height[i], right_max[i + 1]);
+		}
 
-        int[] left_max = new int[height.length];
-        left_max[0] = height[0];
-        for (int i = 1; i < size; i++) {
-            left_max[i] = Math.max(height[i], left_max[i - 1]);
-        }
+		for (int i = 1; i < size - 1; i++) {
+			ans += Math.min(left_max[i], right_max[i]) - height[i];
+		}
 
-        int[] right_max = new int[height.length];
-        right_max[size - 1] = height[size - 1];
-        for (int i = size - 2; i >= 0; i--) {
-            right_max[i] = Math.max(height[i], right_max[i + 1]);
-        }
+		return ans;
+	}
 
-        for (int i = 1; i < size - 1; i++) {
-            ans += Math.min(left_max[i], right_max[i]) - height[i];
-        }
+	/**
+	 * 利用栈
+	 * 思想：遍历 每次遇到
+	 * 1.height[i]比栈顶元素小，就入栈（说明栈顶元素可以作为左边界）
+	 * 2.height[i]比栈顶元素大 i就是右边界 计算trap的水量
+	 * O(n) time + O(n) space
+	 */
+	public int trap2(int[] height) {
+		int ans = 0, current = 0;
+		Stack<Integer> st = new Stack<>();
+		while (current < height.length) {
+			while (!st.isEmpty() && height[current] > height[st.peek()]) {
+				int top = st.peek();
+				st.pop();
+				if (st.empty())
+					break;
+				int distance = current - st.peek() - 1;
+				int bounded_height = Math.min(height[current], height[st.peek()]) - height[top];
+				ans += distance * bounded_height;
+			}
+			st.push(current++);
+		}
+		return ans;
+	}
 
-        return ans;
-    }
-
-    /**
-     * 利用栈
-     * 思想：遍历 每次遇到
-     * 1.height[i]比栈顶元素小，就入栈（说明栈顶元素可以作为左边界）
-     * 2.height[i]比栈顶元素大 i就是右边界 计算trap的水量
-     */
-    public int trap3(int[] height) {
-        int ans = 0, current = 0;
-        Stack<Integer> st = new Stack<>();
-        while (current < height.length) {
-            while (!st.isEmpty() && height[current] > height[st.peek()]) {
-                int top = st.peek();
-                st.pop();
-                if (st.empty())
-                    break;
-                int distance = current - st.peek() - 1;
-                int bounded_height = Math.min(height[current], height[st.peek()]) - height[top];
-                ans += distance * bounded_height;
-            }
-            st.push(current++);
-        }
-        return ans;
-    }
-
-    /**
-     * 使用前后两个指针 比较难理解
-     * O(n）time + O(1) space
-     */
-    public int trap4(int[] height) {
-        int left = 0, right = height.length - 1;
-        int ans = 0;
-        int left_max = 0, right_max = 0;
-        while (left < right) {
-            if (height[left] < height[right]) {
-                if (height[left] > left_max) {
-                    left_max = height[left];
-                } else {
-                    ans += (left_max - height[left]);
-                }
-                ++left;
-            } else {
-                if (height[right] > right_max) {
-                    right_max = height[right];
-                } else {
-                    ans += (right_max - height[right]);
-                }
-                --right;
-            }
-        }
-        return ans;
-    }
+	/**
+	 * 使用前后两个指针
+	 * O(n）time + O(1) space
+	 */
+	public int trap3(int[] a) {
+		int left = 0;
+		int right = a.length - 1;
+		int res = 0;
+		int maxleft = 0, maxright = 0;
+		while (left <= right) {
+			if (a[left] <= a[right]) {
+				if (a[left] >= maxleft)
+					maxleft = a[left];
+				else
+					res += maxleft - a[left];
+				left++;
+			} else {
+				if (a[right] >= maxright)
+					maxright = a[right];
+				else
+					res += maxright - a[right];
+				right--;
+			}
+		}
+		return res;
+	}
 }
