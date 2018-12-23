@@ -23,7 +23,8 @@ import java.util.List;
 public class Problem056 {
 
     /**
-     * 排序后逐个加入结果集合
+     * 先排序后逐个加入结果集合
+     * O(nlogn) time + O(n) space
      */
     public List<Interval> merge(List<Interval> intervals) {
         if (intervals.size() <= 1) return intervals;
