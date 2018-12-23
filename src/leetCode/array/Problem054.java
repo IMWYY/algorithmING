@@ -19,6 +19,9 @@ import java.util.List;
  */
 public class Problem054 {
 
+    /**
+     * 主要考察代码能力
+     */
     public List<Integer> spiralOrder(int[][] matrix) {
         List<Integer> res = new ArrayList<>();
         if (matrix.length == 0 || matrix[0].length == 0) return res;
