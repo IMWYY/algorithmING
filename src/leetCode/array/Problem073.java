@@ -24,6 +24,7 @@ public class Problem073 {
     /**
      * 利用第一行和第一列来记录改行/列是否出现过1
      * 因此第一行和第一列要单独分出来
+     * O(m+n) time + O(1) space
      */
     public void setZeroes(int[][] matrix) {
         boolean firstRow = false, firstCol = false;

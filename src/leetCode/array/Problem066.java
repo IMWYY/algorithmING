@@ -24,6 +24,7 @@ public class Problem066 {
 
     /**
      * 利用进位 不需要将数组转换为具体数字进行加法
+     * 一旦出现进位 就说明第一位一定是0 其余是0
      */
     public int[] plusOne(int[] digits) {
         for (int i=digits.length-1; i>=0; --i) {
