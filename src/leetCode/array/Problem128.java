@@ -17,58 +17,53 @@ import java.util.Set;
  */
 public class Problem128 {
 
-    public static void main(String[] args) {
-        System.out.println(longestConsecutive(new int[]{9, 1, 4, 7, 3, -1, 0, 5, 8, -1, 6}));
-    }
+	/**
+	 * 排序后遍历
+	 * O(nlgn) time + O(1) space
+	 */
+	public static int longestConsecutive(int[] nums) {
+		if (nums.length <= 1)
+			return nums.length;
+		Arrays.sort(nums);
+		int len = 1, result = 1;
+		for (int i = 1; i < nums.length; ++i) {
+			if (nums[i] - nums[i - 1] == 1) {
+				len++;
+				result = Math.max(result, len);
+			} else if (nums[i] != nums[i - 1]) {
+				len = 1;
+			}
+		}
 
+		return result;
+	}
 
-    /**
-     * 排序后遍历
-     * O(nlgn) time + O(1) space
-     */
-    public static int longestConsecutive(int[] nums) {
-        if (nums.length <= 1) return nums.length;
-        Arrays.sort(nums);
-        int len = 1, result = 1;
-        for (int i = 1; i < nums.length; ++i) {
-            if (nums[i] - nums[i - 1] == 1) {
-                len++;
-                result = Math.max(result, len);
-            } else if (nums[i] != nums[i - 1]) {
-                len = 1;
-            }
-        }
+	/**
+	 * HashSet方法
+	 * O(n) time + O(n) space
+	 */
+	public int longestConsecutive1(int[] nums) {
+		Set<Integer> num_set = new HashSet<>();
+		for (int num : nums) {
+			num_set.add(num);
+		}
 
-        return result;
-    }
+		int longestStreak = 0;
 
+		for (int num : num_set) {
+			if (!num_set.contains(num - 1)) {
+				int currentNum = num;
+				int currentStreak = 1;
 
-    /**
-     * HashSet方法
-     * O(n) time + O(n) space
-     */
-    public int longestConsecutive1(int[] nums) {
-        Set<Integer> num_set = new HashSet<>();
-        for (int num : nums) {
-            num_set.add(num);
-        }
+				while (num_set.contains(currentNum + 1)) {
+					currentNum += 1;
+					currentStreak += 1;
+				}
 
-        int longestStreak = 0;
+				longestStreak = Math.max(longestStreak, currentStreak);
+			}
+		}
 
-        for (int num : num_set) {
-            if (!num_set.contains(num - 1)) {
-                int currentNum = num;
-                int currentStreak = 1;
-
-                while (num_set.contains(currentNum + 1)) {
-                    currentNum += 1;
-                    currentStreak += 1;
-                }
-
-                longestStreak = Math.max(longestStreak, currentStreak);
-            }
-        }
-
-        return longestStreak;
-    }
+		return longestStreak;
+	}
 }

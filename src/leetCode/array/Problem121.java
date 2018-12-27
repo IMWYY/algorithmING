@@ -18,19 +18,21 @@ package leetCode.array;
  */
 public class Problem121 {
 
-    /**
-     * 找到最小值之后的最大值即可 用一个数字记录当前之前的最小值
-     */
-    public int maxProfit(int[] prices) {
-        if (prices.length <= 1) return 0;
-        int minPrice = prices[0];
-        int maxProfit = 0;
-        for (int i=1; i<prices.length; ++i) {
-            if (prices[i] < minPrice) {
-                minPrice = prices[i];
-            }
-            maxProfit = Math.max(maxProfit, prices[i]-minPrice);
-        }
-        return maxProfit;
-    }
+	/**
+	 * 找到最小值之后的最大值即可 用一个数字记录当前之前的最小值
+	 * O(n) time + O(1) space
+	 */
+	public int maxProfit(int[] prices) {
+		if (prices.length <= 1)
+			return 0;
+		int minPrice = prices[0];
+		int maxProfit = 0;
+		for (int i = 1; i < prices.length; ++i) {
+			if (prices[i] < minPrice) {
+				minPrice = prices[i];
+			}
+			maxProfit = Math.max(maxProfit, prices[i] - minPrice);
+		}
+		return maxProfit;
+	}
 }
