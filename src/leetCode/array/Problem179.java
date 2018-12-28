@@ -17,6 +17,13 @@ import java.util.Arrays;
  */
 public class Problem179 {
 
+    /**
+     * 将数组转换为字符串排序 但是需要注意的是排序规则：
+     * 如 3，30，34
+     * 因为4>3, 0<3, 所以排序完的顺序为34，3，30
+     *
+     * 所以排序时可以更直接的 比较a+b与b+a的字典序
+     */
     public String largestNumber(int[] nums) {
         String[] asStrs = new String[nums.length];
         for (int i = 0; i < nums.length; i++) {

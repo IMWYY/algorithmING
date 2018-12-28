@@ -1,4 +1,4 @@
-package leetCode.array;
+package leetCode.binarySearch;
 
 /**
  * A peak element is an element that is greater than its neighbors.
@@ -18,10 +18,9 @@ package leetCode.array;
  */
 public class Problem162 {
 
-    public static void main(String[] args) {
-        System.out.println(new Problem162().findPeakElement(new int[]{1, 2, 3}));
-    }
-
+    /**
+     * 找子结构 二分查找
+     */
     public int findPeakElement(int[] nums) {
         if (nums.length <= 1) return 0;
         int start = 0, end = nums.length - 1;
@@ -37,17 +36,5 @@ public class Problem162 {
 
         return start;
     }
-
-    public int findPeakElement1(int[] nums) {
-        for (int i = 0; i < nums.length; ++i) {
-            if ((i == 0 && i + 1 < nums.length && nums[i] > nums[i + 1])
-                    || (i == nums.length - 1 && i - 1 >= 0 && nums[i] > nums[i - 1])
-                    || (i != 0 && i != nums.length - 1 && nums[i] > nums[i - 1] && nums[i] > nums[i + 1])) {
-                return i;
-            }
-        }
-        return 0;
-    }
-
 
 }

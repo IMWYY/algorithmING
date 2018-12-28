@@ -23,6 +23,7 @@ public class Problem169 {
      * 用一个count记录当前出现的次数
      * 遇到不等于该candidate的数字就减一 否则加一
      * 当count为0的时候更换新的candidate
+     * O(n) time + O(1) space
      */
     public int majorityElement(int[] nums) {
         int candidate = nums[0];
@@ -42,6 +43,7 @@ public class Problem169 {
 
     /**
      * 排序 取中间
+     * O(nlogn) time + O(1) space
      */
     public int majorityElement1(int[] nums) {
         Arrays.sort(nums);
