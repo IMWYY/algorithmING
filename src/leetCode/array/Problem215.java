@@ -20,6 +20,7 @@ public class Problem215 {
 
     /**
      * 利用最小堆 并保存堆大小为k
+     * O(nlogk) time + O(k) space
      */
     public int findKthLargest(int[] nums, int k) {
         if (k == 0 || nums.length == 0) return 0;
@@ -40,6 +41,7 @@ public class Problem215 {
     /**
      * 利用选择排序的思想
      * randomize the input 来保证时间复杂度为O(n)
+     * O(n) time + O(1) space
      */
     public int findKthLargest1(int[] nums, int k) {
         shuffle(nums);
@@ -69,7 +71,8 @@ public class Problem215 {
     }
 
     /**
-     * 每次执行完partition之后 j位置前的数小于num[j] j位置后的数大于num[j]
+     * 每次执行完partition 按照a[lo] 将数组分成两部分
+     * j位置前的数小于num[j] j位置后的数大于num[j]
      */
     private int partition(int[] a, int lo, int hi) {
         int i = lo;
