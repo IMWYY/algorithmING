@@ -18,6 +18,7 @@ public class Problem283 {
 
     /**
      * O(n) space + o(1) space
+     * 直接交换位置
      */
     public void moveZeroes(int[] nums) {
         for (int lastNonZeroFoundAt = 0, cur = 0; cur < nums.length; cur++) {

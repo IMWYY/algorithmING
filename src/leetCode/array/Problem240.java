@@ -30,7 +30,7 @@ import java.util.Arrays;
 public class Problem240 {
 
     /**
-     * 从右上角开始查找
+     * 从右上角(或者左下角)开始查找
      * O(m+n) time + O(1) space
      */
     public boolean searchMatrix(int[][] matrix, int target) {

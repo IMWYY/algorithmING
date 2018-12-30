@@ -17,8 +17,9 @@ package leetCode.array;
 public class Problem268 {
 
     /**
-     * 巧妙利用异或
+     * 巧妙利用异或(相同为0不同为1的性质)
      * 其他方法：排序/HashSet/利用高斯求和共识
+     * O(n) time + O(1) space
      */
     public int missingNumber(int[] nums) {
         int xor = nums.length;
