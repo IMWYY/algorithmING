@@ -31,11 +31,12 @@ public class Problem289 {
 
     /**
      * 在原数组上修改 利用位运算记录当前和之前的状态
+     * 这里没必要更新所有的情况 只要对于10 11 这两个左移后会变化的情况更新
      * - 00  dead (next) <- dead (current)
      * - 01  dead (next) <- live (current)
      * - 10  live (next) <- dead (current)
      * - 11  live (next) <- live (current)
-     * O(mn) time + O(mn) space
+     * O(mn) time + O(1) space in-space
      */
     public void gameOfLife(int[][] board) {
         if (board == null || board.length == 0) return;

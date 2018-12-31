@@ -21,14 +21,18 @@ public class Problem287 {
 
     /**
      * Floyd's Tortoise and Hare 链表闭环判断算法
-     * O(n)+O(1)
+     * 将数组铺平，类似于循环链表，即寻找环的起点
+     * 满足不改动数字且O(1) space
+     * O(n) time + O(1) space
      */
-    public int findDuplicate5(int[] nums) {
+    public int findDuplicate(int[] nums) {
         int slow = nums[0], fast = nums[0];
         do {
             slow = nums[slow];
             fast = nums[nums[fast]];
         } while (slow != fast);
+        // 相遇后 fast=a+(t+k)b  slow=a+tb
+	    // 那么新结点从头开始走 a之后，与slow相差刚好的b的整数倍，两者相遇在环的起点
 
         slow = nums[0];
         while (slow != fast) {
@@ -39,9 +43,10 @@ public class Problem287 {
     }
 
     /**
-     * 最普通的想法 O(n2)
+     * 在O(1)space 且不能改动数组的要求下 最普通的想法
+     * O(n^2) time + O(1) space
      */
-    public int findDuplicate(int[] nums) {
+    public int findDuplicate1(int[] nums) {
         for (int i = 0; i < nums.length; ++i) {
             for (int j = i + 1; j < nums.length; ++j) {
                 if (nums[j] == nums[i]) return nums[i];
@@ -51,9 +56,9 @@ public class Problem287 {
     }
 
     /**
-     * 排序 O(nlogn)
+     * 排序 O(nlogn) time + O(1) space
      */
-    public int findDuplicate3(int[] nums) {
+    public int findDuplicate2(int[] nums) {
         Arrays.sort(nums);
         for (int i = 1; i < nums.length; i++) {
             if (nums[i] == nums[i - 1]) {
@@ -66,9 +71,9 @@ public class Problem287 {
 
 
     /**
-     * 利用集合或者map O(n)+O(n)
+     * 利用集合或者map O(n) time + O(n) space
      */
-    public int findDuplicate4(int[] nums) {
+    public int findDuplicate3(int[] nums) {
         Set<Integer> seen = new HashSet<>();
         for (int num : nums) {
             if (seen.contains(num)) {
