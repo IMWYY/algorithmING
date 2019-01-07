@@ -24,6 +24,7 @@ public class Problem448 {
 
     /**
      * 用负数来表示该下标已经存在
+     * O(n) space + O(1) space
      */
     public List<Integer> findDisappearedNumbers(int[] nums) {
         List<Integer> result = new ArrayList<>();
