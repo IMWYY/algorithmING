@@ -1,6 +1,6 @@
 package leetCode.array;
 
-import java.util.Stack;
+import java.util.Arrays;
 
 /**
  * Given an integer array, you need to find one continuous subarray that if you only
@@ -22,46 +22,75 @@ import java.util.Stack;
 public class Problem581 {
 
 	/**
-	 * 改进方案 只遍历一遍
+	 * one-pass
+	 * 找到比最小值小的最前面的位置start 和 比最大值大的最后面的位置end
 	 * O(n) time + O(1) space
 	 */
-	public int findUnsortedSubarray1(int[] nums) {
-		if (nums.length <= 1)
-			return 0;
-
+	public int findUnsortedSubarray(int[] nums) {
+		int i = 0, j = -1;
 		int max = Integer.MIN_VALUE, min = Integer.MAX_VALUE;
-		int start = 0, end = 0;
-		for (int i = 0; i < nums.length; ++i) {
-			max = Math.max(max, nums[i]);
-			min = Math.min(min, nums[nums.length - 1 - i]);
-			if (nums[nums.length - i - 1] > min)
-				start = nums.length - i - 1;        // start是比min大的最前面一个位置
-			if (nums[i] < max)  // end点是比max小的最后一个位置
-				end = i;
+
+		for (int l = 0, r = nums.length - 1; r >= 0; l++, r--) {
+			max = Math.max(max, nums[l]);
+			if (nums[l] < max)  // 找到比max小的最后面一个
+				j = l;
+
+			min = Math.min(min, nums[r]);
+			if (nums[r] > min)     // 找到比min大的最前面一个
+				i = r;
 		}
 
-		return end == start ? 0 : end - start + 1;
+		return (j - i + 1);
 	}
 
 	/**
-	 * 记录从0-i位置的最大值和n-1到i位置的最小值
+	 * two-pass
+	 * 记录从0-i位置的最大值 和 i到n-1位置的最小值
 	 * 找到第一个大于最小值的位置和第一个小于最大值的位置
 	 * O(n) time + O(n) space
 	 */
-	public int findUnsortedSubarray(int[] nums) {
-		Stack<Integer> stack = new Stack<>();
-		int l = nums.length, r = 0;
-		for (int i = 0; i < nums.length; i++) {
-			while (!stack.isEmpty() && nums[stack.peek()] > nums[i])
-				l = Math.min(l, stack.pop());
-			stack.push(i);
+	public int findUnsortedSubarray1(int[] nums) {
+		int l = 0, r = nums.length - 1;
+
+		while (l < r && nums[l] <= nums[l + 1])
+			l++;
+
+		if (l >= r)
+			return 0;
+
+		while (nums[r] >= nums[r - 1])
+			r--;
+
+		int max = Integer.MIN_VALUE, min = Integer.MAX_VALUE;
+
+		for (int k = l; k <= r; k++) {
+			max = Math.max(max, nums[k]);
+			min = Math.min(min, nums[k]);
 		}
-		stack.clear();
-		for (int i = nums.length - 1; i >= 0; i--) {
-			while (!stack.isEmpty() && nums[stack.peek()] < nums[i])
-				r = Math.max(r, stack.pop());
-			stack.push(i);
+
+		while (l >= 0 && min < nums[l])
+			l--;
+		while (r < nums.length && nums[r] < max)
+			r++;
+
+		return (r - l - 1);
+	}
+
+	/**
+	 * 利用排序 然后比较当前数组和排序后的数组的首尾位置数值偏差
+	 * O(nlogn) time + O(1) space
+	 */
+	public int findUnsortedSubarray2(int[] nums) {
+		int[] snums = nums.clone();
+		Arrays.sort(snums);
+		int start = snums.length, end = 0;
+		for (int i = 0; i < snums.length; i++) {
+			if (snums[i] != nums[i]) {
+				start = Math.min(start, i);
+				end = Math.max(end, i);
+			}
 		}
-		return r - l > 0 ? r - l + 1 : 0;
+		return (end - start >= 0 ? end - start + 1 : 0);
 	}
 }
+
