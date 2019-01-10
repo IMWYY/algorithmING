@@ -25,93 +25,101 @@ import java.util.PriorityQueue;
  */
 public class Problem621 {
 
-    /**
-     * 数组排序后 每一个interval选择出现次数最多的n个任务
-     */
-    public int leastInterval1(char[] tasks, int n) {
-        if (tasks.length == 0) return 0;
-        int[] map = new int[26];
-        Arrays.fill(map, 0);
-        for (char task : tasks) {
-            map[task - 'A']++;
-        }
-        Arrays.sort(map);
+	/**
+	 * 数组排序后 每一个interval选择出现次数最多的n个任务
+	 */
+	public int leastInterval1(char[] tasks, int n) {
+		if (tasks.length == 0)
+			return 0;
+		int[] map = new int[26];
+		Arrays.fill(map, 0);
+		for (char task : tasks) {
+			map[task - 'A']++;
+		}
+		Arrays.sort(map);
 
-        int result = 0;
-        while (map[25] > 0) {
-            int i = 0;
-            while (i <= n) {
-                if (map[25] == 0) break;
-                if (i < 26 && map[25 - i] > 0) {
-                    map[25 - i]--;
-                }
-                i++;
-                result++;
-            }
+		int result = 0;
+		while (map[25] > 0) {
+			int i = 0;
+			while (i <= n) {
+				if (map[25] == 0)
+					break;
+				if (i < 26 && map[25 - i] > 0) {
+					map[25 - i]--;
+				}
+				i++;  // 这里如果拿出的任务数量 < n, 会被填充为idle
+				result++;
+			}
 
-            Arrays.sort(map);
-        }
+			Arrays.sort(map);
+		}
 
-        return result;
-    }
+		return result;
+	}
 
-    /**
-     * 方法同上 优化的方向是利用最大堆每次获取出现频率最高的任务
-     */
-    public int leastInterval2(char[] tasks, int n) {
-        if (tasks.length == 0) return 0;
-        int[] map = new int[26];
-        Arrays.fill(map, 0);
-        for (char task : tasks) {
-            map[task - 'A']++;
-        }
+	/**
+	 * 方法同上 优化的方向是利用最大堆每次获取出现频率最高的任务
+	 */
+	public int leastInterval2(char[] tasks, int n) {
+		if (tasks.length == 0)
+			return 0;
+		int[] map = new int[26];
+		Arrays.fill(map, 0);
+		for (char task : tasks) {
+			map[task - 'A']++;
+		}
 
-        PriorityQueue<Integer> maxHeap = new PriorityQueue<>();
-        for (int i : map) {
-            if (i > 0) maxHeap.offer(i);
-        }
+		PriorityQueue<Integer> maxHeap = new PriorityQueue<>();
+		for (int i : map) {
+			if (i > 0)
+				maxHeap.offer(i);
+		}
 
-        int result = 0;
-        List<Integer> tempList = new ArrayList<>();
+		int result = 0;
+		List<Integer> tempList = new ArrayList<>();
 
-        while (!maxHeap.isEmpty()) {
-            tempList.clear();
-            int i = 0, temp;
-            while (i <= n) {
-                if (maxHeap.isEmpty()) break;
-                temp = maxHeap.poll();
-                if (temp > 1) {
-                    tempList.add(temp - 1);
-                }
-                i++;
-                result++;
-            }
+		while (!maxHeap.isEmpty()) {
+			tempList.clear();
+			int i = 0, temp;
+			while (i <= n) {
+				if (maxHeap.isEmpty())
+					break;
+				temp = maxHeap.poll();
+				if (temp > 1) {
+					tempList.add(temp - 1);
+				}
+				i++;
+				result++;
+			}
 
-            for (int j : tempList) {
-                if (j > 0) maxHeap.offer(i);
-            }
-        }
+			for (int j : tempList) {
+				if (j > 0)
+					maxHeap.offer(i);
+			}
+		}
 
-        return result;
-    }
+		return result;
+	}
 
-    /**
-     * 以出现次数最多的task为基准，填充idle task。
-     * 最后结果为tasks + idle task
-     */
-    public int leastInterval3(char[] tasks, int n) {
-        if (tasks.length == 0) return 0;
-        int[] map = new int[26];
-        Arrays.fill(map, 0);
-        for (char task : tasks) {
-            map[task - 'A']++;
-        }
-        Arrays.sort(map);
-        int idle = (map[25] - 1) * n;
-        for (int i = 24; i >= 0 && map[i] > 0; --i) {
-            idle -= Math.max(map[25], map[i]);
-        }
+	/**
+	 * 以出现次数最多的task为基准，填充idle task。
+	 * 如果idle task没被填满，说明又多出来的idle task，结果为tasks + idle task
+	 * O(n) time + O(1) space
+	 */
+	public int leastInterval3(char[] tasks, int n) {
+		if (tasks.length == 0)
+			return 0;
+		int[] map = new int[26];
+		Arrays.fill(map, 0);
+		for (char task : tasks) {
+			map[task - 'A']++;
+		}
+		Arrays.sort(map);
+		int idle = (map[25] - 1) * n;
+		for (int i = 24; i >= 0 && map[i] > 0; --i) {
+			idle -= Math.min(map[25] - 1, map[i]);// 每次最多装入map[25]-1个 如果有多出（也只会多出一个）放在最后
+		}
 
-        return idle > 0 ? idle + tasks.length : tasks.length;
-    }
+		return idle > 0 ? idle + tasks.length : tasks.length;
+	}
 }
