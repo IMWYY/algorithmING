@@ -1,4 +1,4 @@
-package leetCode.array;
+package leetCode.binarySearch;
 
 /**
  * Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.
@@ -47,7 +47,7 @@ public class Problem033 {
 		//
 		//		}
 		int n = nums.length;
-		int bias = (start + n) - (n - 1); //得到偏移
+		bias = (start + n) - (n - 1); //得到偏移
 		start = 0;
 		end = nums.length - 1;
 		while (start <= end) {
