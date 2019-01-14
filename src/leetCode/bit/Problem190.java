@@ -14,9 +14,6 @@ package leetCode.bit;
  */
 public class Problem190 {
 
-    public static void main(String[] args) {
-        System.out.println((Integer.MAX_VALUE) >> 1);
-    }
 
     /**
      * you need treat n as an unsigned value

@@ -40,4 +40,18 @@ public class Problem191 {
         return bits;
     }
 
+    /**
+     * 无符号右移原数字 并检查&1的结果
+     */
+    public int hammingWeight2(int n) {
+        int bits = 0;
+        for (int i = 0; i < 32; i++) {
+            if ((n & 1) != 0) {
+                bits++;
+            }
+            n >>>= 1;
+        }
+        return bits;
+    }
+
 }
