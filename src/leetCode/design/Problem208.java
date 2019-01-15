@@ -17,77 +17,85 @@ package leetCode.design;
  */
 public class Problem208 {
 
-    private TrieNode root;
+	private class TrieNode {
+		private TrieNode[] nodes;
+		private boolean isEnd;
 
-    /** Initialize your data structure here. */
-    public Problem208() {
-        root = new TrieNode();
-    }
+		TrieNode() {
+			this.nodes = new TrieNode[26];
+		}
 
-    /** Inserts a word into the trie. */
-    public void insert(String word) {
-        TrieNode curNode = root;
-        for (char c : word.toCharArray()) {
-            if (!curNode.containsKey(c)) {
-                curNode.put(c, new TrieNode());
-            }
-            curNode = curNode.get(c);
-        }
-        curNode.setEnd(true);
-    }
+		public boolean containsKey(char c) {
+			return nodes[c - 'a'] != null;
+		}
 
-    /** Returns if the word is in the trie. */
-    public boolean search(String word) {
-        TrieNode curNode = root;
-        for (char c: word.toCharArray()) {
-            if (!curNode.containsKey(c)) {
-                return false;
-            }
-            curNode = curNode.get(c);
-        }
-        return curNode.isEnd;
-    }
+		public void put(char c, TrieNode node) {
+			nodes[c - 'a'] = node;
+		}
 
-    /** Returns if there is any word in the trie that starts with the given prefix. */
-    public boolean startsWith(String prefix) {
-        TrieNode curNode = root;
-        for (char c: prefix.toCharArray()) {
-            if (!curNode.containsKey(c)) {
-                return false;
-            }
-            curNode = curNode.get(c);
-        }
-        return true;
-    }
+		public TrieNode get(char c) {
+			return nodes[c - 'a'];
+		}
 
-    private class TrieNode {
-        private TrieNode[] nodes;
-        private boolean isEnd;
+		public boolean isEnd() {
+			return isEnd;
+		}
 
-        TrieNode() {
-            this.nodes = new TrieNode[26];
-        }
+		public void setEnd(boolean end) {
+			isEnd = end;
+		}
+	}
 
-        public boolean containsKey(char c) {
-            return nodes[c - 'a'] != null;
-        }
+	private TrieNode root;
 
+	/**
+	 * Initialize your data structure here.
+	 */
+	public Problem208() {
+		root = new TrieNode();
+	}
 
-        public void put(char c, TrieNode node) {
-            nodes[c - 'a'] = node;
-        }
+	/**
+	 * Inserts a word into the trie.
+	 */
+	public void insert(String word) {
+		TrieNode curNode = root;
+		for (char c : word.toCharArray()) {
+			if (!curNode.containsKey(c)) {
+				curNode.put(c, new TrieNode());
+			}
+			curNode = curNode.get(c);
+		}
+		curNode.setEnd(true);
+	}
 
-        public TrieNode get(char c) {
-            return nodes[c - 'a'];
-        }
+	/**
+	 * Returns if the word is in the trie.
+	 */
+	public boolean search(String word) {
+		TrieNode curNode = root;
+		for (char c : word.toCharArray()) {
+			if (!curNode.containsKey(c)) {
+				return false;
+			}
+			curNode = curNode.get(c);
+		}
+		return curNode.isEnd;
+	}
 
-        public boolean isEnd() {
-            return isEnd;
-        }
-
-        public void setEnd(boolean end) {
-            isEnd = end;
-        }
-    }
+	/**
+	 * Returns if there is any word in the trie that starts with the given prefix.
+	 */
+	public boolean startsWith(String prefix) {
+		TrieNode curNode = root;
+		for (char c : prefix.toCharArray()) {
+			if (!curNode.containsKey(c)) {
+				return false;
+			}
+			curNode = curNode.get(c);
+		}
+		// 注意这里和search不同 只要找到前缀即可
+		return true;
+	}
 
 }

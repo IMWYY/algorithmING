@@ -13,6 +13,10 @@ import java.util.*;
  */
 public class Problem380 {
 
+    /**
+     * 主要是为了实现getRandom需要有一个index
+     * 所以用一个list保存index，同时需要用保存data和index的双向映射
+     */
     private List<Integer> keyList;
     private Map<Integer, Integer> index2dataMap;
     private Map<Integer, Integer> data2indexMap;

@@ -34,7 +34,7 @@ public class Problem146 {
      * 使用双向链表+hash表实现的LRU缓存策略
      * 其中双向链表包含一个头尾伪节点
      * <p>
-     * 实际上java内置的LinkedHashMap即可以实现
+     * 实际上java内置的LinkedHashMap，并将accessOrder设为true即可以实现
      */
     public Problem146(int capacity) {
         this.capacity = capacity;

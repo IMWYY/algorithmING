@@ -43,6 +43,9 @@ public class Problem297 {
         }
     }
 
+    /**
+     * 反序列化时 将字符串入队列 并构造树节点
+     */
     public TreeNode deserialize(String data) {
         Deque<String> queue = new ArrayDeque<>();
         queue.addAll(Arrays.asList(data.split(",")));
