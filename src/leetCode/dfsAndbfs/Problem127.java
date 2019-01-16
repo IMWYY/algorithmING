@@ -102,7 +102,7 @@ public class Problem127 {
                 String s = String.valueOf(chars);
                 if (set.contains(s)) {
                     queue.add(s);
-                    set.remove(s);
+                    set.remove(s);  //这里需要在set中移除这个单词 否则会有重复添加
                 }
             }
             chars[i] = temp;

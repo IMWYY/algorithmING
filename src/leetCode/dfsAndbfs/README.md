@@ -1,10 +1,26 @@
 # DFS & BDF & Topological sort
 
 ### DFS算法
-TODO
+
+参考一个用DFS的典型题目：Problem079
+
+```java
+for (int i = 0; i < n; ++i) {
+	DFS();  // do something
+}
+```
 
 ### BFS算法
-TODO
+
+参考一个用DFS的典型题目：Problem127
+
+```java
+while (!queue.isEmpty()) {
+	Element e = queue.poll();
+	BFS();  // do something
+	// add new element to queue
+}
+```
 
 ### Topological sort
 

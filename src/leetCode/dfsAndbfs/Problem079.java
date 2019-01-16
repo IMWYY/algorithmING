@@ -23,14 +23,6 @@ import java.util.Arrays;
  */
 public class Problem079 {
 
-    public static void main(String[] args) {
-        char[][] board = {{'A', 'B', 'C', 'E'}, {'S', 'F', 'C', 'S'}, {'A', 'D', 'E', 'E'}};
-        System.out.println(exist(board, "ABCCED"));
-        System.out.println(exist(board, "SEE"));
-        System.out.println(exist(board, "ABCB"));
-    }
-
-
     /**
      * dfs算法即可
      * 优化点：可以不用单独一个boolean数组记录是否被访问过，可以直接用board数组，
@@ -54,7 +46,7 @@ public class Problem079 {
         return false;
     }
 
-    public static boolean findWord(char[][] board, String word, boolean[][] used, int index, int i, int j) {
+    private static boolean findWord(char[][] board, String word, boolean[][] used, int index, int i, int j) {
         if (index >= word.length()) return true;
         if (i < 0 || i >= board.length || j < 0 || j >= board[0].length) return false;
         if (board[i][j] != word.charAt(index)) return false;
