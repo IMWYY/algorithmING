@@ -31,9 +31,11 @@ public class Problem130 {
     }
 
     /**
+     * 反向思维 不去找所有被包围的O 而是将不满足条件的O全部去除 然后将剩余的（满足条件的）flip
      * a. 从board的边开始dfs 将所有边可以到达的O标记为1,
      * b. 将board的所有O变成X
      * c. 将board的所有1变成O
+     * O(n^2) time + O(1) space
      */
     public void solve(char[][] board) {
         if (board.length == 0 || board[0].length == 0) return;
