@@ -18,6 +18,9 @@ package leetCode.dfsAndbfs;
  */
 public class Problem200 {
 
+    /**
+     * 典型的DFS问题 将所有的1访问后标记为x
+     */
     public int numIslands(char[][] grid) {
         int result = 0;
         for (int i = 0; i < grid.length; ++i) {
@@ -72,7 +75,7 @@ public class Problem200 {
     class UnionFind {
         int[] father;
         int m, n;
-        int count = 0;
+        int count = 0; // 这里count初始化为1的个数 然后在
 
         UnionFind(char[][] grid) {
             m = grid.length;
