@@ -74,9 +74,9 @@ public class Problem207 {
         int[] inDegree = new int[numCourses];
         Arrays.fill(inDegree, 0);
         for (int[] pair : prerequisites) {          // 转换为邻接矩阵
-            if (edges[pair[0]][pair[1]] == 0)
-                inDegree[pair[1]]++;
-            edges[pair[0]][pair[1]] = 1;
+            if (edges[pair[1]][pair[0]] == 0)
+                inDegree[pair[0]]++;
+            edges[pair[1]][pair[0]] = 1;
         }
 
         Queue<Integer> queue = new ArrayDeque<>();
