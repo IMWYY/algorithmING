@@ -32,7 +32,6 @@ public class UFset {
     /**
      * 将两个不同集合的元素进行合并，使两个集合中任两个元素都连通
      */
-
     public void union(int x1, int x2) {
         int r1 = find(x1), r2 = find(x2); //r1 为 x1 的根结点，r2 为 x2 的根结点
         int tmp = parent[r1] + parent[r2]; //两个集合结点个数之和(负数)

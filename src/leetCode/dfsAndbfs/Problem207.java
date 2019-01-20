@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.dfsAndbfs;
 
 import java.util.*;
 
@@ -22,6 +22,7 @@ import java.util.*;
 public class Problem207 {
 
     /**
+     * 利用邻接表来表示图
      * DFS算法 检查课程顺序的以来关系是不是一个有向无环图
      * 为了减少遍历的次数 用一个visitedCourse来记录被作为起始节点访问过的课程 不用再次遍历
      */
@@ -58,13 +59,15 @@ public class Problem207 {
         for (int c : map.get(curCourse)) {
             if (dfsHasRing(map, chosen, c, visitedCourse)) return true;
         }
-        chosen[curCourse] = false;
+        chosen[curCourse] = false; // 需要在退出之前将chosen数组重置
         return false;
     }
 
 
     /**
+     * 用邻接矩阵来记录图的信息
      * 拓补排序的Kahn算法 用一个数组记录入度
+     * 利用一个队列记录所有入度为0的节点
      */
     public boolean canFinish2(int numCourses, int[][] prerequisites) {
         int[][] edges = new int[numCourses][numCourses];
