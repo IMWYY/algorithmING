@@ -1,9 +1,7 @@
 package leetCode.dfsAndbfs;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Given a 2D board and a list of words from the dictionary, find all words in the board.
@@ -43,6 +41,10 @@ public class Problem212 {
         return res;
     }
 
+    /**
+     * DFS查找trie树 需要注意的是在找到一个word之后需要将这个word设为null 防止重复
+     * 或者 用set来保存找到的word 可以去重
+     */
     private void dfs(char[][] board, int i, int j, TrieNode p, List<String> res) {
         char c = board[i][j];
         if (c == '#' || p.next[c - 'a'] == null) return;
@@ -60,6 +62,9 @@ public class Problem212 {
         board[i][j] = c;
     }
 
+    /**
+     * 构造一个trie树 其中叶节点保存着完整的word
+     */
     private TrieNode buildTrie(String[] words) {
         TrieNode root = new TrieNode();
         for (String w : words) {
@@ -84,14 +89,14 @@ public class Problem212 {
      * 一个个word判断是否在board中 借鉴Problem079的思路
      */
     public List<String> findWords1(char[][] board, String[] words) {
-        Set<String> res = new HashSet<>();
+        List<String> res = new ArrayList<>();
         if (board.length == 0 || board[0].length == 0) return new ArrayList<>();
         for (String s : words) {
             if (exist(board, s)) {
                 res.add(s);
             }
         }
-        return new ArrayList<>(res);
+        return res;
     }
 
     private boolean exist(char[][] board, String s) {
