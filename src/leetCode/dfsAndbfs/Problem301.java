@@ -34,6 +34,15 @@ public class Problem301 {
         return ans;
     }
 
+    /**
+     * 维护两个pos 并且所有的处理最后都要reverse一下
+     * 因为判断的时候只看par[1]比par[0]的情况 相反的情况则需要reverse一下后才能判断
+     * @param s 字符串
+     * @param ans 结果集合
+     * @param startCountPos 开始计算(和)数量的位置 在此位置之前的子字符串已经是valid了
+     * @param startRemovePos 一旦出现invalid的情况，可以删除多余字符的最开始位置
+     * @param par (和)的位置 用于reverse
+     */
     public void remove(String s, List<String> ans, int startCountPos, int startRemovePos, char[] par) {
         for (int stack = 0, i = startCountPos; i < s.length(); ++i) {
             if (s.charAt(i) == par[0]) stack++;
