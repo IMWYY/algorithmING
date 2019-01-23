@@ -20,6 +20,7 @@ import java.util.*;
 public class Problem127 {
 
     /**
+     * 方法一：
      * 从头和尾都利用bfs算法
      */
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
@@ -70,6 +71,7 @@ public class Problem127 {
     }
 
     /**
+     * 方法二：
      * 标准BFS 每次添加忘队列添加的时候 不是遍历wordList 而是循环26个字母 减少时间复杂度
      */
     public int ladderLength1(String beginWord, String endWord, List<String> wordList) {

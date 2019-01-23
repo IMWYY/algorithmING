@@ -23,6 +23,7 @@ import java.util.*;
 public class Problem210 {
 
     /**
+     * 方法一
      * 拓补排序 Kahn算法 BFS
      * 参考Problem207
      */
@@ -58,7 +59,7 @@ public class Problem210 {
     }
 
     /**
-     * DFS算法
+     * 方法二：DFS算法
      * 需要注意的是DFS完了是逆序的 需要用栈转换一下
      */
     public int[] findOrder1(int numCourses, int[][] prerequisites) {

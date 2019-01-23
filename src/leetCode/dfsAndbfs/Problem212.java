@@ -25,6 +25,7 @@ import java.util.List;
 public class Problem212 {
 
     /**
+     * 方法一
      * 利用trie树+backtrack
      * 利用words构造一个特殊的trie树 然后扫描整个board并同时遍历trie
      * 叶节点保存word 遇到叶节点 保存结果到list
@@ -86,6 +87,7 @@ public class Problem212 {
 
 
     /**
+     * 方法二
      * 一个个word判断是否在board中 借鉴Problem079的思路
      */
     public List<String> findWords1(char[][] board, String[] words) {

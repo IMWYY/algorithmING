@@ -19,6 +19,7 @@ package leetCode.dfsAndbfs;
 public class Problem200 {
 
     /**
+     * 方法一：
      * 典型的DFS问题 将所有的1访问后标记为x
      */
     public int numIslands(char[][] grid) {
@@ -44,6 +45,7 @@ public class Problem200 {
     }
 
     /**
+     * 方法二：
      * 利用并查集解决问题
      */
     int[][] distance = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};

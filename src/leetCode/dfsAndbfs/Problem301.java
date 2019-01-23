@@ -26,6 +26,7 @@ import java.util.Set;
 public class Problem301 {
 
 	/**
+	 * 方法1：
 	 * 有点太难理解
 	 * 参考https://leetcode.com/problems/remove-invalid-parentheses/discuss/75027/Easy-Short-Concise-and-Fast-Java-DFS-3-ms-solution/146932
 	 * 下的高vote评论的解释
@@ -82,6 +83,7 @@ public class Problem301 {
 	}
 
 	/**
+	 * 方法2：
 	 * 另一种比较简洁的方法 尝试所有的情况
 	 */
 	public List<String> removeInvalidParentheses1(String s) {

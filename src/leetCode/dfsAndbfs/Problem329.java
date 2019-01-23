@@ -1,7 +1,5 @@
 package leetCode.dfsAndbfs;
 
-import java.util.Arrays;
-
 /**
  * Given an integer matrix, find the length of the longest increasing path.
  * From each cell, you can either move to four directions: left, right, up or down.
@@ -51,45 +49,4 @@ public class Problem329 {
         cache[i][j] = max;
         return max;
     }
-
-
-    private int maxLen;
-    /**
-     * 最普通的DFS算法  : Time Limit Exceeded
-     */
-    public int longestIncreasingPath1(int[][] matrix) {
-        if (matrix.length == 0 || matrix[0].length == 0) return 0;
-
-        boolean[][] visited = new boolean[matrix.length][matrix[0].length];
-        for (boolean[] booleans : visited) Arrays.fill(booleans, false);
-
-        for (int i = 0; i < matrix.length; ++i) {
-            for (int j = 0; j < matrix[0].length; ++j) {
-                dfs(matrix, visited, i, j, 1);
-            }
-        }
-        return maxLen;
-    }
-
-    private void dfs(int[][] matrix, boolean[][] visited, int i, int j, int len) {
-        maxLen = Math.max(len, maxLen);
-        if (i < 0 || i >= matrix.length || j < 0 || j >= matrix[0].length || visited[i][j]) {
-            return;
-        }
-        visited[i][j] = true;
-        if (i + 1 < matrix.length && matrix[i + 1][j] > matrix[i][j] && !visited[i + 1][j]) {
-            dfs(matrix, visited, i + 1, j, len + 1);
-        }
-        if (j + 1 < matrix[0].length && matrix[i][j + 1] > matrix[i][j] && !visited[i][j + 1]) {
-            dfs(matrix, visited, i, j + 1, len + 1);
-        }
-        if (i - 1 >= 0 && matrix[i - 1][j] > matrix[i][j] && !visited[i - 1][j]) {
-            dfs(matrix, visited, i - 1, j, len + 1);
-        }
-        if (j - 1 >= 0 && matrix[i][j - 1] > matrix[i][j] && !visited[i][j - 1]) {
-            dfs(matrix, visited, i, j - 1, len + 1);
-        }
-        visited[i][j] = false;
-    }
-
 }
