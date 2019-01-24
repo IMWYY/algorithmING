@@ -30,6 +30,7 @@ package leetCode.dynamicProgramming;
 public class Problem010 {
 
     /**
+     * 方法一
      * 1, If p.charAt(j) == s.charAt(i) :  dp[i][j] = dp[i-1][j-1];
      * 2, If p.charAt(j) == '.' : dp[i][j] = dp[i-1][j-1];
      * 3, If p.charAt(j) == '*':
@@ -43,6 +44,7 @@ public class Problem010 {
         if (s == null || p == null) return false;
         boolean[][] dp = new boolean[s.length() + 1][p.length() + 1];
         dp[0][0] = true;
+        // 初始化的时候需要对dp[0]特殊考虑
         for (int i = 0; i < p.length(); i++) {
             if (p.charAt(i) == '*' && dp[0][i - 1]) {
                 dp[0][i + 1] = true;  // .*结构
@@ -66,6 +68,7 @@ public class Problem010 {
 
 
     /**
+     * 方法二
      * 递归解法 注意这里.* 结构要么一起跳过 要么不跳过
      * 可以先从没有*开始考虑，然后加入*
      */
@@ -86,16 +89,17 @@ public class Problem010 {
     }
 
     /**
-     * 动态规划 参考递归实现
+     * 方法三
+     * 动态规划 由方法二的递归转换而来
      */
-    public boolean isMatch0(String text, String pattern) {
-        boolean[][] dp = new boolean[text.length() + 1][pattern.length() + 1];
-        dp[text.length()][pattern.length()] = true;
+    public boolean isMatch2(String s, String p) {
+        boolean[][] dp = new boolean[s.length() + 1][p.length() + 1];
+        dp[s.length()][p.length()] = true;
 
-        for (int i = text.length(); i >= 0; i--) {
-            for (int j = pattern.length() - 1; j >= 0; j--) {
-                boolean first_match = (i < text.length() && (pattern.charAt(j) == text.charAt(i) || pattern.charAt(j) == '.'));
-                if (j + 1 < pattern.length() && pattern.charAt(j + 1) == '*') {
+        for (int i = s.length(); i >= 0; i--) {
+            for (int j = p.length() - 1; j >= 0; j--) {
+                boolean first_match = (i < s.length() && (p.charAt(j) == s.charAt(i) || p.charAt(j) == '.'));
+                if (j + 1 < p.length() && p.charAt(j + 1) == '*') {
                     dp[i][j] = dp[i][j + 2] || (first_match && dp[i + 1][j]);
                 } else {
                     dp[i][j] = first_match && dp[i + 1][j + 1];
