@@ -21,26 +21,29 @@ public class Problem139 {
 
     /**
      * 动态规划：dp[i] 表示到i位置是否能够被wordDict组成
+     * dp[i] = true if
      * O(n^2) time + O(n) space
      */
+    @SuppressWarnings("all")
     public boolean wordBreak(String s, List<String> wordDict) {
-        boolean[] f = new boolean[s.length() + 1];
-        f[0] = true;
+        boolean[] dp = new boolean[s.length() + 1];
+        dp[0] = true;
         Set<String> set = new HashSet<>(wordDict);
         for (int i = 1; i <= s.length(); i++) {
             for (int j = 0; j < i; j++) {
-                if (f[j] && set.contains(s.substring(j, i))) {
-                    f[i] = true;
+                if (dp[j] && set.contains(s.substring(j, i))) {
+                    dp[i] = true;
                     break;
                 }
             }
         }
-        return f[s.length()];
+        return dp[s.length()];
     }
 
     /**
      * DFS和BFS都可以解决这个问题 但是效率不如dp好
      * 这里给出BFS
+     * 找出一组下标 可以从0->s.length()
      */
     public boolean wordBreak1(String s, List<String> wordDict) {
         Queue<Integer> queue = new ArrayDeque<>();
@@ -55,6 +58,7 @@ public class Problem139 {
                 for (int j = start; j < s.length(); j++) {
                     String word = s.substring(start, j - start + 1);
                     if (set.contains(word)) {
+                    	// 判断下标是否是end 如果是就表示找到了一组word可以组成string s
                         queue.add(j + 1);
                         if (j + 1 == s.length())
                             return true;

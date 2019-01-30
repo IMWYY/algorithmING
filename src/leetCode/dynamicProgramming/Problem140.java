@@ -23,8 +23,10 @@ import java.util.*;
  * create by stephen on 2018/10/4
  */
 public class Problem140 {
+
     /**
      * DFS算法 同时利用一个hashmap保存之前的值
+     * key: 要分割的string s; value: 分割成功的字符串
      * memorization
      */
     public List<String> wordBreak(String s, List<String> wordDict) {
@@ -103,4 +105,35 @@ public class Problem140 {
         }
         return f[s.length()];
     }
+
+
+    @SuppressWarnings("all")
+    public List<String> wordBreak2(String s, List<String> wordDict) {
+        boolean[] f = new boolean[s.length() + 1];
+        f[0] = true;
+        Set<String> set = new HashSet<>(wordDict);
+        for (int i = 1; i <= s.length(); i++) {
+            for (int j = 0; j < i; j++) {
+                if (f[j] && set.contains(s.substring(j, i))) {
+                    f[i] = true;
+                    break;
+                }
+            }
+        }
+//        if (!f[s.length()]) {
+//            return new ArrayList<>();
+//        }
+
+        List<String> res = new ArrayList<>();
+        findWord(f, s.length()-1, new ArrayList<>(), res, set);
+        return res;
+    }
+
+    private void findWord(boolean[] f, int i, ArrayList<String> tmpList, List<String> res, Set<String> wordDict) {
+        if (!f[i+1]) {
+            return;
+        }
+
+    }
+
 }
