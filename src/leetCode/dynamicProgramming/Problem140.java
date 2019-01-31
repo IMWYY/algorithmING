@@ -55,43 +55,30 @@ public class Problem140 {
     }
 
 
+    //"pineapplepenapple"
+    //["apple","pen","applepen","pine","pineapple"]
+    public static void main(String[] args) {
+        List<String> words = new ArrayList<>();
+        words.add("apple");
+        words.add("pen");
+        words.add("applepen");
+        words.add("pine");
+        words.add("pineapple");
+        List<String> res = wordBreak2("pineapplepenapple", words);
+
+        for (String s : res) {
+            System.out.println(s);
+        }
+    }
+
+
+    @SuppressWarnings("all")
     /**
-     * dp算法变形 每次都记录当前dict下标位置的所有string组合
-     * 对于这种testcase会Memory Limit Exceeded
-     * "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-     * ["a","aa","aaa","aaaa","aaaaa","aaaaaa","aaaaaaa","aaaaaaaa","aaaaaaaaa","aaaaaaaaaa"]
-     * 解决方法：
-     * 1.可以利用wordbreak (problem139) 先判断是否是breakable
-     * 2.先将string加入 先加入index 利用index判断是否breakable
+     * dp回溯 根据Problem139的接过倒推得到结果
+     * 不过需要注意在删除元素的时候 需要删除最后一次出现的元素 否则在有重复元素出现的时候会有顺序问题
+     * 见例子  pineapplepenapple ["apple","pen","applepen","pine","pineapple"]
      */
-    public List<String> wordBreak1(String s, List<String> wordDict) {
-        List<String> res = new ArrayList<>();
-        if (!isBreakable(s, wordDict)) return res;
-        List<List<String>> dp = new ArrayList<>();
-        for (int i = 0; i < s.length(); ++i) {
-            List<String> list = new ArrayList<>();
-            dp.add(list);
-
-            for (String word : wordDict) {
-                if (i + 1 == word.length() && s.substring(0, i + 1).equals(word)) {
-                    dp.get(i).add(word + " ");
-                } else if (i + 1 > word.length() && s.substring(i + 1 - word.length(), i + 1).equals(word)
-                        && dp.get(i - word.length()).size() > 0) {
-                    for (String sb : dp.get(i - word.length())) {  // 将之前的加入
-                        dp.get(i).add(sb + word + " ");
-                    }
-                }
-            }
-        }
-
-        for (String sb : dp.get(dp.size() - 1)) {
-            res.add(sb.substring(0, sb.length() - 1));
-        }
-        return res;
-    }
-
-    @SuppressWarnings("all")
-    public boolean isBreakable(String s, List<String> wordDict) {
+    public static List<String> wordBreak2(String s, List<String> wordDict) {
         boolean[] f = new boolean[s.length() + 1];
         f[0] = true;
         Set<String> set = new HashSet<>(wordDict);
@@ -103,37 +90,40 @@ public class Problem140 {
                 }
             }
         }
-        return f[s.length()];
-    }
-
-
-    @SuppressWarnings("all")
-    public List<String> wordBreak2(String s, List<String> wordDict) {
-        boolean[] f = new boolean[s.length() + 1];
-        f[0] = true;
-        Set<String> set = new HashSet<>(wordDict);
-        for (int i = 1; i <= s.length(); i++) {
-            for (int j = 0; j < i; j++) {
-                if (f[j] && set.contains(s.substring(j, i))) {
-                    f[i] = true;
-                    break;
-                }
-            }
-        }
-//        if (!f[s.length()]) {
-//            return new ArrayList<>();
-//        }
 
         List<String> res = new ArrayList<>();
-        findWord(f, s.length()-1, new ArrayList<>(), res, set);
+        findWord(s, f, s.length(), new ArrayList<>(), res, set);
         return res;
     }
 
-    private void findWord(boolean[] f, int i, ArrayList<String> tmpList, List<String> res, Set<String> wordDict) {
-        if (!f[i+1]) {
+    private static void findWord(String s, boolean[] f, int index, ArrayList<String> tmpList, List<String> res, Set<String> wordDict) {
+        if (index == 0) {
+            StringBuilder sb = new StringBuilder();
+            for (int j = tmpList.size() - 1; j >= 0; j--) {
+                if (j == tmpList.size() - 1) {
+                    sb.append(tmpList.get(j));
+                } else {
+                    sb.append(" ").append(tmpList.get(j));
+                }
+            }
+            res.add(sb.toString());
             return;
         }
+        if (!f[index]) return;
+        for (int j = index - 1; j >= 0; j--) {
+            if (f[j] && wordDict.contains(s.substring(j, index))) {
+                tmpList.add(s.substring(j, index));
+                findWord(s, f, j, tmpList, res, wordDict);
+                for (int k = tmpList.size() - 1; k >= 0; k--) {
+                    if (tmpList.get(k).equals(s.substring(j, index))) {
+                        tmpList.remove(k);
+                        break;
+                    }
+                }
+                //这里删除需要删除最后一次出现而不是第一次出现的的元素 不然当有相同元素时会有乱序的问题
 
+            }
+        }
     }
 
 }
