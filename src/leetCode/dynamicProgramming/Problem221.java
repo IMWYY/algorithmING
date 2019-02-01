@@ -33,6 +33,7 @@ public class Problem221 {
         for (int i = 1; i <= rows; i++) {
             for (int j = 1; j <= cols; j++) {
                 if (matrix[i - 1][j - 1] == '1') {
+                    // 注意这里 限制(i,j)位置边长的它之前三个点的最小值
                     dp[i][j] = Math.min(Math.min(dp[i][j - 1], dp[i - 1][j]), dp[i - 1][j - 1]) + 1;
                     maxsqlen = Math.max(maxsqlen, dp[i][j]);
                 }
@@ -41,52 +42,25 @@ public class Problem221 {
         return maxsqlen * maxsqlen;
     }
 
-
     /**
-     * 借鉴leetcode 84 和 85的做法 （不太可行 largestRectangleArea方法无法计算正方形的最大面积）
-     * O(mn) time + O(nm) space
+     * 动态规划 优化到O(n) space
      */
     public int maximalSquare1(char[][] matrix) {
-        if (matrix.length == 0 || matrix[0].length == 0) return 0;
-        int[] height = new int[matrix[0].length];
-        Arrays.fill(height, 0);
-        int result = 0;
-        for (char[] aMatrix : matrix) {
-            for (int j = 0; j < matrix[0].length; ++j) {
-                if (aMatrix[j] == '1') {
-                    height[j]++;
+        int cols = matrix.length > 0 ? matrix[0].length : 0;
+        int[] dp = new int[cols + 1];
+        int maxsqlen = 0, pre = 0;
+        for (int i = 1; i <= matrix.length; i++) {
+            for (int j = 1; j <= cols; j++) {
+                int temp = dp[j];
+                if (matrix[i - 1][j - 1] == '1') {
+                    dp[j] = Math.min(Math.min(dp[j - 1], dp[j]), pre) + 1;
+                    maxsqlen = Math.max(maxsqlen, dp[j]);
                 } else {
-                    height[j] = 0;
+                    dp[j] = 0;  //注意这里需要将dp[j] 重置为0
                 }
-            }
-            result = Math.max(result, largestRectangleArea(height));
-        }
-        return result;
-    }
-
-    @SuppressWarnings("all")
-    private int largestRectangleArea(int[] heights) {
-        if (heights.length == 0) return 0;
-        if (heights.length == 1) return heights[0];
-        int res = 0;
-        Stack<Integer> stack = new Stack<>();
-
-        for (int i = 0; i <= heights.length; ) {
-            int bar = i == heights.length ? 0 : heights[i];
-            if (stack.isEmpty() || bar >= heights[stack.peek()]) {
-                stack.push(i);
-                i++;
-            } else {
-                int h = heights[stack.pop()];
-                while (!stack.isEmpty() && h == heights[stack.peek()]) {
-                    stack.pop();
-                }
-                int left = stack.isEmpty() ? 0 : stack.peek() + 1; //计算的是peek后面一位作为左下标
-                if (i - left == h) {                        // 计算正方形的面积
-                    res = Math.max(res, h * (i - left));
-                }
+                pre = temp;
             }
         }
-        return res;
+        return maxsqlen * maxsqlen;
     }
 }

@@ -23,9 +23,7 @@ public class Problem279 {
         int[] dp = new int[n + 1];
         Arrays.fill(dp, 1);
         for (int i = 0; i < n + 1; ++i) {
-            if (Math.pow((int) Math.sqrt(i), 2) == i) {
-                dp[i] = 1;
-            } else {
+            if (Math.pow((int) Math.sqrt(i), 2) != i) {
                 int cur = i;
                 for (int j = 1; j * j < i; ++j) {
                     cur = Math.min(cur, dp[i - j * j] + 1);
