@@ -1,7 +1,5 @@
 package leetCode.dynamicProgramming;
 
-import java.util.Arrays;
-
 /**
  * Say you have an array for which the ith element is the price of a given stock on day i.
  * <p>
@@ -29,8 +27,8 @@ public class Problem309 {
      */
     public int maxProfit(int[] prices) {
         if (prices.length <= 1) return 0;
-        int[] s1 = new int[prices.length];
         int[] s0 = new int[prices.length];
+        int[] s1 = new int[prices.length];
         int[] s2 = new int[prices.length];
 
         s0[0] = 0;
@@ -45,19 +43,55 @@ public class Problem309 {
     }
 
     /**
+     * dp算法
+     * buy[i] 表示在第i天及以前 以买结束的一系列操作所带来的收益
+     * sell[i] 表示在第i天及以前 以卖结束的一系列操作所带来的收益
+     * rest[i] 表示在第i天及以前 以cooldown结束的一系列操作所带来的收益
+     * <p>
+     * buy[i]  = max(rest[i-1]-price, buy[i-1])
+     * sell[i] = max(buy[i-1]+price, sell[i-1])
+     * rest[i] = max(sell[i-1], buy[i-1], rest[i-1])
+     * o(n) time + o(n) space
+     */
+    public int maxProfit1(int[] prices) {
+        if (prices.length <= 1) return 0;
+
+        int[] buy = new int[prices.length];
+        int[] sell = new int[prices.length];
+        int[] rest = new int[prices.length];
+
+        buy[0] = -prices[0];
+
+        for (int i = 1; i < prices.length; ++i) {
+            buy[i] = Math.max(buy[i - 1], rest[i - 1] - prices[i]);
+            sell[i] = Math.max(sell[i - 1], buy[i - 1] + prices[i]);
+            rest[i] = Math.max(Math.max(sell[i - 1], buy[i - 1]), rest[i - 1]);
+        }
+
+        return Math.max(sell[prices.length - 1], rest[prices.length - 1]);
+    }
+
+    /**
      * 优化后的dp 参考
      * https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/discuss/75927/Share-my-thinking-process
-     *
+     * <p>
+     * buy[i] 表示在第i天及以前 以买结束的一系列操作所带来的收益
+     * sell[i] 表示在第i天及以前 以卖结束的一系列操作所带来的收益
+     * rest[i] 表示在第i天及以前 以cooldown结束的一系列操作所带来的收益
+     * <p>
      * buy[i]  = max(rest[i-1]-price, buy[i-1])
      * sell[i] = max(buy[i-1]+price, sell[i-1])
      * rest[i] = max(sell[i-1], buy[i-1], rest[i-1])
      * ====>
-     * rest[i] = sell[i-1]
+     * 因为 buy[i] <= rest[i] 并且 rest[i] < sell[i]
+     * 所以得到 rest[i] = sell[i-1]
      * ====>
+     * 进而得到
      * buy[i] = max(sell[i-2]-price, buy[i-1])
      * sell[i] = max(buy[i-1]+price, sell[i-1])
+     * o(n) time + o(1) space
      */
-    public int maxProfit1(int[] prices) {
+    public int maxProfit2(int[] prices) {
         int sell = 0, prev_sell = 0, buy = Integer.MIN_VALUE, prev_buy;
         for (int price : prices) {
             prev_buy = buy;
@@ -66,34 +100,5 @@ public class Problem309 {
             sell = Math.max(prev_buy + price, prev_sell);
         }
         return sell;
-    }
-
-    /**
-     * 暴力DP O(n3) time + O(n2) space
-     */
-    public int maxProfit2(int[] prices) {
-        if (prices.length <= 1) return 0;
-        if (prices.length == 2) return prices[1] > prices[0] ? prices[1] - prices[0] : 0;
-
-        int[][] dp = new int[prices.length][prices.length];
-        for (int i = 0; i < prices.length; ++i) {
-            Arrays.fill(dp[i], 0);
-        }
-        int result = 0;
-        for (int i = 0; i < prices.length - 1; ++i) {
-            for (int j = i + 1; j < prices.length; ++j) {
-                dp[i][j] = prices[j] - prices[i];
-                for (int k = i + 1; k < j; ++k) {
-                    dp[i][j] = Math.max(dp[i][j], dp[i][k]);
-                    dp[i][j] = Math.max(dp[i][j], dp[k][j]);
-                    if (k < j - 2) {
-                        dp[i][j] = Math.max(dp[i][j], dp[i][k] + prices[j] - prices[k + 2]);
-                    }
-                }
-                result = Math.max(result, dp[i][j]);
-            }
-        }
-
-        return result;
     }
 }
