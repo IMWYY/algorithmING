@@ -23,8 +23,8 @@ public class Problem312 {
     /**
      * 利用memorization 不过这里是反着思考。
      * 先考虑最后被burst的气球，然后从后往前找气球，因为最后一个气球不会被干扰，
-     * 假设最后一个位置为i，那么coins就是 numbers[0] * numbers[i] * numbers[n]
-     * 然后以i分割，分别计算两边（left-i, i-right）的值
+     * 假设最后一个位置为i，那么coins就是 nums[0] * nums[i] * nums[n]
+     * 然后以i分割，分别计算两边 (left,i), (i,right)的值
      * 需要注意的是：所有的0需要先去除
      * O(n^3) time + O(n^2) space
      */
@@ -39,7 +39,7 @@ public class Problem312 {
         }
         numbers[0] = numbers[n++] = 1;
 
-        int[][] memo = new int[n][n];
+        int[][] memo = new int[n][n];  // 这里memo记录的值是：left与right之间 burst一个气球所得到的最大值
         return memorization(memo, numbers, 0, n - 1);
     }
 
@@ -48,8 +48,9 @@ public class Problem312 {
         if (memo[left][right] > 0) return memo[left][right];
         int ans = 0;
         for (int i = left + 1; i < right; ++i) {
-            ans = Math.max(ans, numbers[left] * numbers[i] * numbers[right]
-                    + memorization(memo, numbers, left, i) + memorization(memo, numbers, i, right));
+            ans = Math.max(numbers[left] * numbers[i] * numbers[right]
+                    + memorization(memo, numbers, left, i)
+                    + memorization(memo, numbers, i, right), ans);
         }
         memo[left][right] = ans;
         return ans;
@@ -77,9 +78,9 @@ public class Problem312 {
         for (int gap = 2; gap < n; ++gap) {              // key point: gap from 2 to n-1
             for (int left = 0; left < n - gap; ++left) {
                 int right = left + gap;
-                for (int i = left + 1; i < right; ++i) {
-                    dp[left][right] = Math.max(dp[left][right], numbers[left] * numbers[i] * numbers[right]
-                            + dp[left][i] + dp[i][right]);
+                for (int i = left + 1; i < right; ++i) {  //  gap最大n-1确保index 0和n-1 不会被burst，他们都是两边补充的1
+                    dp[left][right] = Math.max(dp[left][right],
+                            numbers[left] * numbers[i] * numbers[right] + dp[left][i] + dp[i][right]);
                 }
             }
         }
