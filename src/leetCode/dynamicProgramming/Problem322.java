@@ -65,6 +65,7 @@ public class Problem322 {
     /**
      * top down dynamic programming
      * memorization
+     * dp[i] = min(dp[i-k]) + 1, for k in coins
      */
     public int coinChange1(int[] coins, int amount) {
         if (amount < 1) return 0;
