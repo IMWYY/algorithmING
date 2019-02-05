@@ -59,8 +59,40 @@ public class Problem494 {
         }
     }
 
+
     /**
-     * 动态规划解法: 将问题转换为子集和的问题
+     * 将上面的递归memorization转换为自底向上的动态规划
+     * O(n*2000) time + O(n*2000) space
+     */
+    public int findTargetSumWays1(int[] nums, int S) {
+        if (nums.length == 0) return 0;
+        if (S > 1000 || S < -1000) return 0;
+        int[][] dp = new int[nums.length][2001];
+        for (int[] a : dp) {
+            Arrays.fill(a, 0);
+        }
+
+        // 注意这里是+=1 因为当num[0]=0的时候 dp[0][1000]=2
+        dp[0][1000 - nums[0]] += 1;
+        dp[0][1000 + nums[0]] += 1;
+
+        for (int i = 1; i < dp.length; ++i) {
+            for (int j = -1000; j < 1001; ++j) {
+                if (j - nums[i] + 1000 < 2001 && j - nums[i] + 1000 >= 0) {
+                    dp[i][j + 1000] += dp[i - 1][j - nums[i] + 1000];
+                }
+                if (j + nums[i] + 1000 < 2001 && j + nums[i] + 1000 >= 0) {
+                    dp[i][j + 1000] += dp[i - 1][j + nums[i] + 1000];
+                }
+            }
+        }
+
+        return dp[nums.length - 1][S + 1000];
+    }
+
+
+    /**
+     * 优化的动态规划解法: 将问题转换为子集和的问题
      * P表示正数集合 N表示负数集合
      * sum(P) - sum(N) = target
      * sum(P) + sum(N) + sum(P) - sum(N) = target + sum(P) + sum(N)
@@ -70,7 +102,7 @@ public class Problem494 {
      * 记数组的和sum(nums) = S, 则得到
      * 正数集合的和 sum(P) =  target + S/2 典型背包问题
      */
-    public int findTargetSumWays1(int[] nums, int S) {
+    public int findTargetSumWays2(int[] nums, int S) {
         int sum = 0;
         for (int n : nums) sum += n;
         return (sum < S || S < -sum || (sum + S) % 2 == 1) ? 0 : subTarget(nums, (sum + S) >> 1);
