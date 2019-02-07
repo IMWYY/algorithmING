@@ -21,6 +21,9 @@ public class Problem138 {
     }
 
     /**
+     * 保存新节点到旧节点的映射关系
+     * 不过这里不确定为什么在两个节点 random pointer不相等的情况下还可以hashcode相等
+     * 可能只看label的值？
      * O(n) space + O(n) time
      */
     public RandomListNode copyRandomList(RandomListNode head) {
@@ -47,6 +50,9 @@ public class Problem138 {
     }
 
     /**
+     * 对于链表 A -> B -> C -> D
+     * 先将链表复制为 A -> A' -> B -> B' -> C -> C' -> D -> D'
+     * 最后需要还原原来的链表
      * O(1) space + O(n) time
      */
     public RandomListNode copyRandomList1(RandomListNode head) {
@@ -75,6 +81,7 @@ public class Problem138 {
 
         // Third round: restore the original list, and extract the copy list.
         iter = head;
+        // 利用伪节点
         RandomListNode pseudoHead = new RandomListNode(0);
         RandomListNode copy, copyIter = pseudoHead;
 

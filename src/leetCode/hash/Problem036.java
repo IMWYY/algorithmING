@@ -15,6 +15,10 @@ import java.util.Set;
  * create by stephen on 2018/9/5
  */
 public class Problem036 {
+
+    /**
+     * 利用set来判断是否有重复元素
+     */
     public boolean isValidSudoku(char[][] board) {
 
         Set<Character> rowSet = new HashSet<>();
