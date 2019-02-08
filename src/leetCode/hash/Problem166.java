@@ -25,11 +25,15 @@ import java.util.Map;
 public class Problem166 {
 
     public static void main(String[] args) {
-        System.out.println(new Problem166().fractionToDecimal(-1,
-                -2147483648));
+        System.out.println(new Problem166().fractionToDecimal(-1, -2147483648));
     }
 
-    // 模拟除法的计算方法
+    /**
+     * 模拟除法的计算方法
+     * 先计算整数 然后计算小数部分
+     * 当计算循环小数的时候，需要利用map记录循环的起始位置
+     * 为了避免溢出 将integer转换为long类型
+     */
     public String fractionToDecimal(int numerator, int denominator) {
         if (numerator == 0) {
             return "0";
@@ -60,7 +64,6 @@ public class Problem166 {
             } else {
                 map.put(num, sb.length());
             }
-
         }
         return sb.toString();
     }
