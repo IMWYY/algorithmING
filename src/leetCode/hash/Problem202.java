@@ -24,10 +24,6 @@ import java.util.List;
  */
 public class Problem202 {
 
-    public static void main(String[] args) {
-        System.out.println(new Problem202().isHappy(14));
-    }
-
     public boolean isHappy(int n) {
         HashSet<Integer> map = new HashSet<>();
 
