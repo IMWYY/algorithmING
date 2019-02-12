@@ -36,8 +36,8 @@ import java.util.Queue;
 public class Problem218 {
 
     /**
-     * 问题核心：求解每一个左端点和右端点的高度，这里的高度取该x位置最高的长方形的高度
-     * 求解方法：将所有端点排序（这里需要区分左右端点，所以用负数表示左端点高度），利用堆来保存到目前位置的最大高度。
+     * 问题核心：求解每一个左端点和右端点的高度，因为keyPoint的横坐标只可能是所有左右端点的子集
+     * 求解方法：将所有端点排序（这里需要区分左右端点，所以用负数表示左端点高度），利用最大堆来保存到目前位置的最大高度。
      */
     public List<int[]> getSkyline(int[][] buildings) {
         List<int[]> heights = new ArrayList<>();
