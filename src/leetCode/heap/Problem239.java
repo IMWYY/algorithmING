@@ -33,11 +33,11 @@ import java.util.PriorityQueue;
 public class Problem239 {
 
     /**
-     * 使用双向队列保存数组的下标 同时保证队列里的元素值从大到小排列 并且总比新加的值大
+     * 使用双向队列保存数组的下标 同时保证队列里的元素值从大到小排列
      * 对于每个新元素：
      * 1. 将在窗口之外的元素移除
      * 2. 将小于新元素的值从队列中移除 这一操作保证执行queue.peek()会取到当前window最大的值
-     * O(n) time + O(n) time
+     * O(n) time + O(n) space
      */
     public int[] maxSlidingWindow(int[] nums, int k) {
         if (k == 0 || nums.length == 0) return new int[0];
@@ -59,7 +59,7 @@ public class Problem239 {
     }
 
     /**
-     * 用一个堆维持滑动窗口中的最大值
+     * 用一个最大堆维持滑动窗口中的最大值
      * O(nlogk) time + O(n) space
      */
     public int[] maxSlidingWindow1(int[] nums, int k) {
