@@ -1,7 +1,10 @@
 package classic;
 
+import java.util.Arrays;
+
 /**
  * 查并集
+ * parent节点保存的值是该集合的元素个数的相对数
  * create by stephen on 2018/4/21
  */
 public class UFset {
@@ -10,6 +13,7 @@ public class UFset {
 
     public UFset(int n) {
         this.parent = new int[n];
+        Arrays.fill(this.parent, -1);
     }
 
     /**

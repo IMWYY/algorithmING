@@ -11,9 +11,7 @@ public class ShortPath {
      */
     public void Dijkstra(int[][] e) {
         int[] dis = new int[e.length];
-        for (int i = 0; i < e.length; ++i) {
-            dis[i] = e[0][i];
-        }
+        System.arraycopy(e[0], 0, dis, 0, e.length);
 
         //记录到该节点的路径有没有确定最短 每次循环会确定一个
         boolean[] finished = new boolean[e.length];
@@ -42,8 +40,8 @@ public class ShortPath {
         }
 
         //最短路径
-        for (int i = 0; i < dis.length; ++i) {
-            System.out.println(dis[i]);
+        for (int di : dis) {
+            System.out.println(di);
         }
     }
 

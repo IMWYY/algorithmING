@@ -23,10 +23,11 @@ public class Problem295 {
      * 利用两个堆 一个最大堆和一个最小堆
      * 每次添加元素的时候调整 通过两个堆的堆顶可以确定median
      * todo: 也可以用AVL树
-     * todo: Follow up:
-     * todo: If all integer numbers from the stream are between 0 and 100, how would you optimize it?
-     * todo: If 99% of all integer numbers from the stream are between 0 and 100, how would you optimize it?
-     * 如果在99%在0-100 可以记录个数？
+     * Q: If all integer numbers from the stream are between 0 and 100, how would you optimize it?
+     * A: 利用100个bucket，记录每个数字出现的次数
+     * Q: If 99% of all integer numbers from the stream are between 0 and 100, how would you optimize it?
+     * A: reservoir sampling?
+     * https://stackoverflow.com/questions/10657503/find-running-median-from-a-stream-of-integers/10693752#10693752
      */
     private class MedianFinder {
 
@@ -34,15 +35,25 @@ public class Problem295 {
         private PriorityQueue<Integer> maxHeap = new PriorityQueue<>((o1, o2) -> o2 - o1);
 
         public void addNum(int num) {
-            maxHeap.add(num);
-            minHeap.add(maxHeap.poll());
-            if (maxHeap.size() < minHeap.size()) {
+            if (maxHeap.size() == 0) {
+                maxHeap.add(num);
+                return;
+            }
+            if (num > maxHeap.peek()) {
+                minHeap.add(num);
+            } else {
+                maxHeap.add(num);
+            }
+            if (maxHeap.size() > minHeap.size() + 1) {
+                minHeap.add(maxHeap.poll());
+            } else if (minHeap.size() > maxHeap.size() + 1) {
                 maxHeap.add(minHeap.poll());
             }
         }
 
         public double findMedian() {
-            return maxHeap.size() == minHeap.size() ? (minHeap.peek() + maxHeap.peek()) * 0.5 : maxHeap.peek();
+            return maxHeap.size() == minHeap.size() ? (minHeap.peek() + maxHeap.peek()) * 0.5 :
+                    maxHeap.size() > minHeap.size() ? maxHeap.peek() : minHeap.peek();
         }
     }
 }

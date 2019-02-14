@@ -241,3 +241,11 @@ TODO 参考Problem337,Problem543
 ### LCA（lowest common ancestor）问题 
 
 TODO 参考Problem236
+
+### AVL树、红黑树、B/B+树
+
+TODO
+
+### Segment Tree
+
+TODO 

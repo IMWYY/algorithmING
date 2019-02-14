@@ -23,9 +23,7 @@ public class MinimumST {
         Arrays.fill(chosen, false);
 
         int[] dis = new int[e.length];  //记录当前已经选择的点到其他没选择到点的最短距离
-        for (int i = 0; i < e.length; ++i) {
-            dis[i] = e[0][i];
-        }
+        System.arraycopy(e[0], 0, dis, 0, e.length);
 
         for (int i = 1; i < e.length; ++i) {
             //找出当前的最短路径
@@ -76,8 +74,7 @@ public class MinimumST {
         int sum = 0;
 
         //每次选不再同一个集合中的两个边 将两个集合相连
-        for (int i = 0; i < edges.size(); ++i) {
-            Edge edge = edges.get(i);
+        for (Edge edge : edges) {
             if (uFset.find(edge.u) != uFset.find(edge.v)) {
                 uFset.union(edge.u, edge.v);
                 sum++;
@@ -90,11 +87,11 @@ public class MinimumST {
         return mst;
     }
     public class Edge {
-        public int u;
-        public int v;
-        public int w;
+        int u;
+        int v;
+        int w;
 
-        public Edge(int u, int v, int w) {
+        Edge(int u, int v, int w) {
             this.u = u;
             this.v = v;
             this.w = w;
