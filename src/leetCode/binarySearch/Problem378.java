@@ -44,7 +44,7 @@ public class Problem378 {
      */
     public int kthSmallest1(int[][] matrix, int k) {
         int n = matrix.length;
-        PriorityQueue<Tuple> pq = new PriorityQueue<Tuple>();
+        PriorityQueue<Tuple> pq = new PriorityQueue<>();
         for (int j = 0; j <= n - 1; j++) pq.offer(new Tuple(0, j, matrix[0][j]));
         for (int i = 0; i < k - 1; i++) {
             Tuple t = pq.poll();

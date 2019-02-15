@@ -21,6 +21,7 @@ public class Problem373 {
 
     /**
      * 解法类似Problem378的最小堆解法
+     * 用最小堆装入每一对pair 然后poll k次，每次poll的时候将下一次可能的候选pair放入最小堆
      */
     public List<int[]> kSmallestPairs(int[] nums1, int[] nums2, int k) {
         List<int[]> res = new ArrayList<>();
@@ -36,6 +37,22 @@ public class Problem373 {
             if (p.v == nums2.length - 1) continue;
             minHeap.add(new Pair(p.u, p.v + 1, nums1[p.u], nums2[p.v + 1]));
         }
+//        minHeap.add(new Pair(0, 0, nums1[0], nums2[0]));
+//        boolean[][] flags = new boolean[nums1.length][nums2.length];
+//        flags[0][0] = true;
+//        for (int i = 0; i < k; ++i) {
+//            if (minHeap.size() == 0) return res;
+//            Pair p = minHeap.poll();
+//            res.add(p.getData());
+//            if (p.v < nums2.length - 1 && !flags[p.u][p.v + 1]) {
+//                minHeap.add(new Pair(p.u, p.v + 1, nums1[p.u], nums2[p.v + 1]));
+//                flags[p.u][p.v + 1] = true;
+//            }
+//            if (p.u < nums1.length - 1 && !flags[p.u + 1][p.v]) {
+//                minHeap.add(new Pair(p.u + 1, p.v, nums1[p.u + 1], nums2[p.v]));
+//                flags[p.u + 1][p.v] = true;
+//            }
+//        }
 
         return res;
     }

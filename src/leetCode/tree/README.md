@@ -233,11 +233,11 @@ public void printReverse(TreeNode start, TreeNode end) {
 ### 递归同时利用memorization
 
 TODO
- 
+
 ### 自底向上递归 减少重复计算 
 
 TODO 参考Problem337,Problem543
- 
+
 ### LCA（lowest common ancestor）问题 
 
 TODO 参考Problem236
@@ -248,4 +248,55 @@ TODO
 
 ### Segment Tree
 
-TODO 
+```java
+// 这里给出MinSegmentTree的示例 SumSegmentTree参加Problem307
+// 利用数组形式来保存当前的树结构
+// 实际需要的长度是 2*n-1 但是为了方便计算0位置空着不用
+// 前n位：0空着不用，接下来的n-1放父节点
+// 后n为：放nums数组的数，即叶节点
+class MinSegmentTree {
+    int[] tree;
+    int len;
+
+    MinSegmentTree(int[] nums) {
+        tree = new int[2 * nums.length];
+        len = nums.length;
+        System.arraycopy(nums, 0, tree, tree.length - nums.length, nums.length);
+        for (int i = nums.length - 1; i > 0; i--) {
+            tree[i] = Math.min(tree[2 * i], tree[2 * i + 1]);
+        }
+    }
+
+    int query(int l, int r) {
+        l += len;
+        r += len;
+        int min = Integer.MAX_VALUE;
+
+        while (l <= r) {
+            if ((l & 1) == 1) {
+                min = Math.min(min, tree[l]);
+                l++;
+            }
+            if ((r & 1) == 0) {
+                min = Math.min(min, tree[r]);
+                r--;
+            }
+            l /= 2;
+            r /= 2;
+        }
+
+        return min;
+    }
+
+    void update(int i, int value) {
+        tree[i + len] = value;
+        while (i > 1) {
+            i /= 2;
+            tree[i] = Math.min(tree[2 * i], tree[2 * i + 1]);
+        }
+    }
+
+}
+
+```
+
