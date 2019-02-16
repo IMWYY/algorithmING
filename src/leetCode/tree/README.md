@@ -300,3 +300,6 @@ class MinSegmentTree {
 
 ```
 
+### Binary Index Tree
+
+TODO

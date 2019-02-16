@@ -47,12 +47,60 @@ while (!queue.isEmpty()) {
 
 一类元素可以利用一个“代表元”来表示，一个集合内的所有元素组织成以代表元为根的树形结构，
 
-组织成parent[x] = y的形式，其中根节点parent[x] = x.
+很多DFS场景可以利用Union Find来解，参见[Problem200](Problem200.java), [Problem990](Problem990.java)
 
-- 合并操作：合并a、b，找到a的root节点，b的root节点，并设置parent[a] = b
-- 查找：查找a，找到a的根节点
+- java实现：
 
-很多DFS场景可以利用Union Find来解，参见[Problem200](Problem200.java).
+```java
+/**
+ * 并查集 parent节点保存的值是该集合的元素个数的相对数
+ */
+public class UFset {
+
+    private int[] parent;
+
+    UFset(int n) {
+        this.parent = new int[n];
+        Arrays.fill(this.parent, -1);
+    }
+
+    /**
+     * 查找并返回节点所属集合的根节点
+     *
+     * @param x 搜索节点
+     * @return 根节点
+     */
+    public int find(int x) {
+        int s; //查找位置
+        for (s = x; parent[s] >= 0; s = parent[s]) ;
+        while (s != x) { //优化方案―压缩路径，使后续的查找操作加速。
+            int tmp = parent[x];
+            parent[x] = s;
+            x = tmp;
+        }
+        return s;
+    }
+
+    /**
+     * 将两个不同集合的元素进行合并，使两个集合中任两个元素都连通
+     */
+    public void union(int x1, int x2) {
+        int r1 = find(x1), r2 = find(x2); //r1 为 x1 的根结点，r2 为 x2 的根结点
+        int tmp = parent[r1] + parent[r2]; //两个集合结点个数之和(负数)
+
+        //如果 R2 所在树结点个数 > R1 所在树结点个数(注意 parent[r1]是负数)
+        if (parent[r1] > parent[r2]) { //优化方案――加权法则
+            parent[r1] = r2;
+            parent[r2] = tmp;
+        } else {
+            parent[r2] = r1;
+            parent[r1] = tmp;
+        }
+    }
+}
+```
+
+
 
 ### Tips
 
@@ -60,4 +108,5 @@ while (!queue.isEmpty()) {
   - 用memorization，记录之前已经遍历过的节点，典型例题参考[Problem329](Problem329.java) 。
   - 记录当前节点的访问状态（访问过与否），参考[Problem210](Problem210.java)的DFS解法（利用额外的space）和[Problem079](Problem079.java) （原数组更新，不使用额外的space）。
   - 注意遍历的边界条件，如 [Problem301](Problem301.java)的方法二的终止条件，一旦找到一个合法的字符串，就不继续遍历新的可能了。
-- 
+
+  

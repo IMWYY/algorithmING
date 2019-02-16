@@ -1,4 +1,4 @@
-## 二分查找
+# 二分查找
 
 参见我写的[文章](https://blog.csdn.net/C_J33/article/details/80204972)
 

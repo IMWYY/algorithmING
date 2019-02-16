@@ -4,14 +4,14 @@ package classic;
  * 区间最值查询：对于长度为n的数列A，回答若干次询问RMQ(i,j)，返回数列A中下标在区间[i,j]中的最小/大值。
  * <p>
  * 解法1：
- * ST（Sparse Table）O(nlogn)预处理，O(1)回答每个查询，占用space较小
+ * ST（Sparse Table）O(nlogn)预处理，O(1)回答每个查询
  * 解法2：
- * 线段树（Segment Tree）O(n)预处理，O(1)回答每个查询，占用spcae较大
- * 线段树不仅可以回答最大最小的查询，还可以计算range sum等
+ * 线段树（Segment Tree）O(n)预处理，O(1)回答每个查询
+ * 线段树不仅支持min max rangeSum的查询，还支持update
  * <p>
  * create by stephen on 2018/4/27
  */
-public class RangeQuery {
+public class RMQ {
 
     /**
      * 利用dp算法进行预处理
