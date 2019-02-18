@@ -54,23 +54,33 @@ public class Problem995 {
      * 贪心算法优化 一次遍历
      */
     public int minKBitFlips1(int[] A, int K) {
-        int N = A.length;
-        int[] hint = new int[N];
-        int ans = 0, flip = 0;
-
-        // When we flip a subarray like A[i], A[i+1], ..., A[i+K-1]
-        // we can instead flip our current writing state, and put a hint at
-        // position i+K to flip back our writing state.
-        for (int i = 0; i < N; ++i) {
-            flip ^= hint[i];
-            if (A[i] == flip) {  // If we must flip the subarray starting here...
-                ans++;  // We're flipping the subarray from A[i] to A[i+K-1]
-                if (i + K > N) return -1;  //If we can't flip the entire subarray, its impossible
-                flip ^= 1;
-                if (i + K < N) hint[i + K] ^= 1;
+        // Tell when to close an interval
+        boolean[] needClose = new boolean[A.length];
+        int ans = 0, nIntervals = 0;
+        for (int i = 0; i < A.length; i++) {
+            // Close this interval if needed
+            if (needClose[i]) nIntervals--;
+            // When meet following two situations, we need flipping here
+            // if A[i] is 0 and number of intervals is even
+            // --> means the flippings are totally cancelled. We need another flip
+            // if A[i] is 1 and number of intervals is odd
+            // --> means we have 1 before but being flipped to 0. Need flip again.
+            if ((A[i] == 0 && nIntervals % 2 == 0) ||
+                    (A[i] == 1 && nIntervals % 2 == 1)) {
+                // Need flip again. Update answer count
+                ++ans;
+                // Generate an interval
+                ++nIntervals;
+                if (i > A.length - K) {
+                    // A[n-K] is the final possible flipping position
+                    // i > n-K means we need to flip the subarray is less than K elements
+                    // impossible!
+                    return -1;
+                }
+                // Update needClose, so the current interval will be closed at A[i+K]
+                if (i + K < A.length) needClose[i + K] = true;
             }
         }
-
         return ans;
     }
 }
