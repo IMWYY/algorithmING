@@ -25,7 +25,9 @@ public class Problem148 {
     }
 
     /**
-     * 归并排序 将前后两个链表先断开 再merge
+     * 归并排序
+     * 将前后两个链表先断开,然后merge时候按照大小顺序排序
+     * O(nlogn) time + O(1) space
      */
     public ListNode sortList(ListNode head) {
         if (head == null || head.next == null) return head;
@@ -62,6 +64,7 @@ public class Problem148 {
 
     /**
      * 链表快速排序
+     * O(nlogn) time + O(1) space
      */
     public ListNode sortList1(ListNode head) {
         if (head == null || head.next == null) return head;
@@ -78,8 +81,9 @@ public class Problem148 {
     }
 
     /**
-     * flag = head
+     * 因为链表不能从后往前 所以与普通的快排相比 两个指针都只能从前往后移动
      * 两个指针p，q一起往后走，保持p之前小于flag，p与q之间大于flag
+     * q每次遇到一个比flag小的元素就和p交换
      */
     private ListNode getSeparator(ListNode head, ListNode end) {
         ListNode p = head, q = head;
