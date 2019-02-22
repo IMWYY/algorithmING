@@ -32,6 +32,7 @@ public class Problem160 {
     /**
      * 不需要知道每个链表的长度 只需要两个指针同时遍历
      * 如果A达到末尾 就重新跳转到B的head。两者相遇的地方就是交点
+     * O(n) time + O(n) space
      */
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         if (headA == null || headB == null) return null;
@@ -46,6 +47,7 @@ public class Problem160 {
 
     /**
      * 找到链表的长度 然后从长度一样的地方一起往下遍历
+     * O(n) time + O(n) space
      */
     public ListNode getIntersectionNode2(ListNode headA, ListNode headB) {
         int lenA = length(headA), lenB = length(headB);
