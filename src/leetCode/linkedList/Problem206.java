@@ -36,15 +36,15 @@ public class Problem206 {
      * 非递归 更简洁 直接改变指针指向
      */
     public ListNode reverseList1(ListNode head) {
-        ListNode prev = null;
-        ListNode curr = head;
-        while (curr != null) {
-            ListNode nextTemp = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr = nextTemp;
+        ListNode pre = null;
+        ListNode cur = head;
+        while (cur != null) {
+            ListNode nextTemp = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = nextTemp;
         }
-        return prev;
+        return pre;
     }
 
     /**
@@ -54,7 +54,7 @@ public class Problem206 {
         if (head == null || head.next == null) return head;
         ListNode cur = head.next, pre = head;
         ListNode temp = head.next.next;
-        head.next = null;
+        head.next = null;  //这一步很重要 不然会有链表环
         while (cur != null) {
             cur.next = pre;
             pre = cur;
