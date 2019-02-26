@@ -29,8 +29,33 @@ public class Problem998 {
         }
     }
 
+    /**
+     * 简洁的递归解法
+     */
     public TreeNode insertIntoMaxTree(TreeNode root, int val) {
-        // todo
-        return null;
+        if (root == null || val > root.val) {
+            TreeNode node = new TreeNode(val);
+            node.left = root;
+            return node;
+        }
+        root.right = insertIntoMaxTree(root.right, val);
+        return root;
+    }
+
+    /**
+     * 迭代解法
+     */
+    public TreeNode insertIntoMaxTree1(TreeNode root, int val) {
+        TreeNode node = new TreeNode(val), cur = root;
+        if (root.val < val) {
+            node.left = root;
+            return node;
+        }
+        while (cur.right != null && cur.right.val > val) {
+            cur = cur.right;
+        }
+        node.left = cur.right;
+        cur.right = node;
+        return root;
     }
 }

@@ -52,14 +52,18 @@ public class Problem654 {
 
     /**
      * 非递归解法
+     * 对于每个新加入的元素 找到其应该插入的位置
      */
     public TreeNode constructMaximumBinaryTree1(int[] nums) {
         Deque<TreeNode> stack = new LinkedList<>();
         for (int num : nums) {
             TreeNode curr = new TreeNode(num);
+            // 将所有比他小的元素放入左子数
+            // 在执行这一步的时候，前面所有比他小的元素 已经按照右到左 小到大的顺序排好了
             while (!stack.isEmpty() && stack.peek().val < num) {
                 curr.left = stack.pop();
             }
+            // 如果当前元素不是最大 放到比他大的元素的右子树
             if (!stack.isEmpty()) {
                 stack.peek().right = curr;
             }

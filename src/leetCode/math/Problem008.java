@@ -27,7 +27,9 @@ package leetCode.math;
  */
 public class Problem008 {
 
-    // 对于溢出的情况需要特殊处理 特别是Integer.MIN_VALUE
+    /**
+     * 对于溢出的情况需要特殊处理 特别是Integer.MIN_VALUE
+     */
     public int myAtoi(String str) {
         str = str.trim();
         if (str.length() == 0) return 0;
