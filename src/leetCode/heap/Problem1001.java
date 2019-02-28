@@ -49,6 +49,10 @@ public class Problem1001 {
         return res;
     }
 
+    /**
+     * 利用直角坐标系 记录每个点被照亮的次数
+     * 对角的为x+y 和 x-y
+     */
     public int[] gridIllumination1(int N, int[][] lamps, int[][] queries) {
         int[][] dirs = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}, {0, 0}};
         Map<Integer, Integer> m1 = new HashMap<>();       // row number to count of lamps
