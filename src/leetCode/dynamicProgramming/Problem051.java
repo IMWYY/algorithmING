@@ -1,4 +1,4 @@
-package leetCode.hash;
+package leetCode.dynamicProgramming;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,20 +35,19 @@ public class Problem051 {
             return;
         }
         for (int c = 0; c < grid[r].length; ++c) {
-            if (cache.getOrDefault("1:" + r, 0) > 0 || cache.getOrDefault("2:" + c, 0) > 0
-                    || cache.getOrDefault("3:" + (r + c), 0) > 0 || cache.getOrDefault("4:" + (r - c), 0) > 0) {
+            if (cache.getOrDefault("c:" + c, 0) > 0
+                    || cache.getOrDefault("d1:" + (r + c), 0) > 0
+                    || cache.getOrDefault("d2:" + (r - c), 0) > 0) {
                 continue;
             }
-            cache.put("1:" + r, cache.getOrDefault("1:" + r, 0) + 1);
-            cache.put("2:" + c, cache.getOrDefault("2:" + c, 0) + 1);
-            cache.put("3:" + (r + c), cache.getOrDefault("3:" + (r + c), 0) + 1);
-            cache.put("4:" + (r - c), cache.getOrDefault("4:" + (r - c), 0) + 1);
+            cache.put("c:" + c, 1);
+            cache.put("d1:" + (r + c), 1);
+            cache.put("d2:" + (r - c), 1);
             grid[r][c] = 'Q';
             dfs(grid, r + 1, res, cache);
-            cache.put("1:" + r, cache.getOrDefault("1:" + r, 0) - 1);
-            cache.put("2:" + c, cache.getOrDefault("2:" + c, 0) - 1);
-            cache.put("3:" + (r + c), cache.getOrDefault("3:" + (r + c), 0) - 1);
-            cache.put("4:" + (r - c), cache.getOrDefault("4:" + (r - c), 0) - 1);
+            cache.put("c:" + c, 0);
+            cache.put("d1:" + (r + c), 0);
+            cache.put("d2:" + (r - c), 0);
             grid[r][c] = '.';
         }
     }
