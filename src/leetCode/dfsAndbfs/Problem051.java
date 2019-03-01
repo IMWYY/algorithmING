@@ -1,4 +1,4 @@
-package leetCode.dynamicProgramming;
+package leetCode.dfsAndbfs;
 
 import java.util.ArrayList;
 import java.util.Arrays;
