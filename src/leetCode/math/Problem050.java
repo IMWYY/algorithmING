@@ -16,7 +16,11 @@ package leetCode.math;
  */
 public class Problem050 {
 
-    // 递归二分？需要处理n=INT_MIN的情况 因为n=-INT_MIN会溢出
+    /**
+     * 直接计算pow会stackoverflow
+     * 所以这里使用类似于二分的方法
+     * 需要处理n=INT_MIN的情况 因为n=-INT_MIN会溢出
+     */
     public double myPow(double x, int n) {
         if (x == 0) return 0;
         if (n == 0) return 1;
@@ -28,22 +32,5 @@ public class Problem050 {
             x = 1 / x;
         }
         return n % 2 == 0 ? myPow(x * x, n / 2) : x * myPow(x * x, n / 2);
-    }
-
-    // 最暴力的解法 time limit exceed
-    public double myPow1(double x, int n) {
-        if (x == 0) return 0;
-        if (n == 0) return 1;
-        double res = 1;
-        if (x > 0) {
-            for (int i = 0; i < n; ++i) {
-                res *= res;
-            }
-        } else {
-            for (int i = 0; i < -n; ++i) {
-                res *= 1 / res;
-            }
-        }
-        return res;
     }
 }
