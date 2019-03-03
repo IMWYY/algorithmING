@@ -1,2 +1,3 @@
 # algorithmING
-some interesting algorithms and OJ problems
+
+using c++ & java to solve some oj problems.
