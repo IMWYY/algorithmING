@@ -5,10 +5,14 @@
  * Return the length of N.  If there is no such N, return -1.
  * */
 
+// an excellent explanation
+// https://leetcode.com/problems/smallest-integer-divisible-by-k/discuss/260916/Proof%3A-we-only-need-to-consider-the-first-K-candidates-in-1-11-111-1111-...
 int smallestRepunitDivByK(int K) {
-  if ((K & 1) == 0) return -1;
-  while (K ^ (~1) != 0) {
-    K += K;
+  if (K % 2 == 0 || K % 5 == 0) return -1;
+  int num = 0;
+  for (int i=1; i<= K; ++i) {
+    num = (num * 10 + 1) % K;
+    if (num % K == 0) return i;
   }
-  return K;
+  return -1;
 }
