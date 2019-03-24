@@ -1,6 +1,9 @@
 # Created by .ignore support plugin (hsz.mobi)
 .idea
+.vscode
 out
 *.iml
 build
+output
 cmake-build-debug
+CMakeFiles
