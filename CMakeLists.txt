@@ -8,6 +8,19 @@ file(GLOB algorithm_src
     ${CMAKE_CURRENT_SOURCE_DIR}/leetCode/backTrack/*.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/leetCode/binarySearch/*.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/leetCode/bit/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/leetCode/design/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/leetCode/dfsAndbfs/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/leetCode/dynamicProgramming/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/leetCode/graph/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/leetCode/greedy/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/leetCode/hash/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/leetCode/heap/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/leetCode/linkedList/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/leetCode/math/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/leetCode/stack/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/leetCode/string/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/leetCode/tree/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/leetCode/twoPoint/*.cpp
 )
 
 #aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/leetCode/array/*.cpp algorithm_src)
