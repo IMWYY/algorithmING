@@ -13,7 +13,8 @@ using namespace std;
  * elements of the array such that it is divisible by three.
  */
 
-// get sum first, remove the min element(s) that result in the same reminder with sum
+// get sum first, remove the min element(s) that result in the same reminder
+// with sum
 int maxSumDivThree(vector<int>& nums) {
   std::sort(nums.begin(), nums.end());
   int sum = 0;
