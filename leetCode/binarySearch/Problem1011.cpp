@@ -1,5 +1,6 @@
 
 #include <vector>
+#include <climits>
 
 using namespace std;
 
@@ -32,7 +33,7 @@ bool can_ship(vector<int> &weights, int capacity, int D) {
   return d <= D;
 }
 
-// search within the answers 
+// search within the answers
 int shipWithinDays(vector<int> &weights, int D) {
   int sum_w = 0, max_w = INT_MIN;
   for (auto &j : weights) {
