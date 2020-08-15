@@ -20,7 +20,7 @@ using namespace std;
 int maxNonOverlapping(vector<int>& nums, int target) {
   int prefix_sum = 0, res = 0;
   std::unordered_set<int> dict;
-  dict.insert(0);
+  dict.insert(0);  // to enable subarray starting from index 0
   for (int i = 0; i < nums.size(); ++i) {
     prefix_sum += nums[i];
     int s = prefix_sum - target;
