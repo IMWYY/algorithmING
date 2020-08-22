@@ -7,8 +7,6 @@
 #include <unordered_set>
 #include <vector>
 
-using namespace std;
-
 /**
  * Given an array nums and an integer target.
  *
@@ -17,7 +15,7 @@ using namespace std;
  */
 
 // using a hash set to record when previous prefix sum
-int maxNonOverlapping(vector<int>& nums, int target) {
+int maxNonOverlapping(std::vector<int>& nums, int target) {
   int prefix_sum = 0, res = 0;
   std::unordered_set<int> dict;
   dict.insert(0);  // to enable subarray starting from index 0
@@ -37,7 +35,7 @@ int maxNonOverlapping(vector<int>& nums, int target) {
 }
 
 // time exceed limit
-int maxNonOverlapping1(vector<int>& nums, int target) {
+int maxNonOverlapping1(std::vector<int>& nums, int target) {
   std::vector<int> prefix_sum(nums.size(), 0);
   prefix_sum[0] = nums[0];
   for (int i = 1; i < nums.size(); ++i) {
