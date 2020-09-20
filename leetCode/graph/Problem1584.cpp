@@ -2,10 +2,12 @@
 #include <climits>
 #include <cmath>
 #include <iostream>
-#include <numeric>
+#include <queue>
 #include <string>
 #include <unordered_set>
 #include <vector>
+
+#include "classic/graph/union_find_set.cpp"
 
 /**
  * You are given an array points representing integer coordinates of some points
@@ -20,7 +22,8 @@
  *
  */
 
-int minCostConnectPoints(std::vector<std::vector<int>>& points) {
+// minimum spanning tree - prim algorithm, add vertice one by one
+int minCostConnectPoints_prim(std::vector<std::vector<int>>& points) {
   std::unordered_set<int> alone;
   for (int i = 1; i < points.size(); ++i) {
     alone.insert(i);
@@ -44,6 +47,34 @@ int minCostConnectPoints(std::vector<std::vector<int>>& points) {
     res += min_dist;
     alone.erase(next);
     pre_next = next;
+  }
+  return res;
+}
+
+// minimum spanning tree - Kruskal algorithm, add edge one by one
+int minCostConnectPoints_kruskal(std::vector<std::vector<int>>& points) {
+  std::vector<std::array<int, 3>> pq;
+  for (int i = 0; i < points.size(); ++i) {
+    for (int j = i + 1; j < points.size(); ++j) {
+      pq.push_back({std::abs(points[i][0] - points[j][0]) +
+                        std::abs(points[i][1] - points[j][1]),
+                    i, j});
+    }
+  }
+
+  // std::make_heap is more light-weigth than priority_queue
+  std::make_heap(pq.begin(), pq.end(), std::greater<std::array<int, 3>>());
+  UFSet ufset(points.size());
+  int res = 0;
+  while (!pq.empty()) {
+    std::pop_heap(pq.begin(), pq.end(), std::greater<std::array<int, 3>>());
+    const std::array<int, 3>& ele = pq.back();
+    pq.pop_back();
+    if (!ufset.connected(ele[1], ele[2])) {
+      res += ele[0];
+      int sum = ufset.union_two(ele[1], ele[2]);
+      if (sum == points.size()) break;
+    }
   }
   return res;
 }

@@ -57,7 +57,6 @@ public class MinimumST {
 
     /**
      * Kruskal算法 利用并交集
-     * https://www.cnblogs.com/yoke/p/6697013.html
      */
     public int Kruskal(int[][] e) {
         int mst = 0;
