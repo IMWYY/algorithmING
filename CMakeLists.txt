@@ -21,6 +21,7 @@ file(GLOB algorithm_src
     ${CMAKE_CURRENT_SOURCE_DIR}/leetCode/string/*.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/leetCode/tree/*.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/leetCode/twoPoint/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/classic/*.cpp
 )
 
 #aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/leetCode/array/*.cpp algorithm_src)
