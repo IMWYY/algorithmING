@@ -87,38 +87,6 @@ public class Problem236 {
         return null;
     }
 
-    /**
-     * Tarjan算法 利用并查集和DFS
-     * marge和find为并查集合并函数和查找函数
-     * <p>
-     * Tarjan(u) {
-     * for each(u,v) {    //访问所有u子节点v
-     * Tarjan(v);        //继续往下遍历
-     * marge(u,v);    //合并v到u上
-     * 标记v被访问过;
-     * }
-     * <p>
-     * for each(u,e) {    //访问所有和u有询问关系的e
-     * 如果e被访问过;
-     * u,e的最近公共祖先为find(e);
-     * }
-     * }
-     */
-    public TreeNode Tarjan(TreeNodeWrapper root, TreeNodeWrapper p, TreeNodeWrapper q, UFset uFset) {
-        if (root.node.left != null) {
-            Tarjan(root.left, p, q, uFset);
-            // TODO: merge
-            // TODO: mark visted
-        }
-
-        if (root.node.right != null) {
-            Tarjan(root.right, p, q, uFset);
-            // TODO: merge
-            // TODO: mark visted
-        }
-
-        return null;
-    }
 
     public TreeNodeWrapper wrapTreeNode(TreeNode node) {
         if (node == null)

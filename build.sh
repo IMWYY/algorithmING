@@ -1,10 +1,9 @@
-if [ -d "output" ]; then
-  rm -rf output
+if [ -d "build" ]; then
+  rm -rf build
 fi
-mkdir output
-cd output
+mkdir build
+cd build
 cmake ../
 make $1 -j
 # echo -e "\n"
-./$1
-
+/$1

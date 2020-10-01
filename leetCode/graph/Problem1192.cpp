@@ -4,8 +4,6 @@
 #include <unordered_map>
 #include <vector>
 
-using namespace std;
-
 /**
  * There are n servers numbered from 0 to n-1 connected by undirected
  * server-to-server connections forming a network where connections[i] = [a, b]
@@ -44,8 +42,8 @@ void tarjan(std::vector<std::vector<int>> &graph, int prev, int cur,
   }
 }
 
-vector<vector<int>> criticalConnections(int n,
-                                        vector<vector<int>> &connections) {
+std::vector<std::vector<int>> criticalConnections(
+    int n, std::vector<std::vector<int>> &connections) {
   std::vector<std::vector<int>> graph;
   for (int i = 0; i < n; ++i) {
     graph.push_back(std::vector<int>());
