@@ -34,10 +34,14 @@ int maxResult(std::vector<int>& nums, int k) {
   std::vector<int> scores(n, INT_MIN);
   std::deque<int> q;
   for (int i = n - 1; i >= 0; i--) {
-    if (!q.empty() && q.front() > i + k) q.pop_front();
+    if (!q.empty() && q.front() > i + k) {
+      q.pop_front();  // keep the window small
+    }
+
     int cur = nums[i] + (q.empty() ? 0 : scores[q.front()]);
+
     while (!q.empty() && cur > scores[q.back()]) {
-      q.pop_back();
+      q.pop_back();  // keep the deque sorted
     }
     scores[i] = cur;
     q.push_back(i);
