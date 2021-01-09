@@ -13,7 +13,7 @@
  *
  * construct sparse table @st from @arr
  */
-void sparse_table(std::vector<int>& arr, std::vector<std::vector<int>>& st) {
+void build_sparse_table(std::vector<int>& arr, std::vector<std::vector<int>>& st) {
   assert(st.size() == 0);
   assert(arr.size() > 0);
   int ilen = (int)arr.size();
@@ -41,7 +41,7 @@ std::vector<std::vector<int>> st;
 /* return maximum element in [s, e] */
 int range_maximum_query(std::vector<int>& arr, int s, int e) {
   if (st.size() == 0) {
-    sparse_table(arr, st);
+    build_sparse_table(arr, st);
     assert(st.size() != 0);
   }
   int loglen = std::log2(e - s + 1);
