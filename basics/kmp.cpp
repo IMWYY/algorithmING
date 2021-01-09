@@ -8,6 +8,9 @@
 #include <string>
 #include <vector>
 
+/*
+ * KMP algorihtm for pattern matching
+ */
 int match(std::string& base, std::string& target) {
   if (target.empty() || base.empty()) return -1;
 
