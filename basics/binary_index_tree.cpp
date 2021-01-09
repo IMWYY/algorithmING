@@ -27,45 +27,50 @@
  *         3) range_sum(s, e) = range_sum(0, e) - range_sum(0, s)
  */
 
+class BinIndexTree {
+ public:
+  BinIndexTree(int len) : tree(len + 1, 0) {}
+
+  void upsert(int i, int val) {
+    i++;
+    while (i < tree.size()) {
+      tree[i] += val;
+      i += low_bit_val(i);
+    }
+  }
+
+  // return sum in range [s, e)
+  int range_sum(int s, int e) {
+    assert(s < e);
+    int res = 0;
+    if (s == 0) {
+      while (e > 0) {
+        res += tree[e];
+        e -= low_bit_val(e);
+      }
+      return res;
+    }
+    return range_sum(0, e) - range_sum(0, s);
+  }
+
+  inline int low_bit_val(int n) {
+    assert(n >= 0);
+    return n & (-n);
+  }
+  std::vector<int> tree;
+};
+
 const int max_round = 10000;
 const int max_len = 1000;
-std::vector<int> bin_idx_tree(max_len + 1, 0);
-// leave bin_idx_tree[0] unused, for the ease of programming
-
-inline int low_bit_val(int n) {
-  assert(n >= 0);
-  return n & (-n);
-}
-
-void upsert(int i, int val) {
-  i++;
-  while (i < bin_idx_tree.size()) {
-    bin_idx_tree[i] += val;
-    i += low_bit_val(i);
-  }
-}
-
-// return sum in range [s, e)
-int range_sum(int s, int e) {
-  assert(s < e);
-  int res = 0;
-  if (s == 0) {
-    while (e > 0) {
-      res += bin_idx_tree[e];
-      e -= low_bit_val(e);
-    }
-    return res;
-  }
-  return range_sum(0, e) - range_sum(0, s);
-}
 
 int main() {
   srand(time(NULL));
+  BinIndexTree bit(max_len);
   std::vector<int> arr(max_len, 0);
   for (int i = 0; i < max_round; ++i) {
     int idx = rand() % max_len;
     int val = rand() % max_round;
-    upsert(idx, val);
+    bit.upsert(idx, val);
     arr[idx] += val;
   }
 
@@ -79,7 +84,7 @@ int main() {
   for (int i = 0; i < max_len; ++i) {
     for (int j = i + 1; j <= max_len; ++j) {
       int expected = prefix_sum[j] - prefix_sum[i];
-      assert(expected == range_sum(i, j));
+      assert(expected == bit.range_sum(i, j));
     }
   }
 }
