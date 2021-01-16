@@ -51,13 +51,13 @@ void kosaraju(Graph& graph) {
 /**
  * 2.Tarjan.
  * DFS on the graph. Each node is marked with two stamps.
- * DNF: the visit number of the node.
+ * DFN: the visit number of the node.
  * LOW: the smallest node that this node can track through back edge or tree
  * edge.
  * low[u] = min {
  *  dfn[u],
  *  low(v), (u,v) is a tree edge
- *  dfn(v), (u, v) is a back edg
+ *  dfn(v), (u,v) is a back edge
  * }
  * If low is equal to dfn, then we find one SCC.
  */
@@ -93,10 +93,10 @@ void tarjan_helper(Graph& g, int u, std::vector<bool>& on_stack,
   on_stack[u] = true;
   stack.push_back(u);
   for (int& v : g.adj_list[u]) {
-    if (!dfn[v]) {
+    if (!dfn[v]) {  // tree edge
       tarjan_helper(g, v, on_stack, stack);
       low[u] = std::min(low[u], low[v]);
-    } else if (on_stack[v]) {
+    } else if (on_stack[v]) {  // back edge
       low[u] = std::min(low[u], dfn[v]);
     }
   }
@@ -115,15 +115,14 @@ void tarjan_helper(Graph& g, int u, std::vector<bool>& on_stack,
 }
 
 int main() {
-  std::vector<std::vector<int>> e = {{6, 4}, {0}, {4, 5}, {}, {1}, {}, {2, 5}};
-  Graph g1(7, e);
-  g1.pre_visit();
-  g1.post_visit();
-  g1.reverse_post_visit();
-
   int n = 6;
   std::vector<std::vector<int>> edges = {{1, 2}, {3}, {3, 4}, {0, 5}, {5}, {}};
   Graph g(6, edges);
+
+  g.pre_visit();
+  g.post_visit();
+  g.reverse_post_visit();
+
   tarjan(g);
   kosaraju(g);
 }
