@@ -7,6 +7,8 @@
 #include <unordered_set>
 #include <vector>
 
+#include "graph_visit.cpp"
+
 /**
  * Two algorithms for Strongly Connected Components
  */
@@ -18,6 +20,33 @@
  * G', which is the sink of G. DFS on the sink of G to get the first SCC. Remove
  * the nodes in the SCC and repeat the procedure to get all SCCs.
  */
+void dfs(std::vector<std::vector<int>>& adj_list, std::vector<int>& scc, int v,
+         int id) {
+  if (scc[v] != -1) return;
+  scc[v] = id;
+  std::cout << v << " ";
+  for (int nextv : adj_list[v]) {
+    if (scc[nextv] == -1) dfs(adj_list, scc, nextv, id);
+  }
+}
+
+void kosaraju(Graph& graph) {
+  Graph reverse_g = graph.reverse();
+  // get reverse post visiting order on the reversed graph
+  std::vector<int> reverse_post = reverse_g.reverse_post_visit();
+
+  std::vector<int> scc(graph.vn, -1);
+
+  int scc_id = 0;
+  for (int i = 0; i < reverse_post.size(); ++i) {
+    if (scc[reverse_post[i]] == -1) {
+      std::cout << scc_id << ": ";
+      dfs(graph.adj_list, scc, reverse_post[i], scc_id);
+      std::cout << std::endl;
+      scc_id++;
+    }
+  }
+}
 
 /**
  * 2.Tarjan.
@@ -33,46 +62,39 @@
  * If low is equal to dfn, then we find one SCC.
  */
 
-void tarjan(int, std::vector<bool>&, std::vector<int>&);
-
-std::vector<std::vector<int>> edges;
 std::vector<int> dfn;
 std::vector<int> low;
 int dfn_idx = 0;
 int scc_idx = 0;
 
-int main() {
-  int n = 6;
-  edges.push_back({1, 2});  // 0
-  edges.push_back({3});     // 1
-  edges.push_back({3, 4});  // 2
-  edges.push_back({0, 5});  // 3
-  edges.push_back({5});     // 4
-  edges.push_back({});      // 5
-  for (int i = 0; i < n; ++i) {
+void tarjan_helper(Graph&, int, std::vector<bool>&, std::vector<int>&);
+
+void tarjan(Graph& g) {
+  for (int i = 0; i < g.vn; ++i) {
     dfn.push_back(0);
     low.push_back(0);
   }
-  for (int i = 0; i < n; ++i) {
+  for (int i = 0; i < g.vn; ++i) {
     if (!dfn[i]) {
-      std::vector<bool> on_stack(n, false);
+      std::vector<bool> on_stack(g.vn, false);
       std::vector<int> stack;
-      tarjan(i, on_stack, stack);
+      tarjan_helper(g, i, on_stack, stack);
     }
   }
 }
 
 // on_stack: whether node is visited in current stack.
-void tarjan(int u, std::vector<bool>& on_stack, std::vector<int>& stack) {
+void tarjan_helper(Graph& g, int u, std::vector<bool>& on_stack,
+                   std::vector<int>& stack) {
   if (dfn[u] > 0) {  // visited
     return;
   }
   dfn[u] = low[u] = ++dfn_idx;
   on_stack[u] = true;
   stack.push_back(u);
-  for (int& v : edges[u]) {
+  for (int& v : g.adj_list[u]) {
     if (!dfn[v]) {
-      tarjan(v, on_stack, stack);
+      tarjan_helper(g, v, on_stack, stack);
       low[u] = std::min(low[u], low[v]);
     } else if (on_stack[v]) {
       low[u] = std::min(low[u], dfn[v]);
@@ -90,4 +112,18 @@ void tarjan(int u, std::vector<bool>& on_stack, std::vector<int>& stack) {
     } while (stack.size() > 0);
     std::cout << std::endl;
   }
+}
+
+int main() {
+  std::vector<std::vector<int>> e = {{6, 4}, {0}, {4, 5}, {}, {1}, {}, {2, 5}};
+  Graph g1(7, e);
+  g1.pre_visit();
+  g1.post_visit();
+  g1.reverse_post_visit();
+
+  int n = 6;
+  std::vector<std::vector<int>> edges = {{1, 2}, {3}, {3, 4}, {0, 5}, {5}, {}};
+  Graph g(6, edges);
+  tarjan(g);
+  kosaraju(g);
 }

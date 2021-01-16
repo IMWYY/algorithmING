@@ -13,19 +13,20 @@ class UFSet {
   UFSet(int l) : len(l), parent(l, -1) {}
 
   int find(int x) {
-    std::cout << parent.size() << ": " << x << std::endl;
-    std::cout << "[ ";
-    for (int i = 0; i < parent.size(); ++i) {
-      std::cout << parent[i] << ", ";
-    }
-    std::cout << "]" << std::endl;
+    // std::cout << parent.size() << ": " << x << std::endl;
+    // std::cout << "[ ";
+    // for (int i = 0; i < parent.size(); ++i) {
+    //   std::cout << parent[i] << ", ";
+    // }
+    // std::cout << "]" << std::endl;
     int s;
     // the value of the root node is negetive, it stores the number of its
     // decendents
     for (s = x; parent[s] >= 0; s = parent[s])
       ;
 
-    std::cout << "mid" << std::endl;
+    // std::cout << "mid" << std::endl;
+
     // fast path for following 'find(x)': directly link all descendents of s as
     // the child of s
     while (parent[x] >= 0) {
@@ -33,7 +34,7 @@ class UFSet {
       parent[x] = s;
       x = tmp;
     }
-    std::cout << "return" << std::endl;
+    // std::cout << "return" << std::endl;
     return s;
   }
 

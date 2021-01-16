@@ -11,7 +11,10 @@
 
 // see Problem1584
 
-// minimum spanning tree - prim algorithm, add vertice one by one
+/**
+ * minimum spanning tree - prim algorithm, add vertice one by one
+ * suitable for dense graph, which is typically respesented in adjacent list
+ */
 int prim(int vertice_n, std::vector<std::vector<int>>& edges) {
   std::unordered_set<int> alone;
   for (int i = 1; i < vertice_n; ++i) {
@@ -25,7 +28,8 @@ int prim(int vertice_n, std::vector<std::vector<int>>& edges) {
   for (int k = 0; k < vertice_n - 1; ++k) {
     int next = -1, min_dist = INT_MAX;
     for (int j : alone) {
-      // update min distance
+      // update min distance array with all edges starting from the previous
+      // added node
       distance[j] = std::min(edges[pre_next][j], distance[j]);
       if (distance[j] < min_dist) {
         min_dist = distance[j];
@@ -39,7 +43,10 @@ int prim(int vertice_n, std::vector<std::vector<int>>& edges) {
   return res;
 }
 
-// minimum spanning tree - Kruskal algorithm, add edge one by one
+/**
+ * minimum spanning tree - Kruskal algorithm, add edge one by one
+ * suitable for sparse graph, which is typically respesented in adjacent matrix
+ */
 int kruskal(int vertice_n, std::vector<std::vector<int>>& edges) {
   std::vector<std::array<int, 3>> pq;
   for (int i = 0; i < vertice_n; ++i) {
@@ -49,6 +56,7 @@ int kruskal(int vertice_n, std::vector<std::vector<int>>& edges) {
   }
 
   // std::make_heap is more light-weigth than priority_queue
+  // construct a min heap
   std::make_heap(pq.begin(), pq.end(), std::greater<std::array<int, 3>>());
   UFSet ufset(vertice_n);
   int res = 0;
