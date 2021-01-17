@@ -27,6 +27,12 @@
  *
  */
 
+/**
+ * NOTE that this problem cannot be solved by simply finding cycles in the
+ * graph, because the optimal solution might be some small cycles instead of a
+ * big cycles.
+ */
+
 void helper(std::vector<std::vector<int>>&, std::vector<int>&, int, int, int&);
 
 int maximumRequests(int n, std::vector<std::vector<int>>& requests) {
