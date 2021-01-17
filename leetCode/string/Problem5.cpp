@@ -17,11 +17,11 @@ std::string longestPalindrome(std::string s) {
 
   int n = str.size();
   std::vector<int> p(n, 0);
-  int c = 0, r = c + p[c];
+  int center = 0, right_most = center + p[center];
   for (int i = 1; i < n; ++i) {
-    int mirror = 2 * c - i;
-    if (r > i) {
-      p[i] = std::min(r - i, p[mirror]);
+    int left_mirror_i = 2 * center - i;
+    if (right_most > i) {
+      p[i] = std::min(right_most - i, p[left_mirror_i]);
     } else {
       p[i] = 0;
     }
@@ -30,12 +30,13 @@ std::string longestPalindrome(std::string s) {
       p[i]++;
     }
 
-    if (i + p[i] > r) {
-      c = i;
-      r = i + p[i];
+    if (i + p[i] > right_most) {
+      center = i;
+      right_most = i + p[i];
     }
   }
 
+  // get the max length
   int max_len = 0;
   int center_idx = 0;
   for (int i = 0; i < n; ++i) {
