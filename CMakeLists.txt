@@ -28,7 +28,7 @@ file(GLOB algorithm_src
 #aux_source_directory(./leetCode algorithm_src)
 
 add_executable(${PROJECT_NAME} ${algorithm_src})
-add_executable(Problem1000 leetCode/dynamicProgramming/Problem1000.cpp)
+add_executable(Problem1000 leetCode/dp/Problem1000.cpp)
 add_executable(Problem172 leetCode/math/Problem172.cpp)
 add_executable(Problem401 leetCode/math/Problem400.cpp)
 add_executable(Problem1005 leetCode/heap/Problem1005.cpp)
