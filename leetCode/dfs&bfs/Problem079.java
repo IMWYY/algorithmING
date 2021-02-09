@@ -7,27 +7,9 @@ import java.util.Arrays;
  * The word can be constructed from letters of sequentially adjacent cell,
  * where "adjacent" cells are those horizontally or vertically neighboring.
  * The same letter cell may not be used more than once.
- * <p>
- * Example:
- * board =
- * [
- * ['A','B','C','E'],
- * ['S','F','C','S'],
- * ['A','D','E','E']
- * ]
- * Given word = "ABCCED", return true.
- * Given word = "SEE", return true.
- * Given word = "ABCB", return false.
- * <p>
- * create by stephen on 2018/5/10
  */
 public class Problem079 {
 
-    /**
-     * dfs算法即可
-     * 优化点：可以不用单独一个boolean数组记录是否被访问过，可以直接用board数组，
-     * 如果访问过则^=256, 那么就不会有字符与他相等 访问完之后再^=256
-     */
     public static boolean exist(char[][] board, String word) {
         if (board.length == 0 || board[0].length == 0) return false;
         if (word.length() == 0) return true;
