@@ -19,9 +19,6 @@ import java.util.List;
  */
 public class Problem054 {
 
-    /**
-     * 主要考察代码能力
-     */
     public List<Integer> spiralOrder(int[][] matrix) {
         List<Integer> res = new ArrayList<>();
         if (matrix.length == 0 || matrix[0].length == 0) return res;
@@ -43,7 +40,6 @@ public class Problem054 {
             for (int row = maxRow - k - 2; row >= k + 1; --row) res.add(matrix[row][k]);
         }
 
-        // 如果中间还存在一层没有遍历 添加上去
         if (maxCol == maxRow && maxRow % 2 == 1) {
             res.add(matrix[maxRound][maxRound]);
         } else if (maxCol > maxRow && maxRow % 2 == 1) {
