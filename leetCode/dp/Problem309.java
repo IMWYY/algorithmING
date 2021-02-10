@@ -86,7 +86,6 @@ public class Problem309 {
      * 因为 buy[i] <= rest[i] 并且 rest[i] < sell[i]
      * 所以得到 rest[i] = sell[i-1]
      * ====>
-     * 进而得到
      * buy[i] = max(sell[i-2]-price, buy[i-1])
      * sell[i] = max(buy[i-1]+price, sell[i-1])
      * o(n) time + o(1) space
