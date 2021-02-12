@@ -32,6 +32,5 @@ std::vector<std::string> commonChars(std::vector<std::string> &A) {
       res.emplace_back(1, 'a' + l);
     }
   }
-
   return res;
 }

@@ -12,19 +12,13 @@ import java.util.Set;
  * <p>
  * The Sudoku board could be partially filled, where empty cells are filled with the character '.'.
  * <p>
- * create by stephen on 2018/9/5
  */
 public class Problem036 {
 
-    /**
-     * 利用set来判断是否有重复元素
-     */
     public boolean isValidSudoku(char[][] board) {
-
         Set<Character> rowSet = new HashSet<>();
         Set<Character> colSet = new HashSet<>();
         Set<Character> boxSet = new HashSet<>();
-
         for (int i = 0; i < 9; ++i) {
             rowSet.clear();
             colSet.clear();
@@ -33,18 +27,15 @@ public class Problem036 {
                 if (board[i][j] != '.' && !rowSet.add(board[i][j])) {
                     return false;
                 }
-
                 if (board[j][i] != '.' && !colSet.add(board[j][i])) {
                     return false;
                 }
-
                 if (board[(i / 3) * 3 + j / 3][(i % 3) * 3 + j % 3] != '.'
                         && !boxSet.add(board[(i / 3) * 3 + j / 3][(i % 3) * 3 + j % 3])) {
                     return false;
                 }
             }
         }
-
         return true;
     }
 }

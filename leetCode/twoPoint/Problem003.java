@@ -5,13 +5,6 @@ import java.util.Map;
 
 /**
  * Given a string, find the length of the longest substring without repeating characters.
- * <p>
- * Example 1:
- * <p>
- * Input: "abcabcbb"
- * Output: 3
- * Explanation: The answer is "abc", with the length of 3.
- * create by stephen on 2018/11/3
  */
 public class Problem003 {
 
@@ -56,7 +49,7 @@ public class Problem003 {
     }
 
     /**
-     * 两指针 + map 类似Problem076
+     * Two pointer + HashMap
      */
     public int lengthOfLongestSubstring2(String s) {
         if (s.length() < 2) return s.length();
