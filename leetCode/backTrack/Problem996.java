@@ -9,21 +9,6 @@ import java.util.List;
  * their sum is a perfect square.
  * Return the number of permutations of A that are squareful.
  * Two permutations A1 and A2 differ if and only if there is some index i such that A1[i] != A2[i].
- * <p>
- * Example 1:
- * Input: [1,17,8]
- * Output: 2
- * Explanation:
- * [1,8,17] and [17,8,1] are the valid permutations.
- * <p>
- * Example 2:
- * Input: [2,2,2]
- * Output: 1
- * <p>
- * Note:
- * 1 <= A.length <= 12
- * 0 <= A[i] <= 1e9
- * create by stephen on 2019/2/18
  */
 public class Problem996 {
 

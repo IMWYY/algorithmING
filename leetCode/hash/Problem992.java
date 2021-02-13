@@ -8,18 +8,6 @@ import java.util.Map;
  * A good if the number of different integers in that subarray is exactly K.
  * (For example, [1,2,3,1,2] has 3 different integers: 1, 2, and 3.)
  * Return the number of good subarrays of A.
- * <p>
- * Example 1:
- * Input: A = [1,2,1,2,3], K = 2
- * Output: 7
- * Explanation: Subarrays formed with exactly 2 different integers: [1,2], [2,1], [1,2], [2,3], [1,2,1], [2,1,2], [1,2,1,2].
- * <p>
- * Note:
- * 1 <= A.length <= 20000
- * 1 <= A[i] <= A.length
- * 1 <= K <= A.length
- * <p>
- * create by stephen on 2019/2/11
  */
 public class Problem992 {
 

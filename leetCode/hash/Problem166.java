@@ -4,23 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Given two integers representing the numerator and denominator of a fraction, return the fraction in string format.
- * <p>
+ * Given two integers representing the numerator and denominator of a fraction,
+ * return the fraction in string format.
  * If the fractional part is repeating, enclose the repeating part in parentheses.
- * <p>
- * Example 1:
- * <p>
- * Input: numerator = 1, denominator = 2
- * Output: "0.5"
- * Example 2:
- * <p>
- * Input: numerator = 2, denominator = 1
- * Output: "2"
- * Example 3:
- * <p>
- * Input: numerator = 2, denominator = 3
- * Output: "0.(6)"
- * create by stephen on 2018/9/7
  */
 public class Problem166 {
 

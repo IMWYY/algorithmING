@@ -1,16 +1,7 @@
 package leetCode.bit;
 
 /**
- * <p>
  * Reverse bits of a given 32 bits unsigned integer.
- * <p>
- * Example:
- * <p>
- * Input: 43261596
- * Output: 964176192
- * Explanation: 43261596 represented in binary as 00000010100101000001111010011100,
- * return 964176192 represented in binary as      00111001011110000010100101000000.
- * create by stephen on 2018/10/13
  */
 public class Problem190 {
 

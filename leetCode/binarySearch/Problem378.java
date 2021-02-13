@@ -6,17 +6,6 @@ import java.util.PriorityQueue;
  * Given a n x n matrix where each of the rows and columns are sorted in ascending order,
  * find the kth smallest element in the matrix.
  * Note that it is the kth smallest element in the sorted order, not the kth distinct element.
- * <p>
- * Example:
- * matrix = [
- * [ 1,  5,  9],
- * [10, 11, 13],
- * [12, 13, 15]
- * ],
- * k = 8,
- * <p>
- * return 13.
- * create by stephen on 2018/9/30
  */
 public class Problem378 {
 
