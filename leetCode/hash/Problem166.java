@@ -10,20 +10,11 @@ import java.util.Map;
  */
 public class Problem166 {
 
-    public static void main(String[] args) {
-        System.out.println(new Problem166().fractionToDecimal(-1, -2147483648));
-    }
-
     /**
-     * 模拟除法的计算方法
-     * 先计算整数 然后计算小数部分
-     * 当计算循环小数的时候，需要利用map记录循环的起始位置
-     * 为了避免溢出 将integer转换为long类型
+     * use long instead of int to avoid overflow
      */
     public String fractionToDecimal(int numerator, int denominator) {
-        if (numerator == 0) {
-            return "0";
-        }
+        if (numerator == 0) return "0";
         StringBuilder sb = new StringBuilder();
         sb.append((numerator > 0) ^ (denominator > 0) ? '-' : "");
         long num = Math.abs((long) numerator);
@@ -38,7 +29,7 @@ public class Problem166 {
         Map<Long, Integer> map = new HashMap<>();
         map.put(num, sb.length());
 
-        // 余数
+        // reminder
         while (num != 0) {
             num *= 10;
             sb.append(num / den);

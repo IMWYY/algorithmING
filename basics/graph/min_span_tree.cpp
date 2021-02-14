@@ -7,7 +7,7 @@
 #include <unordered_set>
 #include <vector>
 
-#include "classic/graph/union_find_set.cpp"
+#include "basics/graph/union_find.cpp"
 
 // see Problem1584
 

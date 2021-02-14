@@ -98,7 +98,7 @@ void bellman_ford(std::vector<std::vector<int>>& edges, int start) {
 
 /**
  * floyd algorithm:
- * can handle negative edge, but cannot handle negetive circle.
+ * can handle positive edge, but cannot handle negetive circle.
  * can calcuate the shortest path between any two vertex.
  *
  * O(V^3) space

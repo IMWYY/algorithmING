@@ -11,14 +11,6 @@ import java.util.Map;
  */
 public class Problem992 {
 
-    public static void main(String[] args) {
-        Problem992 p = new Problem992();
-        System.out.println(p.subarraysWithKDistinct(new int[]{1, 2, 1, 2, 3}, 2));
-        System.out.println(p.subarraysWithKDistinct(new int[]{1, 2, 1, 3, 4}, 3));
-        System.out.println(p.subarraysWithKDistinct(new int[]{1, 1, 1, 2}, 1));
-        System.out.println(p.subarraysWithKDistinct(new int[]{1, 1, 1, 2}, 2));
-    }
-
     /**
      * 转换为atMostK 因为最多K个不同元素是比较方便计算的
      * O(n) time + O(n) space

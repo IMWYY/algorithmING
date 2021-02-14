@@ -9,7 +9,23 @@ import java.util.Arrays;
  */
 public class Problem389 {
 
-    public char findTheDifference(String s, String t) {
+    /**
+     * solution 1: use XOR to find the distinct element
+     */
+    public char findTheDifference1(String s, String t) {
+    	int n = t.length();
+    	char c = t.charAt(n - 1);
+    	for (int i = 0; i < n - 1; ++i) {
+    		c ^= s.charAt(i);
+    		c ^= t.charAt(i);
+    	}
+    	return c;
+    }
+
+    /**
+     * solution 2: use hashmap
+     */
+    public char findTheDifference2(String s, String t) {
         int[] chars = new int[26];
         Arrays.fill(chars, 0);
         for (char c : s.toCharArray()) {

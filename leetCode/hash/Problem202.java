@@ -14,7 +14,6 @@ public class Problem202 {
 
     public boolean isHappy(int n) {
         HashSet<Integer> map = new HashSet<>();
-
         while (n != 1) {
             int t = 0;
             while (n > 0) {
@@ -25,7 +24,6 @@ public class Problem202 {
             map.add(t);
             n = t;
         }
-
         return true;
     }
 }
