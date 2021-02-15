@@ -8,35 +8,21 @@ import java.util.PriorityQueue;
 /**
  * Merge k sorted linked lists and return it as one sorted list.
  * Analyze and describe its complexity.
- * <p>
- * Example:
- * Input:
- * [
- * 1->4->5,
- * 1->3->4,
- * 2->6
- * ]
- * Output: 1->1->2->3->4->4->5->6
- * create by stephen on 2018/5/17
  */
 public class Problem023 {
 
     private class ListNode {
         int val;
         ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
+        ListNode(int x) {val = x;}
     }
 
     /**
-     * 利用PriorityQueue 每次从k个list中拿出最小的那个
+     * solution1: use a minheap to record the minimum value of current front elements of k lists
      * O(k*n*logk) time + O(k) space
      */
-    public ListNode mergeKLists(ListNode[] lists) {
+    public ListNode mergeKLists1(ListNode[] lists) {
         if (lists == null || lists.length == 0) return null;
-
         PriorityQueue<ListNode> queue = new PriorityQueue<>(lists.length, Comparator.comparingInt(o -> o.val));
         ListNode dummy = new ListNode(Integer.MIN_VALUE);
         ListNode tail = dummy;
@@ -47,15 +33,14 @@ public class Problem023 {
         while (!queue.isEmpty()) {
             tail.next = queue.poll();
             tail = tail.next;
-
-            if (tail.next != null) queue.add(tail.next);    // 将list的下一个节点入队
+            if (tail.next != null) queue.add(tail.next);
         }
         return dummy.next;
     }
 
 
     /**
-     * 归并法合并列表 可以用递归法 这里用了非递归
+     * solution 2: merge lists by different intervals
      * O(k*n*logk) time + O(1) space
      */
     public ListNode mergeKLists1(ListNode[] lists) {
@@ -72,9 +57,10 @@ public class Problem023 {
     }
 
     /**
-     * 一个个合并
+     * solution 3: merge lists one by one
+     * O(k*n*logk) time + O(1) space
      */
-    public ListNode mergeKLists2(ListNode[] lists) {
+    public ListNode mergeKLists3(ListNode[] lists) {
         if (lists == null || lists.length == 0) return null;
         if (lists.length == 1) return lists[0];
         ListNode result = lists[0];
@@ -88,7 +74,6 @@ public class Problem023 {
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         ListNode dummy = new ListNode(Integer.MIN_VALUE);
         ListNode tail = dummy;
-
         while (l1 != null && l2 != null) {
             if (l1.val < l2.val) {
                 tail.next = l1;
@@ -99,9 +84,7 @@ public class Problem023 {
             }
             tail = tail.next;
         }
-
         tail.next = l1 != null ? l1 : l2;
         return dummy.next;
     }
-
 }
