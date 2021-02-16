@@ -17,10 +17,9 @@ int match(std::string& base, std::string& target) {
   // next[i] is the length of longest common substr between prefix and suffix of
   // target[0:i] (0 inclusive, i exclusive)
   std::vector<int> next(target.size(), 0);
-
   next[0] = -1;
-  int i = 1, j = 0;
-  while (i < next.size()) {
+  int i = 0, j = -1;
+  while (i < next.size() - 1) {
     if (j == -1 || target[i] == target[j]) {
       i++;
       j++;
@@ -36,7 +35,9 @@ int match(std::string& base, std::string& target) {
 
   i = 0;
   j = 0;
-  while (j < target.size() && i < base.size()) {
+  // note that we must convert to int for comparison, otherwise
+  // -1 compare with size_t will not get expected result
+  while (j < (int)target.size() && i < (int)base.size()) {
     if (j == -1 || base[i] == target[j]) {
       i++;
       j++;
@@ -50,8 +51,8 @@ int match(std::string& base, std::string& target) {
 }
 
 int main() {
-  std::string base = "ababababca";
-  std::string target = "abababca";
+  std::string base = "hello";
+  std::string target = "ll";
   int idx = match(base, target);
   std::cout << idx << std::endl;
 }
