@@ -6,8 +6,8 @@ package leetCode.array;
 public class Problem073 {
 
     /**
-     * 利用第一行和第一列来记录改行/列是否出现过1
-     * 因此第一行和第一列要单独分出来
+     * use the first row and the first column to record whether this
+     * row or column needs to set.
      * O(m+n) time + O(1) space
      */
     public void setZeroes(int[][] matrix) {
@@ -37,40 +37,6 @@ public class Problem073 {
         if (firstCol) {
             for (int i = 0; i < matrix.length; i++) {
                 matrix[i][0] = 0;
-            }
-        }
-    }
-
-    /**
-     * 左移一位 用最右边一位数字表示初始状态下数字是否为0
-     * 0 表示 该数字为0
-     * 1 表示该数字不为0
-     * 但是无法解决整数溢出的问题 左移动相当于数字乘以2 导致整数溢出
-     */
-    public void setZeroes1(int[][] matrix) {
-        for (int i = 0; i < matrix.length; ++i) {
-            for (int j = 0; j < matrix[0].length; ++j) {
-                if (matrix[i][j] == 0) {
-                    matrix[i][j] = matrix[i][j] << 1;
-                } else {
-                    matrix[i][j] = matrix[i][j] << 1;
-                    matrix[i][j]++;
-                }
-            }
-        }
-
-        for (int i = 0; i < matrix.length; ++i) {
-            for (int j = 0; j < matrix[0].length; ++j) {
-                if ((matrix[i][j] & 1) == 0) {
-                    for (int k = 0; k < matrix[0].length; ++k) matrix[i][k] &= 1;
-                    for (int k = 0; k < matrix.length; ++k) matrix[k][j] &= 1;
-                }
-            }
-        }
-
-        for (int i = 0; i < matrix.length; ++i) {
-            for (int j = 0; j < matrix[0].length; ++j) {
-                matrix[i][j] = matrix[i][j] >> 1;
             }
         }
     }

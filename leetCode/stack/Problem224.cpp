@@ -37,6 +37,6 @@ int calculate(std::string s) {
       sign = s[i] == '+' ? 1 : -1;
     }
   }
-  res += sign * cur;
+  res += sign * cur;  // embrace the case where the end of string is a number
   return res;
 }

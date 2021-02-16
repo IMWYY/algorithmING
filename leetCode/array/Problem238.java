@@ -6,10 +6,8 @@ package leetCode.array;
  */
 public class Problem238 {
 
-	/**
-	 * res[i] = product_before_i * product_after_i
-	 * O(n) time + O(n) space
-	 */
+	// res[i] = product_before_i * product_after_i
+	// O(n) time + O(n) space
 	public int[] productExceptSelf(int[] nums) {
 		int[] res = new int[nums.length];
 		res[0] = 1;

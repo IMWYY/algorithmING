@@ -5,10 +5,7 @@ package leetCode.array;
  * while maintaining the relative order of the non-zero elements.
  */
 public class Problem283 {
-
-    /**
-     * O(n) space + o(1) space
-     */
+    // O(n) space + o(1) space
     public void moveZeroes1(int[] nums) {
         int noneZeroIndex = 0;
         for (int i = 0; i < nums.length; ++i) {

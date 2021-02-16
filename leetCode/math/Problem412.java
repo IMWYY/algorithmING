@@ -3,13 +3,7 @@ package leetCode.math;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * create by stephen on 2018/10/23
- */
 public class Problem412 {
-    /**
-     * 普通思路
-     */
     public List<String> fizzBuzz1(int n) {
         List<String> res = new ArrayList<>();
         for (int i = 1; i <= n; ++i) {
@@ -26,9 +20,6 @@ public class Problem412 {
         return res;
     }
 
-    /**
-     * 如果条件增加 可以应对多条件
-     */
     public List<String> fizzBuzz2(int n) {
         List<String> ans = new ArrayList<String>();
         for (int num = 1; num <= n; num++) {
