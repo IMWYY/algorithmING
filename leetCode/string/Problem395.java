@@ -10,6 +10,7 @@ import java.util.Map;
  * such that every character in T appears no less than k times.
  */
 public class Problem395 {
+    // solution1
     // split the string by less frequent chars and solve the problem on the substring
     public int longestSubstring(String s, int k) {
         if (s == null || s.length() == 0) return 0;
@@ -34,7 +35,9 @@ public class Problem395 {
         return result;
     }
 
-
+    // solution2
+    // we cannot apply the two-pointer template to the original problem, but
+    // we can use it to solve a sub-problem.
     public int longestSubstring(String s, int k) {
         int res = 0;
         for (int numUniqueTarget = 1; numUniqueTarget <= 26; numUniqueTarget++)
