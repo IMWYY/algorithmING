@@ -1,6 +1,9 @@
 # String
 
-### Manacher's algorithm
+## KMP algorithm
+
+see [kmp.cpp](./../../basics/kmp.cpp)
+## Manacher's algorithm
 
 Find the longest palindrome in O(n) time.
 
@@ -48,3 +51,19 @@ std::string longestPalindrome(std::string s) {
   return s.substr(start, max_len);
 }
 ```
+
+## Palindromic related
+
+- [Problem005](./Problem005.cpp)
+- [Problem131](./Problem131.cpp)
+- [Problem132](./Problem132.cpp)
+- [Problem516](./Problem516.cpp)
+- [Problem647](./Problem647.cpp)
+
+## Subsequence related
+
+- [Problem392](./Problem392.cpp)
+
+## Substring related
+
+- [Problem395](./Problem395.java)

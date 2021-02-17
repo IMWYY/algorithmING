@@ -7,9 +7,7 @@ import java.util.*;
  */
 public class Problem049 {
 
-    /**
-     * O(n*klogk) time + O(n) space
-     */
+    // O(n*klogk) time + O(n) space
     public List<List<String>> groupAnagrams(String[] strs) {
         Map<String, List<String>> map = new HashMap<>();
         String key;
@@ -26,8 +24,6 @@ public class Problem049 {
                 map.get(key).add(s);
             }
         }
-
         return new ArrayList<>(map.values());
     }
-
 }

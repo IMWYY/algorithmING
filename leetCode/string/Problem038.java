@@ -2,7 +2,6 @@ package leetCode.string;
 
 /**
  * The count-and-say sequence is the sequence of integers with the first five terms as following:
- * <p>
  * 1.     1
  * 2.     11
  * 3.     21
@@ -11,14 +10,10 @@ package leetCode.string;
  * 1 is read off as "one 1" or 11.
  * 11 is read off as "two 1s" or 21.
  * 21 is read off as "one 2, then one 1" or 1211.
- * <p>
  * Given an integer n where 1 ≤ n ≤ 30, generate the nth term of the count-and-say sequence.
- * <p>
- * 参见wiki https://en.wikipedia.org/wiki/Look-and-say_sequence
- * create by stephen on 2018/9/23
+ * see wiki https://en.wikipedia.org/wiki/Look-and-say_sequence
  */
 public class Problem038 {
-
     public String countAndSay(int n) {
         if (n == 1) return "1";
         if (n == 2) return "11";
@@ -37,8 +32,6 @@ public class Problem038 {
             }
             s = sb.toString();
         }
-
         return s;
     }
-
 }

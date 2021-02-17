@@ -1,6 +1,12 @@
 #include <string>
 #include <vector>
 
+// dynamic programming
+// parlin[i][j] is true when s[i,j] is a parlindrome
+// parlin[i][j] = true if s[i] == s[j] && dp[i+1][j-1]
+//
+// dp[i] is the minimum cut need to cut s[:i]
+// dp[i] = min(i-1, dp[j] + 1) for each j that satisfy s[j,i] is a parlindrome
 int minCut(std::string s) {
   std::vector<std::vector<bool>> parlin(s.size(),
                                         std::vector<bool>(s.size(), false));
