@@ -6,23 +6,11 @@ import java.util.List;
 /**
  * Given a string containing digits from 2-9 inclusive,
  * return all possible letter combinations that the number could represent.
- * <p>
  * A mapping of digit to letters (just like on the telephone buttons) is given below.
  * Note that 1 does not map to any letters.
- * <p>
- * Example:
- * Input: "23"
- * Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
- * <p>
- * create by stephen on 2018/5/18
  */
 public class Problem017 {
-
-    /**
-     * 每一轮将原来list所有的string都加上新字母
-     * 每一轮 结果的string长度都会加1 可以依据string的长度来判断是否需要新加字母
-     * 也可以利用递归来解决
-     */
+    // iterative solution
     public List<String> letterCombinations(String digits) {
         LinkedList<String> result = new LinkedList<>();
         if (digits == null || digits.length() == 0) return result;
@@ -37,7 +25,6 @@ public class Problem017 {
                 }
             }
         }
-
         return result;
     }
 }

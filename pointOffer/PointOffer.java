@@ -5,10 +5,6 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * 剑指offer
- * create by stephen on 2018/4/2
- */
 public class PointOffer {
 
     public static void main(String[] args) {

@@ -4,12 +4,10 @@ package leetCode.twoPoint;
  * Given an array with n objects colored red, white or blue, sort them in-place so
  * that objects of the same color are adjacent, with the colors in the order red, white and blue.
  * Here, we will use the integers 0, 1, and 2 to represent the color red, white, and blue respectively.
- * <p>
  * Note: You are not suppose to use the library's sort function for this problem.
  * Could you come up with a one-pass algorithm using only constant space?
  */
 public class Problem075 {
-
 	public void sortColors(int[] nums) {
 		int low = 0, high = nums.length - 1;
 		int i = 0, temp;
@@ -31,18 +29,13 @@ public class Problem075 {
 		}
 	}
 
-	/**
-	 * counting sort
-	 */
+	// counting sort
 	public void sortColors2(int[] nums) {
 		int a = 0, b = 0, c = 0;
 		for (int num : nums) {
-			if (num == 0)
-				a++;
-			if (num == 1)
-				b++;
-			if (num == 2)
-				c++;
+			if (num == 0) a++;
+			if (num == 1) b++;
+			if (num == 2) c++;
 		}
 
 		for (int i = 0; i < nums.length; ++i) {

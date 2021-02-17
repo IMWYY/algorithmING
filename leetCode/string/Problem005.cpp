@@ -1,11 +1,33 @@
 #include <string>
 #include <vector>
 
-/**
- * Given a string s, return the longest palindromic substring in s.
- */
+// O(n^2) time + O(1) space
+void extendPalindrome(std::string&, int, int, int&, int&);
+
+std::string longestPalindrome(std::string s) {
+  int len = s.length();
+  if (len < 2) return s;
+
+  int lo, maxlen;
+  for (int i = 0; i < len - 1; i++) {
+    extendPalindrome(s, i, i, lo, maxlen);      // assume odd length
+    extendPalindrome(s, i, i + 1, lo, maxlen);  // assume even length.
+  }
+  return s.substr(lo, maxlen);
+}
+void extendPalindrome(std::string& s, int j, int k, int& lo, int& maxlen) {
+  while (j >= 0 && k < s.size() && s[j] == s[k]) {
+    j--;
+    k++;
+  }
+  if (maxlen < k - j - 1) {
+    lo = j + 1;
+    maxlen = k - j - 1;
+  }
+}
 
 // manacher algorithm
+// O(n) time + O(n) space
 std::string longestPalindrome(std::string s) {
   if (s.size() <= 1) return s;
   std::string str = "^#";
@@ -22,7 +44,7 @@ std::string longestPalindrome(std::string s) {
     int left_mirror_i = 2 * center - i;
     if (right_most > i) {
       p[i] = std::min(right_most - i, p[left_mirror_i]);
-    } else {
+    } else {  // i exceeds the control range of center
       p[i] = 0;
     }
 
@@ -31,8 +53,8 @@ std::string longestPalindrome(std::string s) {
     }
 
     if (i + p[i] > right_most) {
-      center = i;
-      right_most = i + p[i];
+      center = i;  // update center
+      right_most = i + p[i]; // update right_most
     }
   }
 
