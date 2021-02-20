@@ -1,3 +1,4 @@
+#include <queue>
 #include <stack>
 #include <vector>
 
@@ -178,4 +179,32 @@ void reverse_add(std::vector<int> &res, TreeNode *cur) {
     res.insert(res.begin() + pos, cur->val);
     cur = cur->right;
   }
+}
+
+/**************************************************
+ *************** level order traversal **************
+ *************************************************/
+
+std::vector<std::vector<int>> levelOrder(TreeNode *root) {
+  if (!root) { return {}; }
+  std::vector<std::vector<int>> result;
+  std::queue<TreeNode *> q;
+  q.push(root);
+
+  while (!q.empty()) {
+    int len = q.size();
+    std::vector<int> row;
+    while (len-- > 0) {
+      if (q.front()->left) {
+        q.push(q.front()->left);
+      }
+      if (q.front()->right) {
+        q.push(q.front()->right);
+      }
+      row.push_back(q.front()->val);
+      q.pop();
+    }
+    result.emplace_back(row);
+  }
+  return result;
 }

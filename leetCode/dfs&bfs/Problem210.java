@@ -10,26 +10,11 @@ import java.util.*;
  * return the ordering of courses you should take to finish all courses.
  * There may be multiple correct orders, you just need to return one of them.
  * If it is impossible to finish all courses, return an empty array.
- * <p>
- * Example 1:
- * <p>
- * Input: 2, [[1,0]]
- * Output: [0,1]
- * Explanation: There are a total of 2 courses to take. To take course 1 you should have finished
- * course 0. So the correct course order is [0,1] .
- * <p>
- * create by stephen on 2018/10/19
  */
 public class Problem210 {
 
-    /**
-     * 方法一
-     * 拓补排序 Kahn算法 BFS
-     * 参考Problem207
-     */
-    public int[] findOrder(int numCourses, int[][] prerequisites) {
-        if (numCourses == 0) return new int[0];
-
+    // Topological sort, see Problem207
+    public int[] findOrder(int numCourses, int[][] prerequisites) { if (numCourses == 0) return new int[0];
         // init Adjacency matrix
         int[] linkCount = new int[numCourses];
         Arrays.fill(linkCount, 0);
@@ -54,50 +39,6 @@ public class Problem210 {
                 if (linkCount[i] == 0) queue.add(i);
             }
         }
-
         return visitedCount == linkCount.length ? res : new int[0];
-    }
-
-    /**
-     * 方法二：DFS算法
-     * 需要注意的是DFS完了是逆序的 需要用栈转换一下
-     */
-    public int[] findOrder1(int numCourses, int[][] prerequisites) {
-        if (numCourses == 0) return new int[0];
-        // init Adjacency matrix
-        List<List<Integer>> graph = new ArrayList<>();
-        for (int i = 0; i < numCourses; ++i) graph.add(new ArrayList<>());
-        for (int[] pre : prerequisites) {
-            graph.get(pre[1]).add(pre[0]);
-        }
-
-        int[] visited = new int[numCourses];
-        Arrays.fill(visited, 0); //0 -> unvisited, 1 -> visiting, 2 -> visited
-
-        Stack<Integer> dfsResult = new Stack<>();
-        for (int i = 0; i < numCourses; ++i) {
-            if (!solveByDfs(graph, visited, dfsResult, i)) return new int[0];
-        }
-
-        if (dfsResult.size() != numCourses) return new int[0];
-        int[] res = new int[numCourses];
-        int i = 0;
-        while (!dfsResult.isEmpty()) {
-            res[i++] = dfsResult.pop();
-        }
-        return res;
-    }
-
-    private boolean solveByDfs(List<List<Integer>> graph, int[] visited, Stack<Integer> dfsResult, int i) {
-        if (visited[i] == 2) return true;
-        if (visited[i] == 1) return false;
-
-        visited[i] = 1;
-        for (int j : graph.get(i)) {
-            if (!solveByDfs(graph, visited, dfsResult, j)) return false;
-        }
-        visited[i] = 2;
-        dfsResult.push(i);
-        return true;
     }
 }

@@ -4,28 +4,20 @@ import java.util.Stack;
 
 /**
  * Given a binary tree, determine if it is a valid binary search tree (BST).
- * <p>
  * Assume a BST is defined as follows:
- * <p>
  * The left subtree of a node contains only nodes with keys less than the node's key.
  * The right subtree of a node contains only nodes with keys greater than the node's key.
  * Both the left and right subtrees must also be binary search trees.
- * create by stephen on 2018/6/15
  */
 public class Problem098 {
     private class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
+        TreeNode(int x) { val = x; }
     }
 
-    /**
-     * 递归法
-     */
+    // recursive solution
     public boolean isValidBST(TreeNode root) {
         if (root == null) return true;
         if (!isValidBST(root.left)) return false;
@@ -45,9 +37,7 @@ public class Problem098 {
         return true;
     }
 
-    /**
-     * 迭代法：中序遍历 判断遍历的序列是递增的
-     */
+    // inorder traversal, check whether it is an incresing sequences
     public boolean isValidBST1(TreeNode root) {
         Stack<TreeNode> stack = new Stack<>();
         TreeNode temp = root, pre = null;
@@ -67,5 +57,4 @@ public class Problem098 {
         }
         return true;
     }
-
 }
