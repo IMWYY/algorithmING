@@ -6,7 +6,8 @@
 #include <vector>
 
 /**
- * we can also get topological sort through reverse post visiting order.
+ * In a DAG (direct acyclic graph), we can also get topological sort through
+ * reverse post visiting order.
  * see graph_visit.cpp.
  **/
 void topological_sort(std::vector<std::vector<int>>& graph) {

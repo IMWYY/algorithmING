@@ -28,6 +28,7 @@ int dijkstra(std::vector<std::vector<int>>& edges, int s, int e) {
     }
   }
 
+  // initialize the shortest path
   std::vector<int> shortest(vn, 0);
   for (int i = 0; i < vn; ++i) {
     shortest[i] = edges[s][i];
@@ -38,7 +39,8 @@ int dijkstra(std::vector<std::vector<int>>& edges, int s, int e) {
     int smallv = -1;
     int smalledge = INT_MAX;
     // get the vertex with shortest path
-    // NOTE: this can be optimized a with min heap
+    // note: this can be optimized with a min heap, but the complexity is still
+    // O(V^2)
     for (int i = 0; i < shortest.size(); ++i) {
       if (added.count(i) > 0) continue;
       if (shortest[i] < smalledge) {
@@ -58,7 +60,9 @@ int dijkstra(std::vector<std::vector<int>>& edges, int s, int e) {
 }
 
 /**
- * bellman ford algorithm, can handle negative circle.
+ * bellman ford algorithm, can detect negative circle.
+ *
+ * O(VE) time + O(V) space
  */
 void bellman_ford(std::vector<std::vector<int>>& edges, int start) {
   int vn = edges.size();
@@ -75,11 +79,11 @@ void bellman_ford(std::vector<std::vector<int>>& edges, int start) {
   for (int round = 0; round < vn - 1; ++round) {
     for (int i = 0; i < vn; ++i) {
       for (int j = 0; j < vn; ++j) {
-        if (edges[i][j] != INT_MIN) {  // if there is a edge
-          d[i] = std::min(d[i], d[j] + edges[j][i]);
-          // this can be optimized by a queue, add the vertex j to queue once
-          // d[i] is updated by d[j] + edges[j][i]
-        }
+        if (edges[i][j] == INT_MIN) continue;  // there is no edge
+        // for each edge, update the result
+        d[i] = std::min(d[i], d[j] + edges[j][i]);
+        // this can be optimized by a queue, add the vertex j to queue once
+        // d[i] is updated by d[j] + edges[j][i]
       }
     }
   }
@@ -98,10 +102,15 @@ void bellman_ford(std::vector<std::vector<int>>& edges, int start) {
 
 /**
  * floyd algorithm:
- * can handle positive edge, but cannot handle negetive circle.
- * can calcuate the shortest path between any two vertex.
+ * 1. can handle negative edge, but cannot handle negetive circle.
+ * 2. can calcuate the shortest path between any two vertex.
  *
- * O(V^3) space
+ * This is actually a dynamic programming
+ * dp[k][i][j] is the shortest path from i to j, visiting only first k vertexes
+ * dp[k][i][j] = min(dp[k-1][i][j], dp[k-1][i][k] + dp[k-1][k][j])
+ * it can be optimized with a rolling array
+ *
+ * O(V^3) time + O(V^3) space
  **/
 void print_path(std::vector<std::vector<int>>&, int, int);
 void floyd(std::vector<std::vector<int>>& edges) {

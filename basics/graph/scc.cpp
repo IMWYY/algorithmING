@@ -19,22 +19,18 @@
  * postvisit number. The node with the highest postvisit number is the source of
  * G', which is the sink of G. DFS on the sink of G to get the first SCC. Remove
  * the nodes in the SCC and repeat the procedure to get all SCCs.
+ *
+ * Intuition
+ * We find all scc one by one, from the sink scc in the original graph.
+ * Q: How to find the sink scc?
+ * A: Reverse the graph! Then reverse_post[0] is in the source scc of reverse graph, which
+ * is in the sink scc of the original graph.
  */
-void dfs(std::vector<std::vector<int>>& adj_list, std::vector<int>& scc, int v,
-         int id) {
-  if (scc[v] != -1) return;
-  scc[v] = id;
-  std::cout << v << " ";
-  for (int nextv : adj_list[v]) {
-    if (scc[nextv] == -1) dfs(adj_list, scc, nextv, id);
-  }
-}
-
+void dfs(std::vector<std::vector<int>>&, std::vector<int>&, int, int);
 void kosaraju(Graph& graph) {
   Graph reverse_g = graph.reverse();
   // get reverse post visiting order on the reversed graph
   std::vector<int> reverse_post = reverse_g.reverse_post_visit();
-
   std::vector<int> scc(graph.vn, -1);
 
   int scc_id = 0;
@@ -48,6 +44,16 @@ void kosaraju(Graph& graph) {
   }
 }
 
+void dfs(std::vector<std::vector<int>>& adj_list, std::vector<int>& scc, int v,
+         int id) {
+  if (scc[v] != -1) return;
+  scc[v] = id;
+  std::cout << v << " ";
+  for (int nextv : adj_list[v]) {
+    if (scc[nextv] == -1) dfs(adj_list, scc, nextv, id);
+  }
+}
+
 /**
  * 2.Tarjan.
  * DFS on the graph. Each node is marked with two stamps.
@@ -56,8 +62,8 @@ void kosaraju(Graph& graph) {
  * edge.
  * low[u] = min {
  *  dfn[u],
- *  low(v), (u,v) is a tree edge
- *  dfn(v), (u,v) is a back edge
+ *  low(v), (u,v) is a tree edge((u,v) is an edge in graph, and v is not visited yet)
+ *  dfn(v), (u,v) is a back edge((u,v) is an edge in graph, and v has been visited)
  * }
  * If low is equal to dfn, then we find one SCC.
  */
@@ -68,7 +74,6 @@ int dfn_idx = 0;
 int scc_idx = 0;
 
 void tarjan_helper(Graph&, int, std::vector<bool>&, std::vector<int>&);
-
 void tarjan(Graph& g) {
   for (int i = 0; i < g.vn; ++i) {
     dfn.push_back(0);

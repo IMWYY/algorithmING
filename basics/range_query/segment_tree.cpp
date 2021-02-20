@@ -41,8 +41,8 @@ class SegmentTree {
     return range_val(0, 0, len - 1, arr_s, arr_e - 1);
   }
 
-  void update(int idx, int val);
-  void range_update(int s, int e, int val);
+  void update(int idx, int val); // TODO
+  void range_update(int s, int e, int val); // TODO
 
  private:
   int range_val(int i, int s, int e, int arr_s, int arr_e) {

@@ -13,7 +13,9 @@
 
 /**
  * minimum spanning tree - prim algorithm, add vertice one by one
- * suitable for dense graph, which is typically respesented in adjacent list
+ * suitable for dense graph, which is typically respesented in adjacent matrix
+ *
+ * O(V^2) space + O(V) space
  */
 int prim(int vertice_n, std::vector<std::vector<int>>& edges) {
   std::unordered_set<int> alone;
@@ -45,7 +47,9 @@ int prim(int vertice_n, std::vector<std::vector<int>>& edges) {
 
 /**
  * minimum spanning tree - Kruskal algorithm, add edge one by one
- * suitable for sparse graph, which is typically respesented in adjacent matrix
+ * suitable for sparse graph, which is typically respesented in adjacent list
+ *
+ * O(ElogE) time + O(E)
  */
 int kruskal(int vertice_n, std::vector<std::vector<int>>& edges) {
   std::vector<std::array<int, 3>> pq;
@@ -63,12 +67,12 @@ int kruskal(int vertice_n, std::vector<std::vector<int>>& edges) {
   while (!pq.empty()) {
     std::pop_heap(pq.begin(), pq.end(), std::greater<std::array<int, 3>>());
     const std::array<int, 3>& ele = pq.back();
-    pq.pop_back();
     if (!ufset.connected(ele[1], ele[2])) {
       res += ele[0];
       int sum = ufset.union_two(ele[1], ele[2]);
       if (sum == vertice_n) break;
     }
+    pq.pop_back();
   }
   return res;
 }
