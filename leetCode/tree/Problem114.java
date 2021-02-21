@@ -3,23 +3,18 @@ package leetCode.tree;
 
 /**
  * Given a binary tree, flatten it to a linked list in-place.
- * create by stephen on 2018/6/12
  */
 public class Problem114 {
     private class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
-
         TreeNode(int x) {
             val = x;
         }
     }
 
-    /**
-     * 对左右子树分别flatten
-     * 找到左子树最右边节点 接到右子树
-     **/
+    // solution1: recursion
     public void flatten(TreeNode root) {
         if (root == null) return;
         flatten(root.left);
@@ -32,10 +27,9 @@ public class Problem114 {
         cur.right = temp;
     }
 
-    /**
-     * 递归法
-     * 对于每个子节点 将其左子树搬到右子树来
-     */
+    // solution2: iterative solution
+    // move its left subtree to its right
+    // O(n) time + O(1) space
     public void flatten1(TreeNode root) {
         TreeNode now = root;
         while (now != null) {
@@ -51,10 +45,7 @@ public class Problem114 {
                 now.right = now.left;
                 now.left = null;
             }
-
             now = now.right;
         }
     }
-
-
 }
