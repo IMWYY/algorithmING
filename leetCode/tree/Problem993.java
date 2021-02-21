@@ -10,26 +10,22 @@ import java.util.Queue;
  * Two nodes of a binary tree are cousins if they have the same depth, but have different parents.
  * We are given the root of a binary tree with unique values, and the values x and y of two different nodes in the tree.
  * Return true if and only if the nodes corresponding to the values x and y are cousins.
- * <p>
  * Note:
  * The number of nodes in the tree will be between 2 and 100.
  * Each node has a unique integer value from 1 to 100.
- * <p>
- * create by stephen on 2019/2/17
  */
 public class Problem993 {
     private static class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
-
         TreeNode(int x) {
             val = x;
         }
     }
 
     /**
-     * 层次遍历 检查x和y必须出现在同一层
+     * level-order traversal
      */
     public boolean isCousins(TreeNode root, int x, int y) {
         Queue<TreeNode> queue = new ArrayDeque<>();
@@ -63,15 +59,10 @@ public class Problem993 {
                     }
                     queue.add(n.right);
                 }
-                if (count > 1) {
-                    return false;
-                }
+                if (count > 1) return false;
             }
-            if (xExist && yExist) {
-                return true;
-            } else if (xExist || yExist) {
-                return false;
-            }
+            if (xExist && yExist) return true;
+            else if (xExist || yExist) return false;
         }
         return true;
     }
