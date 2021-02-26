@@ -4,33 +4,13 @@ package leetCode.tree;
  * Given two non-empty binary trees s and t, check whether tree t has exactly the same structure and
  * node values with a subtree of s. A subtree of s is a tree consists of a node in s and all of this
  * node's descendants. The tree s could also be considered as a subtree of itself.
- * <p>
- * Example 1:
- * Given tree s:
- * <p>
- * 3
- * / \
- * 4   5
- * / \
- * 1   2
- * Given tree t:
- * 4
- * / \
- * 1   2
- * Return true, because t has the same structure and node values with a subtree of s.
- * <p>
- * create by stephen on 2018/6/10
  */
 public class Problem572 {
-
     private class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
+        TreeNode(int x) { val = x; }
     }
 
     /**************************************************************
@@ -50,25 +30,20 @@ public class Problem572 {
      */
     private String preOrder(TreeNode node, boolean left) {
         if (node == null) {
-            if (left) {
-                return "lnull";
-            } else {
-                return "rnull";
-            }
+            if (left) return "lnull";
+            else return "rnull";
         }
         return "#" + node.val + " " + preOrder(node.left, true) + " " + preOrder(node.right, false);
     }
 
     /**************************************************************
-     * 递归 通过比较节点的值
+     * simple recursive solution
      *************************************************************/
     public boolean isSubtree1(TreeNode s, TreeNode t) {
         if (t == null) return true;
         if (s == null) return false;
         return equal(s, t) || isSubtree(s.left, t) || isSubtree(s.right, t);
-
     }
-
     private boolean equal(TreeNode a, TreeNode b) {
         if (a == null && b == null) return true;
         if (a == null || b == null) return false;

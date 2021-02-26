@@ -42,7 +42,7 @@ public class Problem221 {
                     dp[j] = Math.min(Math.min(dp[j - 1], dp[j]), pre) + 1;
                     maxsqlen = Math.max(maxsqlen, dp[j]);
                 } else {
-                    dp[j] = 0;  //注意这里需要将dp[j] 重置为0
+                    dp[j] = 0;  // reset dp[j] to 0
                 }
                 pre = temp;
             }
