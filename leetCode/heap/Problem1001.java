@@ -4,9 +4,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * create by stephen on 2019/2/28
- */
 public class Problem1001 {
 
     public int[] gridIllumination(int N, int[][] lamps, int[][] queries) {
@@ -95,7 +92,6 @@ public class Problem1001 {
                 }
             }
         }
-
         return ans;
     }
 }
