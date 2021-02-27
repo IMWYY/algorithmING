@@ -5,7 +5,6 @@ package leetCode.tree;
  * has a value greater than any other value in its subtree.
  * Just as in the previous problem, the given tree was constructed from an list A (root = Construct(A))
  * recursively with the following Construct(A) routine:
- * <p>
  * If A is empty, return null.
  * Otherwise, let A[i] be the largest element of A.  Create a root node with value A[i].
  * The left child of root will be Construct([A[0], A[1], ..., A[i-1]])
@@ -15,23 +14,16 @@ package leetCode.tree;
  * Note that we were not given A directly, only a root node root = Construct(A).
  * Suppose B is a copy of A with the value val appended to it.  It is guaranteed that B has unique values.
  * Return Construct(B).
- * <p>
- * create by stephen on 2019/2/25
  */
 public class Problem998 {
     private class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
+        TreeNode(int x) { val = x;}
     }
 
-    /**
-     * 简洁的递归解法
-     */
+    // recursive solution
     public TreeNode insertIntoMaxTree(TreeNode root, int val) {
         if (root == null || val > root.val) {
             TreeNode node = new TreeNode(val);
@@ -42,9 +34,7 @@ public class Problem998 {
         return root;
     }
 
-    /**
-     * 迭代解法
-     */
+    // iterative solution
     public TreeNode insertIntoMaxTree1(TreeNode root, int val) {
         TreeNode node = new TreeNode(val), cur = root;
         if (root.val < val) {
