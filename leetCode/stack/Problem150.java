@@ -11,7 +11,6 @@ import java.util.Stack;
  * Division between two integers should truncate toward zero.
  * The given RPN expression is always valid. That means the expression would always
  * evaluate to a result and there won't be any divide by zero operation.
- * create by stephen on 2018/10/8
  */
 public class Problem150 {
 

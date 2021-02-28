@@ -2,18 +2,6 @@ package leetCode.design;
 
 /**
  * Implement a trie with insert, search, and startsWith methods.
- * <p>
- * Example:
- * <p>
- * Trie trie = new Trie();
- * <p>
- * trie.insert("apple");
- * trie.search("apple");   // returns true
- * trie.search("app");     // returns false
- * trie.startsWith("app"); // returns true
- * trie.insert("app");
- * trie.search("app");     // returns true
- * create by stephen on 2018/6/22
  */
 public class Problem208 {
 
