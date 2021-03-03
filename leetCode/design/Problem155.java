@@ -20,16 +20,12 @@ import java.util.Stack;
  * minStack.getMin();   --> Returns -2.
  */
 public class Problem155 {
-
     private Stack<Integer> stack;
     private Stack<Integer> minStack;
     private int min = Integer.MIN_VALUE;
 
     /**
-     * 用两个栈
-     * 一个栈保存数据
-     * 另一个栈保存到当前为止为止的min
-     * 每次pop同时pop
+     * use an additional stack to maintain the minimum element so far.
      */
     public Problem155() {
         this.stack = new Stack<>();

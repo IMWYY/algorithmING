@@ -15,6 +15,7 @@ class Base {
 int main() {
   std::unique_ptr<int> p1 = std::make_unique<int>(20);
   std::unique_ptr<int> p2 = std::move(p1);
+  // std::unique_ptr<int> p3 = p2; // cannot compile
   assert(p1 == nullptr);
   COUT_VAR(*p2)
   int* raw_p = p2.release();
