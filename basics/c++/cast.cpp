@@ -10,6 +10,6 @@ int main(void) {
   const int *ptr = &val;
   int *ptr1 = const_cast<int *>(ptr);
   fun(ptr1);
-  std::cout << val << std::endl;
+  std::cout << val << std::endl;  // behaviour is undefined
   return 0;
 }
