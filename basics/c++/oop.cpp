@@ -4,6 +4,7 @@
 class Base {
  public:
   Base() : v1(rand()) {}
+  virtual ~Base() { std::cout << "Deconstruct Base" << std::endl; }
   void f1(int i) { std::cout << "Base f1(" << i << "). " << std::endl; }
   virtual void f2(int i) { std::cout << "Base f2(" << i << "). " << std::endl; }
 
@@ -19,6 +20,7 @@ class Base {
 class Derived : public Base {
  public:
   Derived() : v2(rand()) {}
+  virtual ~Derived() { std::cout << "Deconstruct Derived" << std::endl; }
   // non-virtual function cannot be override
   void f1(int i) { std::cout << "Derived f1(" << i << "). " << std::endl; }
   void f2(int i) { std::cout << "Derived f2(" << i << "). " << std::endl; }
@@ -56,4 +58,10 @@ int main() {
   std::cout << (*b1 < *b2) << std::endl;  // call Base <
   std::cout << (*b1 < *b5) << std::endl;  // call Base <
   std::cout << (*b3 < *b5) << std::endl;  // call Derived <
+
+  delete b1;
+  std::cout << "============" << std::endl;
+  delete b2;
+  std::cout << "============" << std::endl;
+  delete b5;
 }

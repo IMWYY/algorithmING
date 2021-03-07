@@ -7,7 +7,8 @@ std::vector<std::string> split(std::string s, std::string seperator) {
   size_t start = 0;
   size_t end = s.find(seperator, start);
   while (end != std::string::npos) {
-    if (end > start) res.push_back(s.substr(start, end - start));
+    // if (end > start) res.push_back(s.substr(start, end - start));
+    res.push_back(s.substr(start, end - start));
     start = end + seperator.size();
     end = s.find(seperator, start);
   }

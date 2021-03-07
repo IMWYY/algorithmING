@@ -21,9 +21,7 @@ public class Problem166 {
         long den = Math.abs((long) denominator);
         sb.append(num / den);
         num %= den;
-        if (num == 0) {
-            return sb.toString();
-        }
+        if (num == 0) return sb.toString();
         sb.append('.');
 
         Map<Long, Integer> map = new HashMap<>();
