@@ -8,8 +8,9 @@
 class Base {
  public:
   int x;
-  Base(int i) : x(i) { std::cout << "Construct Base" << std::endl; }
-  ~Base() { std::cout << "Delete Base" << std::endl; }
+  Base() : x(0) { std::cout << "Construct Base 1" << std::endl; }
+  Base(int i) : x(i) { std::cout << "Construct Base 2" << std::endl; }
+  ~Base() { std::cout << "Delete Base with id " << x << std::endl; }
 };
 
 int main() {
@@ -21,8 +22,29 @@ int main() {
   int* raw_p = p2.release();
   COUT_VAR(*raw_p);
 
+  std::cout << "==================" << std::endl;
+
+  {
+    std::unique_ptr<Base> p5 = std::make_unique<Base>(3);
+    COUT_VAR((*p5).x)
+  }
+
+  std::cout << "==================" << std::endl;
+
+  {
+    // std::unique_ptr<Base[]> p6(new Base[3]);
+    std::unique_ptr<Base[]> p6 = std::make_unique<Base[]>(3);
+    p6[0] = 0;
+    p6[1] = 1;
+    p6[2] = 2;
+    COUT_VAR(p6[0].x)
+  }
+
+  std::cout << "==================" << std::endl;
+
   std::shared_ptr<Base[]> p3(new Base[3]{1, 2, 3}, [](Base* p) { delete[] p; });
   //   std::shared_ptr<Base[]> p3(new Base[3]{1, 2, 3});
+  // std::shared_ptr<Base[]> p3 = std::make_shared<Base[]>(3);
   COUT_VAR(p3[0].x);
   COUT_VAR(p3[2].x);
   COUT_VAR(p3.use_count());

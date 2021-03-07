@@ -51,7 +51,7 @@ int dijkstra(std::vector<std::vector<int>>& edges, int s, int e) {
 
     // update existing shortest path
     for (int i = 0; i < shortest.size(); ++i) {
-      if (added.count(i) > 0) continue;
+      if (added.count(i) > 0 || edges[smallv][i] == INT_MAX) continue;
       shortest[i] = std::min(shortest[i], shortest[smallv] + edges[smallv][i]);
     }
     added.insert(smallv);
