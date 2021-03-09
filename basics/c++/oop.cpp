@@ -13,6 +13,19 @@ class Base {
     return v1 < other.v1;
   }
 
+  Base& operator++() {
+    std::cout << "prefix ++" << std::endl;
+    ++v1;
+    return *this;
+  }
+
+  Base operator++(int) {
+    std::cout << "suffix ++" << std::endl;
+    Base tmp = *this;
+    v1++;
+    return tmp;
+  }
+
  private:
   int v1;
 };
@@ -42,26 +55,33 @@ int main() {
   Derived& b4 = dynamic_cast<Derived&>(*b2);
   Derived* b5 = new Derived;
 
-  std::cout << "============" << std::endl;
+  std::cout << "====================" << std::endl;
   b1->f1(3);  // base
   b2->f1(3);  // base
   b3->f1(3);  // derived
   b4.f1(3);   // derived
 
-  std::cout << "============" << std::endl;
+  std::cout << "====================" << std::endl;
   b1->f2(3);  // base
   b2->f2(3);  // derived
   b3->f2(3);  // derived
   b4.f2(3);   // derived
 
-  std::cout << "============" << std::endl;
+  std::cout << "====================" << std::endl;
   std::cout << (*b1 < *b2) << std::endl;  // call Base <
   std::cout << (*b1 < *b5) << std::endl;  // call Base <
   std::cout << (*b3 < *b5) << std::endl;  // call Derived <
 
+  std::cout << "====================" << std::endl;
+  b1->operator++();
+  // ++b1;
+  std::cout << "====================" << std::endl;
+  b1->operator++(1);
+  // b1++;
+
   delete b1;
-  std::cout << "============" << std::endl;
+  std::cout << "====================" << std::endl;
   delete b2;
-  std::cout << "============" << std::endl;
+  std::cout << "====================" << std::endl;
   delete b5;
 }
