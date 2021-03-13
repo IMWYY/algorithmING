@@ -81,7 +81,7 @@ void bellman_ford(std::vector<std::vector<int>>& edges, int start) {
       for (int j = 0; j < vn; ++j) {
         if (edges[i][j] == INT_MIN) continue;  // there is no edge
         // for each edge, update the result
-        d[i] = std::min(d[i], d[j] + edges[j][i]);
+        d[j] = std::min(d[j], d[i] + edges[i][j]);
         // this can be optimized by a queue, add the vertex j to queue once
         // d[i] is updated by d[j] + edges[j][i]
       }
@@ -92,7 +92,7 @@ void bellman_ford(std::vector<std::vector<int>>& edges, int start) {
   // negative circle
   for (int i = 0; i < vn; ++i) {
     for (int j = 0; j < vn; ++j) {
-      if (edges[i][j] != INT_MIN && d[j] + edges[j][i] < d[i]) {
+      if (edges[i][j] != INT_MIN && d[i] + edges[i][j] < d[j]) {
         std::cout << "negative circle exists!" << std::endl;
         break;
       }

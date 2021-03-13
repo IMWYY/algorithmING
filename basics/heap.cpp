@@ -34,7 +34,7 @@ class MinHeap {
   }
 
   void heapify_up() {
-    int child_idx = arr.size() -1, par_idx = -1;
+    int child_idx = arr.size() - 1, par_idx = -1;
     while (child_idx > 0 && (par_idx = (child_idx - 1) / 2) >= 0) {
       if (arr[par_idx] < arr[child_idx]) {
         break;
@@ -63,29 +63,48 @@ class MinHeap {
   void insert(T ele) {
     arr.push_back(ele);
     heapify_up();
-    for (int i=0; i<arr.size(); ++i) std::cout << arr[i] << ", ";
+    for (int i = 0; i < arr.size(); ++i) std::cout << arr[i] << ", ";
     std::cout << std::endl;
   }
 };
 
 int main() {
-    MinHeap<int> mh;
-    mh.insert(4);
-    mh.insert(3);
-    mh.insert(1);
-    mh.insert(5);
-    mh.insert(8);
-    mh.insert(0);
-    std::cout << mh.top_min() << std::endl;
-    mh.pop_min();
-    std::cout << mh.top_min() << std::endl;
-    mh.pop_min();
-    std::cout << mh.top_min() << std::endl;
-    mh.pop_min();
-    std::cout << mh.top_min() << std::endl;
-    mh.pop_min();
-    std::cout << mh.top_min() << std::endl;
-    mh.pop_min();
-    std::cout << mh.top_min() << std::endl;
-    mh.pop_min();
+  MinHeap<int> mh;
+  mh.insert(4);
+  mh.insert(3);
+  mh.insert(1);
+  mh.insert(5);
+  mh.insert(8);
+  mh.insert(0);
+  std::cout << mh.top_min() << std::endl;
+  mh.pop_min();
+  std::cout << mh.top_min() << std::endl;
+  mh.pop_min();
+  std::cout << mh.top_min() << std::endl;
+  mh.pop_min();
+  std::cout << mh.top_min() << std::endl;
+  mh.pop_min();
+  std::cout << mh.top_min() << std::endl;
+  mh.pop_min();
+  std::cout << mh.top_min() << std::endl;
+  mh.pop_min();
+
+  std::cout << "================================" << std::endl;
+  // c++ make heap
+  std::vector<int> arr = {0, 4, 6, 9, 3, 3, 10, 73, 5};
+  while (!arr.empty()) {
+    std::make_heap(arr.begin(), arr.end(), std::greater<>());
+    std::cout << arr.front() << std::endl;
+    std::pop_heap(arr.begin(), arr.end(), std::greater<>());
+    arr.pop_back();
+  }
+
+  std::cout << "================================" << std::endl;
+  arr = {0, 4, 6, 9, 3, 3, 10, 73, 5};
+  while (!arr.empty()) {
+    std::make_heap(arr.begin(), arr.end());
+    std::cout << arr.front() << std::endl;
+    std::pop_heap(arr.begin(), arr.end());
+    arr.pop_back();
+  }
 }

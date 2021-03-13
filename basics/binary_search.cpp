@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <climits>
 #include <cmath>
+#include <functional>
 #include <iostream>
 #include <queue>
 #include <string>
@@ -13,7 +14,8 @@
  * find the smallest k >= 0 such that, for all i < k, f(a[i]) == false, and for
  * all j >= k, f(a[j]) == true
  **/
-int bisect(std::vector<int> &arr, bool (*f)(int)) {
+// int bisect(std::vector<int> &arr, bool (*f)(int)) {
+int bisect(std::vector<int>& arr, std::function<bool(int)> f) {
   int start = 0, end = arr.size();
   // invariant: the target k falls within [start, end]
   // set end to arr.size() to embrace two cases: (1) the 'empty arr'
@@ -32,12 +34,11 @@ int bisect(std::vector<int> &arr, bool (*f)(int)) {
 
 int target = 5;
 
-bool gt(int a) { return a > target; }
-
-bool ge(int a) { return a >= target; }
-
 int main() {
   std::vector<int> arr = {1, 3, 5, 5, 6, 8, 8, 8, 9, 15, 17};
+
+  auto ge = [](int a) { return a >= target; };
+  auto gt = [](int a) { return a > target; };
 
   /* case 1: find the target element */
   int pos = bisect(arr, ge);
