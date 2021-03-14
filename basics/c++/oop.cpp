@@ -3,7 +3,7 @@
 #include <iostream>
 class Base {
  public:
-  Base() : v1(rand()) {}
+  Base() : v1(rand()) { std::cout << "Construct Base" << std::endl; }
   virtual ~Base() { std::cout << "Deconstruct Base" << std::endl; }
   void f1(int i) { std::cout << "Base f1(" << i << "). " << std::endl; }
   virtual void f2(int i) { std::cout << "Base f2(" << i << "). " << std::endl; }
@@ -32,7 +32,7 @@ class Base {
 
 class Derived : public Base {
  public:
-  Derived() : v2(rand()) {}
+  Derived() : v2(rand()) { std::cout << "Construct Derived" << std::endl; }
   virtual ~Derived() { std::cout << "Deconstruct Derived" << std::endl; }
   // non-virtual function cannot be override
   void f1(int i) { std::cout << "Derived f1(" << i << "). " << std::endl; }

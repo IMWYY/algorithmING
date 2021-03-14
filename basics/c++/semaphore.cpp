@@ -10,7 +10,7 @@ class Semaphore {
   Semaphore(int c) : counter(c) { assert(c >= 0); }
 
   void acquire() {
-    std::unique_lock<std::mutex> ul;
+    std::unique_lock<std::mutex> ul(m);
     while (counter == 0) {
       cv.wait(ul);
     }
@@ -18,7 +18,7 @@ class Semaphore {
   }
 
   void release() {
-    std::unique_lock<std::mutex> ul;
+    std::unique_lock<std::mutex> ul(m);
     counter++;
     cv.notify_one();
   }

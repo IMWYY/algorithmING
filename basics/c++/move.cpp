@@ -23,22 +23,29 @@ void f(int& i) { std::cout << "call f(int& i)." << std::endl; }
 
 int main() {
   std::cout << "****************case 1******************" << std::endl;
-  std::cout << "initial caller passes rvalue:\n";
+  std::cout << "initial caller passes rvalue:" << std::endl;
   forwarding(5);
-  std::cout << std::endl;
-  std::cout << "initial caller passes lvalue:\n";
+  // via std::forward: by rvalue
+  // via std::move: by rvalue
+  // by simple passing: by lvalue
+  std::cout << std::endl << "initial caller passes lvalue:" << std::endl;
   int x = 5;
   forwarding(x);
+  // via std::forward: by lvalue
+  // via std::move: by rvalue
+  // by simple passing: by lvalue
 
   std::cout << "****************case 2******************" << std::endl;
   int&& rr = 5;  // rr is a lvalue reference
   f(rr);         // call f(int&)
-  f(x);          // call f(int&&)
+  f(x);          // call f(int&)
   f(10);         // call f(int&&)
 
   std::cout << "****************case 3******************" << std::endl;
-  auto&& v1 = rr; // universal reference
-  f(v1);
+  auto&& v1 = rr;  // universal reference
+  f(v1);           // call f(int&)
   const auto& v2 = rr;
-  f(v2);
+  f(v2);  // call f(const int&)
+  auto&& v3 = 10;
+  f(v3);  // call f(int&)
 }
