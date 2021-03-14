@@ -88,23 +88,4 @@ int main() {
   mh.pop_min();
   std::cout << mh.top_min() << std::endl;
   mh.pop_min();
-
-  std::cout << "================================" << std::endl;
-  // c++ make heap
-  std::vector<int> arr = {0, 4, 6, 9, 3, 3, 10, 73, 5};
-  while (!arr.empty()) {
-    std::make_heap(arr.begin(), arr.end(), std::greater<>());
-    std::cout << arr.front() << std::endl;
-    std::pop_heap(arr.begin(), arr.end(), std::greater<>());
-    arr.pop_back();
-  }
-
-  std::cout << "================================" << std::endl;
-  arr = {0, 4, 6, 9, 3, 3, 10, 73, 5};
-  while (!arr.empty()) {
-    std::make_heap(arr.begin(), arr.end());
-    std::cout << arr.front() << std::endl;
-    std::pop_heap(arr.begin(), arr.end());
-    arr.pop_back();
-  }
 }
