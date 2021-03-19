@@ -1,5 +1,6 @@
 #include <assert.h>
 
+#include <algorithm>
 #include <iostream>
 #include <map>
 #include <queue>
@@ -30,6 +31,40 @@ struct MyHash {
 };
 
 int main() {
+  // pointer of customized struct
+  {
+    std::vector<Info*> infos;
+    Info i1 = {1, 2, 3};
+    Info i2 = {0, 2, 3};
+    infos.push_back(&i1);
+    infos.push_back(&i2);
+    std::sort(infos.begin(), infos.end(), [](const Info* p1, const Info* p2) {
+      return p1->v1 + p1->v2 + p1->v3 < p2->v1 + p2->v2 + p2->v3;
+    });
+    assert(infos[0]->v1 == 0);
+  }
+
+  // pointer of customized struct
+  {
+    auto f = [](const Info* p1, const Info* p2) {
+      return p1->v1 + p1->v2 + p1->v3 < p2->v1 + p2->v2 + p2->v3;
+    };
+    std::priority_queue<Info*, std::vector<Info*>, decltype(f)> infos(f);
+
+    Info i1 = {1, 1, 6};
+    Info i2 = {0, 0, 0};
+    Info i3 = {0, 2, 3};
+    Info i4 = {0, 1, 5};
+    infos.push(&i1);
+    infos.push(&i2);
+    infos.push(&i3);
+    infos.push(&i4);
+    while (!infos.empty()) {
+      std::cout << infos.top()->v3 << std::endl;
+      infos.pop();
+    }
+  }
+
   // priority_queue
   {
     // max heap
@@ -103,7 +138,7 @@ int main() {
     it++;
     assert(it->first == info);
     assert(it->second == 4);
-    it ++;
+    it++;
     assert(it->second == 3);
   }
 
