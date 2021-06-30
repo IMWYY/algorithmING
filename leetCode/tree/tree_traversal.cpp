@@ -137,7 +137,7 @@ std::vector<int> postorder_traversal(TreeNode *root) {
           cur->val);  // right subtree has been visited, visit current node
       lastvisit = cur;
       st.pop();
-      cur = nullptr;
+      cur = nullptr;  // important: set cur to nullptr
     } else {
       cur = cur->right;  // go to right subtree
     }
