@@ -7,7 +7,7 @@
 #include <unordered_set>
 #include <vector>
 
-#include "classic/graph/union_find_set.cpp"
+#include "graph_union_find.cpp"
 
 /**
  * You are given an array points representing integer coordinates of some points
