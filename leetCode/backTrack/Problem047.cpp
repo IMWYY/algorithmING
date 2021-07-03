@@ -25,8 +25,8 @@ void backTrack(std::vector<std::vector<int>>& res, std::vector<int>& A,
     // here (A[i] == A[i - 1] && !used[i - 1]) is much faster than
     // (A[i] == A[i - 1] && used[i - 1])
     // reason: !used[i-1] is false means that A[i-1] has been backtracked before
-    // in a different path, ther is no need to visit again. used[i-1] means that
-    // A[i-1] has just been visited in current path, we will have lots of
+    // in a different path, ther is no need to visit again.
+    // used[i-1] means that A[i-1] has just been visited in current path, we will have lots of
     // useless traversals in current path.
     used[i] = true;
     list.push_back(A[i]);
