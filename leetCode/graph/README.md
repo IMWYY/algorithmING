@@ -1,6 +1,6 @@
 # Graph
 
-## Bi-Graph
+## Bi-Graph Max Matching
 
 See [bigraph](graph_bigraph.cpp).
 
