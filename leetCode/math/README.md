@@ -1,8 +1,8 @@
-#include <stdlib.h>
-#include <time.h>
+# Math
 
-#include <vector>
+## Reservoir Sample
 
+```c++
 // A function to randomly select k items from stream[0..n-1].
 std::vector<int> selectKItems(std::vector<int>& stream, int k) {
   int n = stream.size();
@@ -29,3 +29,23 @@ std::vector<int> selectKItems(std::vector<int>& stream, int k) {
   }
   return reservoir;
 }
+```
+
+## Greatest Common Divisor (GCD)
+
+```c++
+// gcd(a, b) = gcd(b, a mod b)
+int gcd_v1(int a, int b) {
+  if (b == 0) return a;
+  return gcd_v1(b, a % b);
+}
+
+int gcd_v2(int a, int b) {
+  if (a == b)
+    return a;
+  else if (a > b)
+    return gcd_v2(a - b, b);
+  else
+    return gcd_v2(a, b - a);
+}
+```
