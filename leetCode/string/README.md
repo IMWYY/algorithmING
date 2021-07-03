@@ -2,10 +2,55 @@
 
 ## KMP algorithm
 
-see [kmp.cpp](./../../basics/kmp.cpp)
+Find the substr in `base` that equals to `target`.
+
+```c++
+/*
+ * KMP algorihtm for pattern matching
+ */
+int match(std::string& base, std::string& target) {
+  if (target.empty() || base.empty()) return -1;
+
+  // next[i] is the length of longest common substr between prefix and suffix of
+  // target[0:i] (0 inclusive, i exclusive)
+  std::vector<int> next(target.size(), 0);
+  next[0] = -1;
+  int i = 0, j = -1;
+  while (i < next.size() - 1) {
+    if (j == -1 || target[i] == target[j]) {
+      i++;
+      j++;
+      next[i] = j;  // init next[i]
+    } else {
+      j = next[j];  // keep i, and move j back to next[j]
+    }
+  }
+
+  for (size_t i = 0; i < next.size(); ++i) {
+    std::cout << "next[" << i << "]=" << next[i] << std::endl;
+  }
+
+  i = 0;
+  j = 0;
+  // note that we must convert to int for comparison, otherwise
+  // -1 compare with size_t will not get expected result
+  while (j < (int)target.size() && i < (int)base.size()) {
+    if (j == -1 || base[i] == target[j]) {
+      i++;
+      j++;
+    } else {
+      j = next[j];
+    }
+  }
+
+  if (j == target.size()) return i - j;
+  return -1;
+}
+```
+
 ## Manacher's algorithm
 
-Find the longest palindrome in O(n) time.
+Find the longest palindrome in a string `s` in O(n) time.
 
 ```c++
 std::string longestPalindrome(std::string s) {
@@ -49,6 +94,24 @@ std::string longestPalindrome(std::string s) {
   }
   int start = (center_idx - 1) / 2 - max_len / 2;
   return s.substr(start, max_len);
+}
+```
+
+## Utils
+
+```c++
+std::vector<std::string> split(std::string s, std::string seperator) {
+  std::vector<std::string> res;
+  size_t start = 0;
+  size_t end = s.find(seperator, start);
+  while (end != std::string::npos) {
+    // if (end > start) res.push_back(s.substr(start, end - start));
+    res.push_back(s.substr(start, end - start));
+    start = end + seperator.size();
+    end = s.find(seperator, start);
+  }
+  if (s.size() > start) res.push_back(s.substr(start, end - start));
+  return res;
 }
 ```
 
