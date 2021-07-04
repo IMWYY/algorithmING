@@ -11,6 +11,27 @@
 
 template <typename T>
 class MinHeap {
+ public:
+  T& top_min() {
+    assert(arr.size() > 0);
+    return arr[0];
+  }
+
+  void pop_min() {
+    if (arr.size() == 0) return;
+    arr[0] = arr[arr.size() - 1];
+    arr.pop_back();
+    heapify_down();
+    std::cout << "arr.size:" << arr.size() << std::endl;
+  }
+
+  void insert(T ele) {
+    arr.push_back(ele);
+    heapify_up();
+    for (int i = 0; i < arr.size(); ++i) std::cout << arr[i] << ", ";
+    std::cout << std::endl;
+  }
+
  private:
   void swap(int i, int j) {
     T tmp = arr[i];
@@ -46,26 +67,6 @@ class MinHeap {
   }
 
   std::vector<T> arr;
-
- public:
-  T& top_min() {
-    assert(arr.size() > 0);
-    return arr[0];
-  }
-
-  void pop_min() {
-    if (arr.size() == 0) return;
-    arr[0] = arr[arr.size() - 1];
-    arr.pop_back();
-    heapify_down();
-    std::cout << "arr.size:" << arr.size() << std::endl;
-  }
-  void insert(T ele) {
-    arr.push_back(ele);
-    heapify_up();
-    for (int i = 0; i < arr.size(); ++i) std::cout << arr[i] << ", ";
-    std::cout << std::endl;
-  }
 };
 
 int main() {

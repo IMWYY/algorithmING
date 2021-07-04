@@ -1,6 +1,9 @@
+#include <algorithm>
+#include <set>
 #include <vector>
 
-std::vector<std::vector<int>> getSkyline(std::vector<std::vector<int>>& buildings) {
+std::vector<std::vector<int>> getSkyline(
+    std::vector<std::vector<int>>& buildings) {
   std::vector<std::pair<int, int>> points;
   for (auto& v : buildings) {
     points.push_back({v[0], -v[2]});
@@ -8,7 +11,8 @@ std::vector<std::vector<int>> getSkyline(std::vector<std::vector<int>>& building
   }
   std::sort(points.begin(), points.end());
   std::vector<std::vector<int>> res;
-  std::multiset<int> heights;  // there may be multiple buildings with the same height, so we use multiset.
+  std::multiset<int> heights;  // there may be multiple buildings with the same
+                               // height, so we use multiset.
   heights.insert(0);
   int cur = 0;
   for (auto& p : points) {
