@@ -11,34 +11,33 @@
  *
  * If target is found in the array return its index, otherwise, return -1.
  */
-int bisect(std::vector<int>&, int, int, int);
-
 int search(std::vector<int>& nums, int target) {
   int start = 0, end = nums.size();
-  while (start + 1 < end) {
-    int mid = start + ((end - start) >> 1);
-    if (nums[mid] > nums[start]) {
-      start = mid;
+  // need to consider four cases according to the relation between
+  // nums[start], nums[end], nums[mid], and target
+  while (start < end) {
+    int m = (start + end) >> 1;
+    if (nums[start] > nums[m]) {
+      if (target < nums[m])
+        end = m;
+      else {
+        if (target >= nums[start])
+          end = m;
+        else
+          start = m;
+      }
+    } else if (nums[start] < nums[m]) {
+      if (target >= nums[m])
+        start = m;
+      else {
+        if (target >= nums[start])
+          end = m;
+        else
+          start = m + 1;
+      }
     } else {
-      end = mid;
+      break;
     }
   }
-  int split_pos = end;  // find the split position
-  int p1 = bisect(nums, 0, split_pos, target);
-  if (p1 != split_pos && nums[p1] == target) return p1;
-  int p2 = bisect(nums, split_pos, nums.size(), target);
-  if (p2 != nums.size() && nums[p2] == target) return p2;
-  return -1;
-}
-
-int bisect(std::vector<int>& arr, int s, int e, int t) {
-  while (s < e) {
-    int m = s + ((e - s) >> 1);
-    if (arr[m] >= t) {
-      e = m;
-    } else {
-      s = m + 1;
-    }
-  }
-  return s;
+  return (start < nums.size() && nums[start] == target) ? start : -1;
 }

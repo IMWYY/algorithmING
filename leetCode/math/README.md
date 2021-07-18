@@ -31,6 +31,18 @@ std::vector<int> selectKItems(std::vector<int>& stream, int k) {
 }
 ```
 
+## Fisher-Yates Shuffle
+```c++
+std::vector<int> shuffle(std::vector<int> arr) {
+  std::vector<int> res(arr);
+  for (int i = 0; i < res.size(); ++i) {
+    int idx = rand() % (i + 1);
+    std::swap(res[idx], res[i]);
+  }
+  return res;
+}
+```
+
 ## Greatest Common Divisor (GCD)
 
 ```c++
