@@ -18,7 +18,7 @@ int find(std::vector<int>& nums, int s, int e, int k) {
   int pivot = nums[s];
   int i = s, j = e;
   while (i < j) {
-    while (i < j && nums[j] >= pivot) j--;
+    while (i < j && nums[j] >= pivot) j--; // order matters!
     while (i < j && nums[i] <= pivot) i++;
     if (i < j) std::swap(nums[i], nums[j]);
   }

@@ -125,7 +125,7 @@ public void quickSort(int[] a, int left, int right) {
     if (left > right) return;
     int flag = a[left], i = left, j = right, temp;
     while (i < j) {
-        while (j > i && a[j] >= flag) j--;
+        while (j > i && a[j] >= flag) j--; // order matters!!
         while (j > i && a[i] <= flag) i++;
         if (i < j) {
             temp = a[i];
