@@ -69,3 +69,44 @@ int gcd_v2(int a, int b) {
     return gcd_v2(a, b - a);
 }
 ```
+## Mod operation with '%' operator
+
+
+```c++
+// only handle positive integers
+int64_t mod(int64_t m, int64_t n) {
+  const int64_t max_val = std::numeric_limits<int64_t>::max();
+  const int64_t min_val = std::numeric_limits<int64_t>::min();
+  if (m < 0) {
+    if (min_val == m) {
+      // TODO need speical handling
+    } else {
+      return mod(-m, n);
+    }
+  }
+
+  if (n < 0) {
+    if (min_val == n) {
+      return m;
+    } else {
+      return mod(m, -n);
+    }
+  }
+  int64_t s = 0, e = max_val;
+  while (s < e) {
+    int64_t tmp = (s + e) >> 1;
+    if (tmp > max_val / n) {
+      e = tmp - 1;  // handle overflow
+      continue;
+    }
+    int64_t reminder = m - n * tmp;
+
+    if (reminder >= 0 && reminder < n) return reminder;
+    if (reminder < 0)
+      e = tmp - 1;
+    else
+      s = tmp + 1;
+  }
+  return m - n * s;
+}
+```
